@@ -51,7 +51,7 @@ def convert_to_str(o):
 
 
 # Đường dẫn đến ChromeDriver
-chromedriver_path = 'C:/chromedriver/chromedriver.exe'
+chromedriver_path = '/root/chromedriver/chromedriver.exe'
 service = Service(chromedriver_path)
 options = Options()
 options.add_argument("--start-maximized")
