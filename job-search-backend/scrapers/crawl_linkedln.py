@@ -191,3 +191,19 @@ with open(csv_file_path, 'a', newline='', encoding='utf-8') as csv_file:
 
 print(f"Dữ liệu đã được lưu vào file CSV '{csv_file_path}'")
 driver.quit()
+df = pd.read_csv(csv_file_path)
+# Chuyển cột 'date' sang kiểu datetime
+df['date'] = pd.to_datetime(df['date'], errors='coerce')
+
+# Lấy ngày hiện tại
+today = datetime.today()
+
+# Lọc ra các hàng có 'date' lớn hơn hoặc bằng 7 ngày trước
+filtered_df = df[df['date'] >= today - timedelta(days=7)]
+
+# Ghi đè lại file gốc (cập nhật dữ liệu)
+filtered_df.to_csv('jobs.csv', index=False)
+
+print("Đã cập nhật file 'jobs.csv' với các công việc trong vòng 7 ngày qua.")
+
+
