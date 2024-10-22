@@ -22,7 +22,7 @@ failed_packages = []
 def install_package(package):
     try:
         print(f"Cài đặt thư viện {package}...")
-        subprocess.check_call(['pip', 'install', package])
+        subprocess.check_call(['pip3.10', 'install', package])
         print(f"Thư viện {package} đã được cài đặt thành công.\n")
     except subprocess.CalledProcessError:
         print(f"Lỗi khi cài đặt thư viện {package}. Bỏ qua và tiếp tục cài đặt các thư viện khác.\n")
