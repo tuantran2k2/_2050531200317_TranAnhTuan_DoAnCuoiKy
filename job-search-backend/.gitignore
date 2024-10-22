@@ -1,0 +1,28 @@
+# Bỏ qua thư viện ảo (virtual environment)
+venv/
+
+# Bỏ qua tệp tin CSV (nếu không cần push lên Git)
+*.csv
+
+# Bỏ qua các tệp Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Bỏ qua tệp môi trường
+.env
+
+# Bỏ qua tệp log (nếu có)
+*.log
+
+# Bỏ qua cookies JSON (nếu là dữ liệu tạm)
+cookies_file.json
+
+# Bỏ qua tệp nặng và không cần thiết
+*.pkl
+*.zip
+*.tar.gz
+*.rar
+
+# Bỏ qua tệp test (nếu không cần)
+test*.py
