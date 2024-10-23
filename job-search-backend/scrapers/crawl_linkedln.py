@@ -50,13 +50,17 @@ def convert_to_str(o):
     raise TypeError(f"Type {type(o)} not serializable")
 
 
-# Đường dẫn đến ChromeDriver
-chromedriver_path = '/root/chromedriver/chromedriver.exe'
-service = Service(chromedriver_path)
+# Đường dẫn tới chromedriver
+service = Service("/usr/bin/chromedriver")
+
+# Cấu hình các tùy chọn cho Chrome
 options = Options()
-options.add_argument("--start-maximized")
-a=[]
-# Khởi tạo trình điều khiển Chrome với dịch vụ và tùy chọn
+options.binary_location = "/usr/bin/google-chrome"  # Đường dẫn đến Chrome binary
+options.add_argument("--headless")  # Chạy ở chế độ không hiển thị giao diện
+options.add_argument("--no-sandbox")
+options.add_argument("--disable-dev-shm-usage")
+
+# Khởi tạo trình điều khiển Chrome
 driver = webdriver.Chrome(service=service, options=options)
 
 # Thiết lập chờ ngầm định
