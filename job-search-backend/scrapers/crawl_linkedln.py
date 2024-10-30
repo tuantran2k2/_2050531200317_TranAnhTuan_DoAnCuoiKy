@@ -14,8 +14,8 @@ import logging
 import random
 import csv
 
-# Khởi tạo logging để kiểm tra tiến trình
-logging.basicConfig(level=logging.INFO)
+# Khởi tạo logging để theo dõi tiến trình
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Hàm chuyển đổi thời gian từ văn bản sang datetime
 def convert_to_datetime(relative_time):
@@ -49,6 +49,7 @@ options.add_argument("--headless")
 options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
 options.add_argument("--disable-gpu")
+options.add_argument("--disable-blink-features=AutomationControlled")
 
 service = Service('/usr/local/bin/chromedriver')
 
@@ -60,9 +61,10 @@ driver.implicitly_wait(10)
 logging.info("Truy cập LinkedIn...")
 driver.get('https://www.linkedin.com')
 
+# Thêm cookie
 cookie = {
     'name': 'li_at',
-    'value': 'AQEDAU0MA38FL2xKAAABktibw5EAAAGS_KhHkU4Aq2VDIBsdaAprfDeBXTry7eD-9MS4ptnUQBDDluFt0PBpxx9qxGSaglNtbWFdFkbUFavqGxSPxmIC4fJQjVa7CzuTVxGiT17mMHtoPh7hK2Al0rZe',  # Thay bằng cookie thật của bạn
+    'value': 'AQEDAU0MA38Bs_vGAAABkt2PtfsAAAGTAZw5-04AhLQtOgID7JKGOe9VY4qSTVbrtVf5dFqDZAQlooYqSjSrgY2hLeb9S_dcxScGAApSlwLYrgW-LvHR39tVCv4vbQcRAfpOCVxEKfPyQ3UaL4ebBrWd',
     'domain': '.linkedin.com',
     'path': '/',
     'secure': True,
@@ -90,9 +92,9 @@ with open(csv_file_path, 'a', newline='', encoding='utf-8') as csv_file:
     if csv_file.tell() == 0:
         writer.writeheader()
 
-    # Lấy dữ liệu từ nhiều trang
+    # Duyệt qua nhiều trang công việc
     for page_num in range(1, 20):
-        url = f'https://www.linkedin.com/jobs/search/?currentJobId=4061299828&f_TPR=r86400&sortBy=DD?start={25 * (page_num - 1)}'
+        url = f'https://www.linkedin.com/jobs/search/?f_TPR=r86400&sortBy=DD&start={25 * (page_num - 1)}'
         driver.get(url)
         time.sleep(10)
 
