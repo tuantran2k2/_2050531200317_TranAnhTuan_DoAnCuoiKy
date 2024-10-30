@@ -129,6 +129,7 @@ with open(csv_file_path, 'a', newline='', encoding='utf-8') as csv_file:
                 ]
                 exact_time = convert_to_datetime(time_posted)
                 date_format = convert_to_str(exact_time) if exact_time else None
+                logging.info("nội dung của : " + job_title )
                 about_job = job_soup.find('div', id='job-details').get_text(separator='\n').strip()
 
                 # Ghi dữ liệu mới vào CSV
