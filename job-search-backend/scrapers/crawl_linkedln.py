@@ -62,7 +62,7 @@ driver.get('https://www.linkedin.com')
 
 cookie = {
     'name': 'li_at',
-    'value': 'AQEDAU0MA38FL2xKAAABktibw5EAAAGS_KhHkU4Aq2VDIBsdaAprfDeBXTry7eD-9MS4ptnUQBDDluFt0PBpxx9qxGSaglNtbWFdFkbUFavqGxSPxmIC4fJQjVa7CzuTVxGiT17mMHtoPh7hK2Al0rZe',  # Thay bằng cookie thật của bạn
+    'value': 'AQEDAU0MA38Bs_vGAAABkt2PtfsAAAGTAZw5-04AhLQtOgID7JKGOe9VY4qSTVbrtVf5dFqDZAQlooYqSjSrgY2hLeb9S_dcxScGAApSlwLYrgW-LvHR39tVCv4vbQcRAfpOCVxEKfPyQ3UaL4ebBrWd',  # Thay bằng cookie thật của bạn
     'domain': '.linkedin.com',
     'path': '/',
     'secure': True,
