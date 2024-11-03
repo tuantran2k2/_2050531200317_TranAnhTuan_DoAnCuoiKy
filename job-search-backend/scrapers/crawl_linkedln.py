@@ -132,24 +132,27 @@ for page_num in range(1, 20):
     logging.info("Đang phân tích HTML để lấy thông tin công việc...")
     soup = BeautifulSoup(driver.page_source, 'html.parser')
     job_postings = soup.find_all('div', {'class': 'job-card-container'})
+
     docs = []
+    
+    
     # Trích xuất thông tin từ mỗi công việc
     for job in job_postings:
         try:
-            try:
-                job_id = job.get('data-job-id', None)
-                existing_job, _ = _qdrant.qdrant_client.scroll(
-                    collection_name=COLLECTION_NAME,
-                    scroll_filter=models.Filter(
-                        must=[models.FieldCondition(key="id_job", match=models.MatchValue(value=job_id))]
-                    ),
-                    limit=1
-                )
-                if existing_job:
-                    logging.info(f"Job với id_job {job_id} đã tồn tại trong Qdrant.")
-                    continue
-            except AttributeError as e:
-                logging.info(f"error {e}")
+            job_id = job.get('data-job-id', None)
+            if not _qdrant.qdrant_client.get_collections().collections:
+                logging.warning(f"Collection '{COLLECTION_NAME}' không tồn tại. Bỏ qua job với id_job {job_id}.")
+                continue
+            existing_job, _ = _qdrant.qdrant_client.scroll(
+                collection_name=COLLECTION_NAME,
+                scroll_filter=models.Filter(
+                    must=[models.FieldCondition(key="id_job", match=models.MatchValue(value=job_id))]
+                ),
+                limit=1
+            )
+            if existing_job:
+                logging.info(f"Job với id_job {job_id} đã tồn tại trong Qdrant.")
+                continue
         
             job_link = f"https://www.linkedin.com/jobs/view/{job_id}"
             logging.info(f"Đang truy cập chi tiết công việc: {job_link}")
