@@ -133,20 +133,23 @@ def update_point_sequence(collection_name):
         
         # Scroll through all points to update their sequence number
         while scroll_result:
+            points_to_update = []
             for point in scroll_result:
-                # Update each point with the current sequence number
-                qdrant_client.update(
-                    collection_name=collection_name,
-                    points=[
-                        {
-                            "id": point.id,
-                            "payload": {
-                                "sequence_number": sequence_number
-                            }
-                        }
-                    ]
-                )
+                # Prepare each point with the updated sequence number
+                points_to_update.append({
+                    "id": point.id,
+                    "payload": {
+                        **point.payload,  # Keep existing payload data
+                        "sequence_number": sequence_number
+                    }
+                })
                 sequence_number += 1
+            
+            # Use upsert to update points in bulk
+            qdrant_client.upsert(
+                collection_name=collection_name,
+                points=points_to_update
+            )
             
             # Check if there's a next page
             if not next_page:
