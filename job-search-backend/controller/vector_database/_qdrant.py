@@ -19,14 +19,13 @@ qdrant_client = QdrantClient(
     url=QDRANT_SERVER
 )
 
-def save_vector_db(docs, collection_name, point_ids):
+def save_vector_db(docs, collection_name):
     qdrant_doc = Qdrant.from_documents(
         documents=docs,
         embedding=embeddings_model,
         url=QDRANT_SERVER,
         prefer_grpc=False,
-        collection_name=collection_name,
-        ids=point_ids,
+        collection_name=collection_name
     )
     return qdrant_doc
 
@@ -86,92 +85,5 @@ def delete_old_points(collection_name):
             print(f"Đã xóa {len(points_to_delete)} điểm có 'date' quá 7 ngày.")
         else:
             print("Không có điểm nào cần xóa.")
-        update_point_sequence(collection_name)
-        total_points = count_points(collection_name)
-        return total_points
     except Exception as e:
         print("Lỗi khi xóa các điểm:", e)
-
-def count_points(collection_name):
-    try:
-        total_points = 0
-        scroll_result, next_page = qdrant_client.scroll(
-            collection_name=collection_name,
-            limit=100  # Limit the number of points loaded each time
-        )
-        
-        # Scroll through all points to count them
-        while scroll_result:
-            total_points += len(scroll_result)
-            
-            # Check if there's a next page
-            if not next_page:
-                break
-            
-            # Continue scrolling to get the next points
-            scroll_result, next_page = qdrant_client.scroll(
-                collection_name=collection_name,
-                limit=100,
-                offset=next_page  # Continue from the next page
-            )
-        
-        print(f"Total number of points in '{collection_name}': {total_points}")
-        return total_points
-        
-    except Exception as e:
-        print("Error counting points:", e)
-        return 0
-    
-    
-def update_point_sequence(collection_name):
-    try:
-        sequence_number = 1
-        scroll_result, next_page = qdrant_client.scroll(
-            collection_name=collection_name,
-            limit=100  # Limit the number of points loaded each time
-        )
-        
-        # Scroll through all points to update their sequence number
-        while scroll_result:
-            points_to_update = []
-            for point in scroll_result:
-                # Check if the vector is available
-                vector = getattr(point, 'vector', None)
-                if vector is None:
-                    print(f"Skipping point {point.id} due to missing vector.")
-                    continue
-                
-                # Prepare each point with the updated sequence number and existing vector
-                points_to_update.append({
-                    "id": point.id,
-                    "vector": vector,
-                    "payload": {
-                        **point.payload,  # Keep existing payload data
-                        "sequence_number": sequence_number
-                    }
-                })
-                sequence_number += 1
-            
-            # Use upsert to update points in bulk
-            if points_to_update:
-                qdrant_client.upsert(
-                    collection_name=collection_name,
-                    points=points_to_update
-                )
-            
-            # Check if there's a next page
-            if not next_page:
-                break
-            
-            # Continue scrolling to get the next points
-            scroll_result, next_page = qdrant_client.scroll(
-                collection_name=collection_name,
-                limit=100,
-                offset=next_page  # Continue from the next page
-            )
-        
-        print("Updated sequence numbers for all points.")
-        
-    except Exception as e:
-        print("Error updating sequence numbers:", e)
-

@@ -5,12 +5,10 @@ from langchain.schema import Document
 def process_csv_to_docs(file_path: str):
     # Đọc file CSV
     df = pd.read_csv(file_path)
-    doc_ids = []
     # Tạo danh sách các Document
     docs = []
-    for index, row in df.iterrows():
+    for row in df.iterrows():
         # Metadata
-        doc_ids.append(index+1)
         metadata = {
             "id_job": row["id_job"],
             "job_title": row["job_title"],
@@ -23,4 +21,4 @@ def process_csv_to_docs(file_path: str):
         doc = Document(metadata=metadata,page_content=row["about_job"])
         docs.append(doc)
 
-    return docs , doc_ids
+    return docs 

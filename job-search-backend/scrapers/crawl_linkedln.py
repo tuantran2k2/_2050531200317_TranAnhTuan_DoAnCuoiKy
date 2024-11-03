@@ -6,6 +6,8 @@ from datetime import datetime, timedelta
 from dotenv import load_dotenv
 from controller.vector_database import _qdrant
 from qdrant_client.http import models
+from langchain.schema import Document  
+
 
 import pandas as pd
 import time
@@ -127,6 +129,7 @@ for page_num in range(1, 20):
     soup = BeautifulSoup(driver.page_source, 'html.parser')
     job_postings = soup.find_all('div', {'class': 'job-card-container'})
 
+    docs = []
     # Trích xuất thông tin từ mỗi công việc
     for job in job_postings:
         try:
@@ -169,20 +172,22 @@ for page_num in range(1, 20):
                 except AttributeError as e:
                     logging.error(f"Lỗi khi lấy mô tả công việc: {e}")
                     continue
-                job_data = {
+                
+                
+                metadata = {
                     "id_job": job_id,
                     "job_title": job_title,
                     "link_post": job_link,
                     "location": location,
                     "date": date_format,
-                    "about_job": text_about_job_cleaned,
                 }
+                
+                doc = Document(metadata=metadata,page_content=text_about_job_cleaned)
+                docs.append(doc)
         except AttributeError:
             logging.error("Không tìm thấy ID công việc, bỏ qua công việc này.")
             continue
-            
-            
-            
+              
 driver.quit()
 
-logging.info("Đã cập nhật các công việc trong vòng 7 ngày qua.")
+logging.info("Đã cập nhật các công việc xong.")
