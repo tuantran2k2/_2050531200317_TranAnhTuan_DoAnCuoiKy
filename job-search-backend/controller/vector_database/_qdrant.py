@@ -135,8 +135,11 @@ def update_point_sequence(collection_name):
         while scroll_result:
             points_to_update = []
             for point in scroll_result:
-                # Retrieve the existing vector for the point
-                vector = point.vector  # Assuming the vector is available in the scroll result
+                # Check if the vector is available
+                vector = getattr(point, 'vector', None)
+                if vector is None:
+                    print(f"Skipping point {point.id} due to missing vector.")
+                    continue
                 
                 # Prepare each point with the updated sequence number and existing vector
                 points_to_update.append({
@@ -150,10 +153,11 @@ def update_point_sequence(collection_name):
                 sequence_number += 1
             
             # Use upsert to update points in bulk
-            qdrant_client.upsert(
-                collection_name=collection_name,
-                points=points_to_update
-            )
+            if points_to_update:
+                qdrant_client.upsert(
+                    collection_name=collection_name,
+                    points=points_to_update
+                )
             
             # Check if there's a next page
             if not next_page:
@@ -170,3 +174,4 @@ def update_point_sequence(collection_name):
         
     except Exception as e:
         print("Error updating sequence numbers:", e)
+
