@@ -135,9 +135,13 @@ def update_point_sequence(collection_name):
         while scroll_result:
             points_to_update = []
             for point in scroll_result:
-                # Prepare each point with the updated sequence number
+                # Retrieve the existing vector for the point
+                vector = point.vector  # Assuming the vector is available in the scroll result
+                
+                # Prepare each point with the updated sequence number and existing vector
                 points_to_update.append({
                     "id": point.id,
+                    "vector": vector,
                     "payload": {
                         **point.payload,  # Keep existing payload data
                         "sequence_number": sequence_number
