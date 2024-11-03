@@ -86,6 +86,7 @@ def delete_old_points(collection_name):
             print(f"Đã xóa {len(points_to_delete)} điểm có 'date' quá 7 ngày.")
         else:
             print("Không có điểm nào cần xóa.")
+        update_point_sequence(collection_name)
         total_points = count_points(collection_name)
         return total_points
     except Exception as e:
@@ -122,52 +123,43 @@ def count_points(collection_name):
         return 0
     
     
-def reindex_points_and_calculate_sum(collection_name):
+def update_point_sequence(collection_name):
     try:
-        # Lấy tất cả các điểm còn lại trong collection
+        sequence_number = 1
         scroll_result, next_page = qdrant_client.scroll(
             collection_name=collection_name,
-            limit=100
+            limit=100  # Limit the number of points loaded each time
         )
         
-        all_points = []
-        
+        # Scroll through all points to update their sequence number
         while scroll_result:
-            all_points.extend(scroll_result)
+            for point in scroll_result:
+                # Update each point with the current sequence number
+                qdrant_client.update(
+                    collection_name=collection_name,
+                    points=[
+                        {
+                            "id": point.id,
+                            "payload": {
+                                "sequence_number": sequence_number
+                            }
+                        }
+                    ]
+                )
+                sequence_number += 1
+            
+            # Check if there's a next page
             if not next_page:
                 break
+            
+            # Continue scrolling to get the next points
             scroll_result, next_page = qdrant_client.scroll(
                 collection_name=collection_name,
                 limit=100,
-                offset=next_page
+                offset=next_page  # Continue from the next page
             )
         
-        # Sắp xếp lại các điểm theo ID để đảm bảo tuần tự
-        all_points = sorted(all_points, key=lambda p: p.id)
+        print("Updated sequence numbers for all points.")
         
-        # Cập nhật lại ID và tính tổng điểm
-        total_points = 0
-        for new_id, point in enumerate(all_points, start=1):
-            # Kiểm tra nếu vector hợp lệ
-            if point.vector is None or not isinstance(point.vector, list):
-                print(f"Bỏ qua điểm với ID {point.id} do vector không hợp lệ.")
-                continue
-            
-            total_points += new_id  # Cộng dồn ID mới vào tổng điểm
-            
-            # Sử dụng upsert để cập nhật điểm với ID mới
-            qdrant_client.upsert(
-                collection_name=collection_name,
-                points=[models.PointStruct(
-                    id=new_id,  # Cập nhật ID mới
-                    vector=point.vector,  # Vector hợp lệ
-                    payload=point.payload
-                )]
-            )
-        
-        print(f"Đã cập nhật lại ID cho {len(all_points)} điểm.")
-        return total_points
-    
     except Exception as e:
-        print("Lỗi khi cập nhật lại ID các điểm:", e)
-        return 0
+        print("Error updating sequence numbers:", e)
