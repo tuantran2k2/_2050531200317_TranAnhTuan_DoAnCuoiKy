@@ -140,18 +140,17 @@ for page_num in range(1, 20):
     for job in job_postings:
         try:
             job_id = job.get('data-job-id', None)
-            if not _qdrant.qdrant_client.get_collections().collections:
-                _qdrant.create_vector_db(COLLECTION_NAME)
-            existing_job, _ = _qdrant.qdrant_client.scroll(
-                collection_name=COLLECTION_NAME,
-                scroll_filter=models.Filter(
-                    must=[models.FieldCondition(key="id_job", match=models.MatchValue(value=job_id))]
-                ),
-                limit=1
-            )
-            if existing_job:
-                logging.info(f"Job với id_job {job_id} đã tồn tại trong Qdrant.")
-                continue
+            if _qdrant.qdrant_client.get_collections().collections:
+                existing_job, _ = _qdrant.qdrant_client.scroll(
+                    collection_name=COLLECTION_NAME,
+                    scroll_filter=models.Filter(
+                        must=[models.FieldCondition(key="id_job", match=models.MatchValue(value=job_id))]
+                    ),
+                    limit=1
+                )
+                if existing_job:
+                    logging.info(f"Job với id_job {job_id} đã tồn tại trong Qdrant.")
+                    continue
         
             job_link = f"https://www.linkedin.com/jobs/view/{job_id}"
             logging.info(f"Đang truy cập chi tiết công việc: {job_link}")
