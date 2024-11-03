@@ -86,12 +86,42 @@ def delete_old_points(collection_name):
             print(f"Đã xóa {len(points_to_delete)} điểm có 'date' quá 7 ngày.")
         else:
             print("Không có điểm nào cần xóa.")
-        total_points = reindex_points_and_calculate_sum(collection_name)
+        total_points = count_points(collection_name)
         return total_points
     except Exception as e:
         print("Lỗi khi xóa các điểm:", e)
 
-
+def count_points(collection_name):
+    try:
+        total_points = 0
+        scroll_result, next_page = qdrant_client.scroll(
+            collection_name=collection_name,
+            limit=100  # Limit the number of points loaded each time
+        )
+        
+        # Scroll through all points to count them
+        while scroll_result:
+            total_points += len(scroll_result)
+            
+            # Check if there's a next page
+            if not next_page:
+                break
+            
+            # Continue scrolling to get the next points
+            scroll_result, next_page = qdrant_client.scroll(
+                collection_name=collection_name,
+                limit=100,
+                offset=next_page  # Continue from the next page
+            )
+        
+        print(f"Total number of points in '{collection_name}': {total_points}")
+        return total_points
+        
+    except Exception as e:
+        print("Error counting points:", e)
+        return 0
+    
+    
 def reindex_points_and_calculate_sum(collection_name):
     try:
         # Lấy tất cả các điểm còn lại trong collection
