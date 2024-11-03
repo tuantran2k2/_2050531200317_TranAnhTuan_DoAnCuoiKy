@@ -139,17 +139,20 @@ for page_num in range(1, 20):
     # Trích xuất thông tin từ mỗi công việc
     for job in job_postings:
         try:
-            # job_id = job.get('data-job-id', None)
-            # existing_job, _ = _qdrant.qdrant_client.scroll(
-            #     collection_name=COLLECTION_NAME,
-            #     scroll_filter=models.Filter(
-            #         must=[models.FieldCondition(key="id_job", match=models.MatchValue(value=job_id))]
-            #     ),
-            #     limit=1
-            # )
-            # if existing_job:
-            #     logging.info(f"Job với id_job {job_id} đã tồn tại trong Qdrant.")
-            #     continue
+            try:
+                job_id = job.get('data-job-id', None)
+                existing_job, _ = _qdrant.qdrant_client.scroll(
+                    collection_name=COLLECTION_NAME,
+                    scroll_filter=models.Filter(
+                        must=[models.FieldCondition(key="id_job", match=models.MatchValue(value=job_id))]
+                    ),
+                    limit=1
+                )
+                if existing_job:
+                    logging.info(f"Job với id_job {job_id} đã tồn tại trong Qdrant.")
+                    continue
+            except AttributeError as e:
+                logging.info(f"error {e}")
         
             job_link = f"https://www.linkedin.com/jobs/view/{job_id}"
             logging.info(f"Đang truy cập chi tiết công việc: {job_link}")
