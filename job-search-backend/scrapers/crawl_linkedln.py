@@ -3,6 +3,8 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
 from datetime import datetime, timedelta
+from langchain.schema import Document  
+
 import pandas as pd
 import time
 import re
@@ -124,7 +126,7 @@ with open(csv_file_path, 'a', newline='', encoding='utf-8') as csv_file:
         job_postings = soup.find_all('div', {'class': 'job-card-container'})
 
         # Trích xuất thông tin từ mỗi công việc
-        for job in job_postings:
+        for index,job in job_postings:
             try:
                 job_id = job.get('data-job-id', None)
                 if job_id in existing_data:
