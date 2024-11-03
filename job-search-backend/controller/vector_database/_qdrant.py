@@ -118,13 +118,19 @@ def reindex_points_and_calculate_sum(collection_name):
         # Cập nhật lại ID và tính tổng điểm
         total_points = 0
         for new_id, point in enumerate(all_points, start=1):
+            # Kiểm tra nếu vector hợp lệ
+            if point.vector is None or not isinstance(point.vector, list):
+                print(f"Bỏ qua điểm với ID {point.id} do vector không hợp lệ.")
+                continue
+            
             total_points += new_id  # Cộng dồn ID mới vào tổng điểm
+            
             # Sử dụng upsert để cập nhật điểm với ID mới
             qdrant_client.upsert(
                 collection_name=collection_name,
                 points=[models.PointStruct(
                     id=new_id,  # Cập nhật ID mới
-                    vector=point.vector,
+                    vector=point.vector,  # Vector hợp lệ
                     payload=point.payload
                 )]
             )
