@@ -21,9 +21,13 @@ qdrant_client = QdrantClient(
 
 
 def create_vector_db(collection_name):
-    qdrant_client.create_collection(
-        collection_name=collection_name
-    )
+    try:
+        qdrant_client.recreate_collection(
+            collection_name=collection_name
+        )
+    
+    except Exception as e:
+        return f"Lỗi khi tạo collection '{collection_name}': {e}"
     
 
 def save_vector_db(docs, collection_name):
