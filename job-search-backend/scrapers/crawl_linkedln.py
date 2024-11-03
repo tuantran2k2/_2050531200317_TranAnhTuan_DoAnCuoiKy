@@ -194,7 +194,8 @@ for page_num in range(1, 20):
         except AttributeError:
             logging.error("Không tìm thấy ID công việc, bỏ qua công việc này.")
             continue
-              
+
+_qdrant.save_vector_db(docs,COLLECTION_NAME)
 driver.quit()
 
 logging.info("Đã cập nhật các công việc xong.")
