@@ -92,7 +92,6 @@ def delete_old_points(collection_name):
         print("Lỗi khi xóa các điểm:", e)
 
 
-
 def reindex_points_and_calculate_sum(collection_name):
     try:
         # Lấy tất cả các điểm còn lại trong collection
@@ -120,7 +119,8 @@ def reindex_points_and_calculate_sum(collection_name):
         total_points = 0
         for new_id, point in enumerate(all_points, start=1):
             total_points += new_id  # Cộng dồn ID mới vào tổng điểm
-            qdrant_client.update(
+            # Sử dụng upsert để cập nhật điểm với ID mới
+            qdrant_client.upsert(
                 collection_name=collection_name,
                 points=[models.PointStruct(
                     id=new_id,  # Cập nhật ID mới
