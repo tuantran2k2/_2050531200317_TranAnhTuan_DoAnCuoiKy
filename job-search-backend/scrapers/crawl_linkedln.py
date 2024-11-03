@@ -3,7 +3,8 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
 from datetime import datetime, timedelta
-from langchain.schema import Document  
+from dotenv import load_dotenv
+from controller.vector_database import _qdrant
 
 import pandas as pd
 import time
@@ -11,10 +12,27 @@ import re
 import logging
 import random
 import csv
-import json
+import os
 
+
+load_dotenv()
+
+# Lấy các biến môi trường từ file .env
+QDRANT_URL = os.getenv("QDRANT_URL")
+COLLECTION_NAME = os.getenv("COLLECTION_NAME")
+QDRANT_SERVER = os.getenv("QDRANT_SERVER")
+
+
+    
 # Cấu hình logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+
+logging.info(f"Đang lọc lại tài liệu trên qdrant")
+
+_qdrant.delete_old_points(COLLECTION_NAME)
+
+
 
 # Hàm hỗ trợ để chuyển đổi thời gian sang datetime
 def convert_to_datetime(relative_time):
