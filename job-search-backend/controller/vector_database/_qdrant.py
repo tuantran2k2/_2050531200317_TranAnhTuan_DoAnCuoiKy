@@ -83,10 +83,11 @@ def delete_old_points(collection_name):
                 collection_name=collection_name,
                 points_selector=models.PointIdsList(points=points_to_delete)
             )
-            reindex_points_and_calculate_sum(collection_name)
             print(f"Đã xóa {len(points_to_delete)} điểm có 'date' quá 7 ngày.")
         else:
             print("Không có điểm nào cần xóa.")
+        total_points = reindex_points_and_calculate_sum(collection_name)
+        return total_points
     except Exception as e:
         print("Lỗi khi xóa các điểm:", e)
 
