@@ -141,8 +141,7 @@ for page_num in range(1, 20):
         try:
             job_id = job.get('data-job-id', None)
             if not _qdrant.qdrant_client.get_collections().collections:
-                logging.warning(f"Collection '{COLLECTION_NAME}' không tồn tại. Bỏ qua job với id_job {job_id}.")
-                continue
+                _qdrant.create_vector_db(COLLECTION_NAME)
             existing_job, _ = _qdrant.qdrant_client.scroll(
                 collection_name=COLLECTION_NAME,
                 scroll_filter=models.Filter(
