@@ -1,5 +1,5 @@
 import pandas as pd
-from langchain.schema import Document  # Import Document từ langchain hoặc thư viện bạn sử dụng
+from langchain.schema import Document  
 
 # Hàm xử lý file CSV
 def process_csv_to_docs(file_path: str):
