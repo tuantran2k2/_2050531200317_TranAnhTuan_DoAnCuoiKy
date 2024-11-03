@@ -38,6 +38,7 @@ logging.info(f"Đang lọc lại tài liệu trên qdrant")
 collection_info = _qdrant.qdrant_client.get_collection(COLLECTION_NAME)
 
 if collection_info.status != CollectionStatus.GREEN:
+    print("âssaasas")
     _qdrant.create_vector_db(COLLECTION_NAME)
     
 try:
