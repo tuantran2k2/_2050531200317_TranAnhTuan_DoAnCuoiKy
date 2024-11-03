@@ -83,8 +83,54 @@ def delete_old_points(collection_name):
                 collection_name=collection_name,
                 points_selector=models.PointIdsList(points=points_to_delete)
             )
+            reindex_points_and_calculate_sum(collection_name)
             print(f"Đã xóa {len(points_to_delete)} điểm có 'date' quá 7 ngày.")
         else:
             print("Không có điểm nào cần xóa.")
     except Exception as e:
         print("Lỗi khi xóa các điểm:", e)
+
+
+
+def reindex_points_and_calculate_sum(collection_name):
+    try:
+        # Lấy tất cả các điểm còn lại trong collection
+        scroll_result, next_page = qdrant_client.scroll(
+            collection_name=collection_name,
+            limit=100
+        )
+        
+        all_points = []
+        
+        while scroll_result:
+            all_points.extend(scroll_result)
+            if not next_page:
+                break
+            scroll_result, next_page = qdrant_client.scroll(
+                collection_name=collection_name,
+                limit=100,
+                offset=next_page
+            )
+        
+        # Sắp xếp lại các điểm theo ID để đảm bảo tuần tự
+        all_points = sorted(all_points, key=lambda p: p.id)
+        
+        # Cập nhật lại ID và tính tổng điểm
+        total_points = 0
+        for new_id, point in enumerate(all_points, start=1):
+            total_points += new_id  # Cộng dồn ID mới vào tổng điểm
+            qdrant_client.update(
+                collection_name=collection_name,
+                points=[models.PointStruct(
+                    id=new_id,  # Cập nhật ID mới
+                    vector=point.vector,
+                    payload=point.payload
+                )]
+            )
+        
+        print(f"Đã cập nhật lại ID cho {len(all_points)} điểm.")
+        return total_points
+    
+    except Exception as e:
+        print("Lỗi khi cập nhật lại ID các điểm:", e)
+        return 0
