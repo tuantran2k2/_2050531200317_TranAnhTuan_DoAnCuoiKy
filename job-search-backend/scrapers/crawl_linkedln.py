@@ -4,7 +4,7 @@ from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
-from ..controller.vector_database import _qdrant
+from controller.vector_database import _qdrant
 from qdrant_client.http import models
 from langchain.schema import Document  
 
