@@ -19,6 +19,13 @@ qdrant_client = QdrantClient(
     url=QDRANT_SERVER
 )
 
+
+def create_vector_db(collection_name):
+    qdrant_client.create_collection(
+        collection_name=collection_name
+    )
+    
+
 def save_vector_db(docs, collection_name):
     qdrant_doc = Qdrant.from_documents(
         documents=docs,

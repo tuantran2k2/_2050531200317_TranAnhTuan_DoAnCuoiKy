@@ -34,6 +34,10 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 
 logging.info(f"Đang lọc lại tài liệu trên qdrant")
 
+if not _qdrant.qdrant_client.has_collection(COLLECTION_NAME):
+   _qdrant.create_vector_db(COLLECTION_NAME)
+    
+    
 try:
     _qdrant.delete_old_points(COLLECTION_NAME)
 except Exception as e:
@@ -131,6 +135,8 @@ for page_num in range(1, 20):
     job_postings = soup.find_all('div', {'class': 'job-card-container'})
 
     docs = []
+    
+    
     # Trích xuất thông tin từ mỗi công việc
     for job in job_postings:
         try:
