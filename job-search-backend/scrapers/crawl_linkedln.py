@@ -67,13 +67,26 @@ with open("cookies.json", "r") as file:
     cookies = json.load(file)
 
 # Thêm cookie vào trình duyệt
+logging.info("Đang đọc cookie từ file 'cookies.json'...")
+with open("cookies.json", "r") as file:
+    cookies = json.load(file)
+
+# Thêm cookie vào trình duyệt
 logging.info("Đang thêm cookie vào trình duyệt...")
 driver.get('https://www.linkedin.com')  # Mở trang LinkedIn để cài cookie
+
 for cookie in cookies:
-    if 'sameSite' in cookie:
-        del cookie['sameSite']
-    logging.info(f"Adding cookie: {cookie}")
-    driver.add_cookie(cookie)
+    # Kiểm tra miền của cookie
+    if cookie.get('domain') == '.linkedin.com':
+        if 'sameSite' in cookie:
+            del cookie['sameSite']  # Xóa thuộc tính sameSite nếu không hợp lệ
+        logging.info(f"Adding cookie: {cookie}")
+        try:
+            driver.add_cookie(cookie)
+        except Exception as e:
+            logging.error(f"Không thể thêm cookie {cookie['name']}: {e}")
+    else:
+        logging.warning(f"Bỏ qua cookie {cookie['name']} do không khớp miền: {cookie['domain']}")
 
 # Tiếp tục truy cập trang để xác thực cookie đã được thêm
 logging.info("Đang tải lại trang LinkedIn để xác thực đăng nhập...")
