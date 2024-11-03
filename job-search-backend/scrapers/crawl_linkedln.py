@@ -35,9 +35,9 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 
 logging.info(f"Đang lọc lại tài liệu trên qdrant")
 
-collection_info = _qdrant.qdrant_client.get_collection(COLLECTION_NAME)
 
-if collection_info.status != CollectionStatus.GREEN:
+
+if not _qdrant.qdrant_client.has_collection(COLLECTION_NAME):
     print("âssaasas")
     _qdrant.create_vector_db(COLLECTION_NAME)
     
