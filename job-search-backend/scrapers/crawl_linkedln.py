@@ -4,7 +4,7 @@ from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
-from controller.vector_database import _qdrant
+from ..controller.vector_database import _qdrant
 from qdrant_client.http import models
 from langchain.schema import Document  
 
@@ -34,9 +34,10 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 
 logging.info(f"Đang lọc lại tài liệu trên qdrant")
 
-_qdrant.delete_old_points(COLLECTION_NAME)
-
-
+try:
+    _qdrant.delete_old_points(COLLECTION_NAME)
+except Exception as e:
+    pass
 
 # Hàm hỗ trợ để chuyển đổi thời gian sang datetime
 def convert_to_datetime(relative_time):
