@@ -61,11 +61,6 @@ logging.info("Đang khởi tạo trình duyệt...")
 driver = webdriver.Chrome(service=service, options=options)
 driver.implicitly_wait(10)
 
-# Đọc cookie từ file JSON
-logging.info("Đang đọc cookie từ file 'cookies.json'...")
-with open("cookies.json", "r") as file:
-    cookies = json.load(file)
-
 # Thêm cookie vào trình duyệt
 logging.info("Đang thêm cookie vào trình duyệt...")
 
