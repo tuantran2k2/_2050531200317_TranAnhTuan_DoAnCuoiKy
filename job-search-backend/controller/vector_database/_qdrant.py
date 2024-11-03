@@ -1,6 +1,7 @@
 # qdrant_client.py
 from langchain_qdrant import Qdrant
 from langchain_openai import OpenAIEmbeddings
+from qdrant_client import QdrantClient
 from qdrant_client.http import models
 import os
 from datetime import datetime, timedelta
@@ -39,18 +40,15 @@ def load_vector_db(collection_names):
 # Hàm mới: Xóa các điểm có "date" quá 7 ngày
 def delete_old_points(collection_name):
     try:
-        client = Qdrant.from_existing_collection(
-            embedding=embeddings_model,
-            collection_name=collection_name,
-            url=QDRANT_SERVER,
+        qdrant_client = QdrantClient(
+            url=QDRANT_SERVER
         )
-
         # Tính ngày giới hạn là 7 ngày trước
         cutoff_date = datetime.now() - timedelta(days=7)
         points_to_delete = []
         
         # Duyệt qua tất cả các điểm trong collection
-        scroll_result = client.scroll(
+        scroll_result = qdrant_client.scroll(
             collection_name=collection_name,
             limit=100  # Giới hạn số điểm tải mỗi lần
         )
@@ -67,7 +65,7 @@ def delete_old_points(collection_name):
                         points_to_delete.append(point.id)
             
             # Tiếp tục scroll để lấy các điểm tiếp theo
-            scroll_result = client.scroll(
+            scroll_result = qdrant_client.scroll(
                 collection_name=collection_name,
                 limit=100,
                 offset=scroll_result.offset
@@ -75,7 +73,7 @@ def delete_old_points(collection_name):
         
         # Xóa các điểm có "date" quá 7 ngày
         if points_to_delete:
-            client.delete(
+            qdrant_client.delete(
                 collection_name=collection_name,
                 points_selector=models.PointIdsList(points=points_to_delete)
             )
