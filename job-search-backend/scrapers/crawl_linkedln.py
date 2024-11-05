@@ -140,7 +140,9 @@ for page_num in range(1, 20):
     for job in job_postings:
         try:
             job_id = job.get('data-job-id', None)
+            print("iihhiihi")
             if _qdrant.qdrant_client.get_collections().collections:
+                print("trong vòng if")
                 existing_job, _ = _qdrant.qdrant_client.scroll(
                     collection_name=COLLECTION_NAME,
                     scroll_filter=models.Filter(
@@ -148,10 +150,11 @@ for page_num in range(1, 20):
                     ),
                     limit=1
                 )
+                print(existing_job)
                 if existing_job:
                     logging.info(f"Job với id_job {job_id} đã tồn tại trong Qdrant.")
                     continue
-        
+            print("không chạy vào vào if")       
             job_link = f"https://www.linkedin.com/jobs/view/{job_id}"
             logging.info(f"Đang truy cập chi tiết công việc: {job_link}")
             driver.get(job_link)
