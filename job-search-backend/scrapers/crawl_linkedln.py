@@ -197,7 +197,7 @@ for page_num in range(1, 20):
 
 docs_sorted = sorted(
     docs,
-    key=lambda doc: datetime.strptime(doc.metadata["date"], "%Y-%m-%d"),
+    key=lambda doc: datetime.strptime(doc.metadata["date"], "%Y-%m-%dT%H:%M:%S.%f"),
     reverse=True
 )
 _qdrant.save_vector_db(docs_sorted,COLLECTION_NAME)
