@@ -195,7 +195,12 @@ for page_num in range(1, 2):
             logging.error("Không tìm thấy ID công việc, bỏ qua công việc này.")
             continue
 
-_qdrant.save_vector_db(docs,COLLECTION_NAME)
+docs_sorted = sorted(
+    docs,
+    key=lambda doc: datetime.strptime(doc.metadata["date"], "%Y-%m-%d"),
+    reverse=True
+)
+_qdrant.save_vector_db(docs_sorted,COLLECTION_NAME)
 driver.quit()
 
 logging.info("Đã cập nhật các công việc xong.")
