@@ -96,7 +96,7 @@ driver.get('https://www.linkedin.com')
 # Thiết lập cookie 'li_at' để đăng nhập
 cookie = {
     'name': 'li_at',
-    'value': 'AQEDAVCQlYkCSEOWAAABkvx8dEwAAAGTIIj4TFYAI1hLvg-cC52nQ00e2NAnLUCx8j39EUDYau2_7kjCerdglEDoPyFRh0ku1EFqrw5fsXmHN9Bw8MngV89WaGcXphSfwiEQd4PpvO5rPFcZ9xVtmsqg',  # Thay bằng giá trị cookie thực tế của bạn
+    'value': 'AQEDAVCQlYkB_tt4AAABkvybvKEAAAGTIKhAoU4AZinDuLIhnYCd2umZS3B-7HQyNQvoDPgYW4LQWJJlB14is0_IsNqN9hA0-sCeYnTlwUXbzpuKNNDHVNzZZmtFoadj_3OpWhvUSX4sic0p7jegRlhB',  # Thay bằng giá trị cookie thực tế của bạn
     'domain': '.linkedin.com',
     'path': '/',
     'secure': True,
