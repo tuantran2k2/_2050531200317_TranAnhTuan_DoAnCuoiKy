@@ -103,6 +103,8 @@ cookie = {
     'httpOnly': True
 }
 
+
+docs = []
 driver.add_cookie(cookie)
 # Tiếp tục truy cập trang để xác thực cookie đã được thêm
 logging.info("Đang tải lại trang LinkedIn để xác thực đăng nhập...")
@@ -111,7 +113,7 @@ driver.get('https://www.linkedin.com')
 
     
     # Vòng lặp qua các trang công việc
-for page_num in range(1, 20):
+for page_num in range(1, 2):
     logging.info(f"Đang truy cập trang công việc {page_num}...")
     url = f'https://www.linkedin.com/jobs/search/?currentJobId=4062516658&f_PP=102267004%2C105790653%2C105668258&f_TPR=r86400&geoId=104195383&origin=JOB_SEARCH_PAGE_JOB_FILTER&refresh=true&sortBy=DD&start={25 * (page_num - 1)}'
     driver.get(url)
@@ -132,8 +134,6 @@ for page_num in range(1, 20):
     logging.info("Đang phân tích HTML để lấy thông tin công việc...")
     soup = BeautifulSoup(driver.page_source, 'html.parser')
     job_postings = soup.find_all('div', {'class': 'job-card-container'})
-
-    docs = []
     
     
     # Trích xuất thông tin từ mỗi công việc
