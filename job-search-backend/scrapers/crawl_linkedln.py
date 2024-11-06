@@ -140,16 +140,16 @@ for page_num in range(1, 20):
     for job in job_postings:
         try:
             job_id = job.get('data-job-id', None)
-            print("iihhiihi")
             if _qdrant.qdrant_client.get_collections().collections:
                 print("trong vòng if")
                 existing_job, _ = _qdrant.qdrant_client.scroll(
                     collection_name=COLLECTION_NAME,
                     scroll_filter=models.Filter(
-                        must=[models.FieldCondition(key="id_job", match=models.MatchValue(value=job_id))]
+                        must=[models.FieldCondition(key="metadata.id_job", match=models.MatchValue(value=job_id))]
                     ),
                     limit=1
                 )
+                
                 print(existing_job)
                 if existing_job:
                     logging.info(f"Job với id_job {job_id} đã tồn tại trong Qdrant.")
