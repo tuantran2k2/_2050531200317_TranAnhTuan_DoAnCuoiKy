@@ -96,7 +96,7 @@ driver.get('https://www.linkedin.com')
 # Thiết lập cookie 'li_at' để đăng nhập
 cookie = {
     'name': 'li_at',
-    'value': 'AQEDAVCQlYkEA3sXAAABkwG2XbkAAAGTJcLhuU0AqdFbW0yS993aoOTM0SQVMC-MXVZYRciSrBUAUIRm_k3KDXMc4VYxrmTOMHO9oY3AUxpkwHNsV6yDa9qzGHx3Yfe1jbxLvIpUPpHi4_9p6Mqp0Rdk',  # Thay bằng giá trị cookie thực tế của bạn
+    'value': 'AQEDAVCQlYkCrSaRAAABkwHKirAAAAGTJdcOsE0AzuLQIYT340ZRHJZ6T70OACdXbqQWB2vlbGdmjHFRzPl1QRjhUiI3yMZQgrNpli8BQNU8RdrLMfLqiSNdl0X3yBXqMsYSaK64OshHj1AAg4ebczR1',  # Thay bằng giá trị cookie thực tế của bạn
     'domain': '.linkedin.com',
     'path': '/',
     'secure': True,
@@ -141,7 +141,6 @@ for page_num in range(1, 20):
         try:
             job_id = job.get('data-job-id', None)
             if _qdrant.qdrant_client.get_collections().collections:
-                print("trong vòng if")
                 existing_job, _ = _qdrant.qdrant_client.scroll(
                     collection_name=COLLECTION_NAME,
                     scroll_filter=models.Filter(
