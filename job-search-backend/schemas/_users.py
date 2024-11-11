@@ -15,3 +15,8 @@ class UserRegistrationRequest(BaseModel):
     tenHienThi: str
     tenKH: str
     password: str
+    
+    
+class User(BaseModel):
+    email: str
+    password: str

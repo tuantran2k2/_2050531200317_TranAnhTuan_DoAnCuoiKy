@@ -3,8 +3,6 @@ from sqlalchemy.orm import relationship
 from database._database_mysql import Base
 
 
-import enum
-
 class KhachHang(Base):
     __tablename__ = "KhachHang"
 
@@ -13,9 +11,9 @@ class KhachHang(Base):
     tenKH = Column(String(100), nullable=False)
     maThonTo = Column(Integer, ForeignKey("ThonTo.maThonTo"))
     email = Column(String(100), nullable=False, unique=True)
-    matKhau = Column(String(50), nullable=False)
+    matKhau = Column(String(255), nullable=False)
     ngayDangKy = Column(Date)
-    maQuyen = Column(Integer, ForeignKey("QuyenTruyCap.maQuyen"))
+    maQuyen = Column(Integer, ForeignKey("QuyenTruyCap.maQuyen"), default=2)
     maVi = Column(Integer, ForeignKey("ViToken.maVi"))
 
     

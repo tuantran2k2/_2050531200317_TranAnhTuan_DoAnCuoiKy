@@ -1,23 +1,13 @@
 from contextlib import contextmanager
-from fastapi import Depends, FastAPI, HTTPException, status 
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
-from typing import Optional
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
-from smtplib import SMTP
-from typing import Annotated
+from fastapi.security import OAuth2PasswordBearer
 from datetime import datetime, timedelta, timezone
 from jwt.exceptions import InvalidTokenError,ExpiredSignatureError
 from passlib.context import CryptContext
-from starlette.middleware.authentication import AuthenticationMiddleware
 
 
 import _constants
 import jwt
-import random
 import bcrypt
-import json
-import requests
 
 # Function to hash password
 def hash_password(password):
@@ -36,18 +26,6 @@ def verify_password(plain_password, hashed_password):
 def get_password_hash(password):
     return pwd_context.hash(password)
 
-
-def create_access_token_phone(data: dict, expires_delta: timedelta | None = None):
-    to_encode = data.copy()
-    vietnam_timezone = timezone(timedelta(hours=7))
-    if expires_delta:
-        expire = datetime.now(vietnam_timezone) + expires_delta
-        print(expire)
-    else:
-        expire = datetime.now(vietnam_timezone) + timedelta(minutes=15)
-    to_encode.update({"exp": expire})
-    encoded_jwt = jwt.encode(to_encode, _constants.SECRET_KEY, algorithm=_constants.ALGORITHM)
-    return encoded_jwt
 
 
 
@@ -94,7 +72,7 @@ def verified_user(auth_header: str):
         return {"status": 401, "message": "Access token has expired"}
     except InvalidTokenError:
         # Xử lý khi token không hợp lệ
-        return {"status": 401, "message": "Invalid token"}
+        return {"status": 405, "message": "Invalid token"}
     except Exception as e:
         # Xử lý các lỗi khác
         return {"status": 500, "message": f"An error occurred: {str(e)}"}
