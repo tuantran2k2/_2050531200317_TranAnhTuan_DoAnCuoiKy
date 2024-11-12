@@ -1,9 +1,9 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status ,Request ,Response
 from sqlalchemy.orm import Session
 from models.KhachHang import KhachHang, OTP 
 from schemas._users import EmailRequest, OTPVerifyRequest ,UserRegistrationRequest , User
 from dependencies.otp_service import generate_otp, send_verification_email
-from dependencies.security import get_password_hash , verify_password , create_access_token, create_refresh_token
+from dependencies.security import get_password_hash , verify_password , create_access_token, create_refresh_token , verified_user
 from database._database_mysql import SessionLocal
 from dependencies.dependencies import get_db
 from datetime import datetime, timedelta
@@ -11,6 +11,7 @@ from fastapi.responses import JSONResponse
 
 import _constants
 from datetime import datetime
+import jwt
 
 router = APIRouter(
     prefix="/api/v1/user",
@@ -133,6 +134,17 @@ def register_user(request: UserRegistrationRequest, db: Session = Depends(get_db
             return {"status" : 500 , "message": f"lỗi {e}"}
 
 ####################################################Đăng nhập tài khoản####################################
+def get_current_user(request: Request):
+    auth_header = request.headers.get("Authorization")
+    if not auth_header:
+        raise HTTPException(status_code=500, detail="Authorization header missing")
+    
+    # Xác thực người dùng
+    payload = verified_user(auth_header)
+    if not payload:
+        raise HTTPException(status_code=500, detail="Invalid token or unauthorized")
+    
+    return payload
 
 @router.post("/login")
 async def login(user: User, db: Session = Depends(get_db)):
@@ -141,8 +153,7 @@ async def login(user: User, db: Session = Depends(get_db)):
         user_in_db = db.query(KhachHang).filter(
             KhachHang.email == user.email
         ).first()
-        
-        
+          
         print(user_in_db.matKhau)
         if user_in_db and verify_password(user.password,user_in_db.matKhau):
             access_token_expires = timedelta(minutes=_constants.ACCESS_TOKEN_EXPIRE_MINUTES)
@@ -151,10 +162,10 @@ async def login(user: User, db: Session = Depends(get_db)):
             
             access_token = create_access_token(
                 data={
-                    "user_id": user["user_id"],
-                    "display_name": user["tenHienThi"],
-                    "user_email": user["tenKH"],
-                    "email": user["email"],
+                    "user_id": user_in_db.maKH,
+                    "display_name": user_in_db.tenKH,
+                    "user_email": user_in_db.tenHienThi,
+                    "email": user_in_db.email,
                 },
                 expires_delta=access_token_expires
             )
@@ -162,10 +173,10 @@ async def login(user: User, db: Session = Depends(get_db)):
                     # Tạo refresh token
             refresh_token = create_refresh_token(
                 data={
-                    "user_id": user["user_id"],
-                    "display_name": user["tenHienThi"],
-                    "user_email": user["tenKH"],
-                    "email": user["email"],
+                    "user_id": user_in_db.maKH,
+                    "display_name": user_in_db.tenKH,
+                    "user_email": user_in_db.tenHienThi,
+                    "email": user_in_db.email,
                 },
                 expires_delta=refresh_token_expires
             )
@@ -178,3 +189,84 @@ async def login(user: User, db: Session = Depends(get_db)):
             return response
     except Exception as e:
             return {"status" : 500 , "message": f"lỗi {e}"}
+
+
+@router.post("/logout")
+async def logout(response: Response, current_user: dict = Depends(get_current_user)):
+    try:
+        # Xóa cookie "refresh_token"
+        response.delete_cookie(key="refresh_token")
+        return JSONResponse({"message": "Logged out successfully"}, status_code=200)
+    except Exception as e:
+        print(f"Error during logout: {e}")
+        raise HTTPException(
+            status_code=500,
+            detail="Logout failed. Please try again."
+        )
+        
+        
+@router.post("/refresh_token")
+async def refresh_token(request: Request, response: Response ,  db: Session = Depends(get_db)):
+    try:
+        refresh_token = request.cookies.get("refresh_token")
+        
+        print(refresh_token)
+        
+        if not refresh_token:
+            return JSONResponse({"status": 405, "message": "Invalid token"}, status_code=405)
+
+        data = jwt.decode(refresh_token, _constants.JWT_REFRESH_KEY, algorithms=[_constants.ALGORITHM])
+        
+        if 'email' not in data:
+            return JSONResponse({"status": 405, "message": "Refresh token not va"}, status_code=405)
+        
+        user_in_db = db.query(KhachHang).filter(
+                KhachHang.email == data["email"]
+        ).first()
+        
+        if user_in_db:
+            access_token_expires = timedelta(minutes=_constants.ACCESS_TOKEN_EXPIRE_MINUTES)
+            refresh_token_expires = timedelta(days=_constants.ACCESS_REFRESH_TOKEN_EXPIRE_DAY)
+            
+            access_token_new = create_access_token(
+                    data={
+                        "user_id": user_in_db.maKH,
+                        "display_name": user_in_db.tenKH,
+                        "user_email": user_in_db.tenHienThi,
+                        "email": user_in_db.email,
+                    },
+                    expires_delta=access_token_expires
+                )
+
+                        # Tạo refresh token
+            refresh_token_new = create_refresh_token(
+                data={
+                    "user_id": user_in_db.maKH,
+                    "display_name": user_in_db.tenKH,
+                    "user_email": user_in_db.tenHienThi,
+                    "email": user_in_db.email,
+                },
+                expires_delta=refresh_token_expires
+            )
+        print("aaaaaaa")
+        print(access_token_new)
+        
+        print("bbbbb")
+        print(refresh_token_new)
+
+        response.set_cookie(
+            key="refresh_token",
+            value=refresh_token_new,
+            httponly=True
+        )
+        return JSONResponse({
+            "access_token": access_token_new,
+            "token_type": "bearer"
+        }, status_code=200)
+        
+    except Exception as e:
+        print(f"Error during logout: {e}")
+        raise HTTPException(
+            status_code=500,
+            detail="Logout failed. Please try again."
+        )

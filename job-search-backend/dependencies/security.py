@@ -1,5 +1,6 @@
 from contextlib import contextmanager
-from fastapi.security import OAuth2PasswordBearer
+from fastapi.security import OAuth2PasswordBearer 
+from fastapi import HTTPException ,Request
 from datetime import datetime, timedelta, timezone
 from jwt.exceptions import InvalidTokenError,ExpiredSignatureError
 from passlib.context import CryptContext
@@ -76,4 +77,16 @@ def verified_user(auth_header: str):
     except Exception as e:
         # Xử lý các lỗi khác
         return {"status": 500, "message": f"An error occurred: {str(e)}"}
+
+
+def get_current_user(request: Request):
+    auth_header = request.headers.get("Authorization")
+    if not auth_header:
+        raise HTTPException(status_code=500, detail="Authorization header missing")
     
+    # Xác thực người dùng
+    payload = verified_user(auth_header)
+    if not payload:
+        raise HTTPException(status_code=500, detail="Invalid token or unauthorized")
+    
+    return payload

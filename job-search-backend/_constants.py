@@ -1,23 +1,7 @@
 
-# ====================== DATA PATH ======================
-DATAS_PATH = "./files/datas/user"
-MEKONGAI_PATH = "./files/datas/mekongAI"
-DATAS_PUBLIC_PATH = "./files/datas/public"
-DATAS_MEKONGAI_PATH = "./files/datas/mekongai"
-DATAS_MEKONGAI_PUBLIC_PATH = "./files/datas/mekongai/public"
-FILE_CHAR_PATH = "./files/html"
-LOG_PATH = "./files/logs"
-IMAGE_TMP_PATH = "./files/tmp"
-FACEBOOK_USER_ACCESS_TOKEN_PATH = "./files/datas/public/FACEBOOK_USER_ACCESS_TOKEN"
-FACEBOOK_PAGE_ACCESS_TOKEN_PATH = "./files/datas/public/FACEBOOK_PAGE_ACCESS_TOKEN"
-FACEBOOK_PAGE_POST_COMMENT_PATH = "./files/datas/public/FACEBOOK_PAGE_POST_COMMENT"
-FACEBOOK_PAGE_COLLECTIONS_PATH = "./files/datas/public/FACEBOOK_PAGE_COLLECTIONS"
+# ====================== DATA PATH_CV  ======================
+DATAS_PATH = "./files"
 
-MAX_FILE_SIZE = 20 * 1024 * 1024
-
-TOTAL_POINTS_NAME = "total_points.txt"
-TOTAL_BOT_MINI = 5
-TOTAL_BOT_MINI_MEKONG = 10
 
 # ====================== CHATBOT NAME ======================
 NAME_CHATBOT = "CHATBOT"
