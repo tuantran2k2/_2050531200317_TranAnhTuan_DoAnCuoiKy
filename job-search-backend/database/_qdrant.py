@@ -47,10 +47,10 @@ def load_vector_db(collection_names):
             collection_name=collection_names,
             url=QDRANT_SERVER,
         )
+        print(client)
         return client
     except Exception:
-        a = "None"
-        return a
+        return "None"
 
 # Hàm mới: Xóa các điểm có "date" quá 7 ngày
 def delete_old_points(collection_name):
@@ -98,3 +98,22 @@ def delete_old_points(collection_name):
             print("Không có điểm nào cần xóa.")
     except Exception as e:
         print("Lỗi khi xóa các điểm:", e)
+
+
+
+def similarity_search_qdrant_data(db, query, k=5):
+    docs = db.similarity_search(query=query, k=k)
+    return docs
+
+
+def get_point_from_ids(db, point_ids, collection_name):
+    # Lọc ra các ID không hợp lệ
+    valid_point_ids = [id for id in point_ids if isinstance(id, (int, str)) and id is not None]
+
+    # Kiểm tra nếu danh sách valid_point_ids không trống trước khi thực hiện truy vấn
+    if not valid_point_ids:
+        raise ValueError("Danh sách ID hợp lệ rỗng, không thể thực hiện truy vấn.")
+
+    # Gọi hàm retrieve với danh sách valid_point_ids
+    id = db.client.retrieve(collection_name=collection_name, ids=valid_point_ids)
+    return id

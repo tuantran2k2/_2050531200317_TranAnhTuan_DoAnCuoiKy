@@ -1,36 +1,33 @@
 from crewai import Crew
 from textwrap import dedent
-from crewai_comment.agents import agent_1_post_analysis, agent_2_comment_analysis, agent_3_generate_reply
-from crewai_comment.tasks import post_analysis, comment_analysis, generate_comment_replies
+from .agents import agent_1_cv_analysis, agent_2_job_search
+from .tasks import cv_analysis, rag_jobs_list
 from dotenv import load_dotenv
 
+load_dotenv()
 
-def _crewai_comment(noi_dung_post, images, cum_comments, comment):
-    # Tạo nhiệm vụ phân tích bài post
-    phan_tich_bai_post = post_analysis(agent_1_post_analysis(), noi_dung_post, images)
+def _crewai_jobscv(id_cv):
+    # Tạo nhiệm vụ phân tích CV để lấy câu hỏi từ AGENT_1
+    phan_tich_cau_hoi = cv_analysis(agent_1_cv_analysis(), id_cv)
 
-    # Kiểm tra nếu phân tích bài post thành công
-    if phan_tich_bai_post is None:
-        print("Phân tích bài post không thành công")
+    # Kiểm tra nếu phân tích CV thành công
+    if phan_tich_cau_hoi is None:
+        print("Phân tích CV không thành công")
         return
 
-    # Chỉ phân tích bình luận nếu bài post đã được phân tích
-    phan_tich_binh_luan = comment_analysis(agent_2_comment_analysis(), cum_comments, phan_tich_bai_post)
+    # Lấy câu hỏi đầu ra từ AGENT_1
+    agent_1_question = phan_tich_cau_hoi.expected_output
 
-    if phan_tich_binh_luan is None:
-        print("Phân tích bình luận không thành công")
+    # Tạo nhiệm vụ tìm kiếm công việc sử dụng câu hỏi từ AGENT_1
+    tim_kiem_cong_viec = rag_jobs_list(agent_2_job_search(agent_1_question), agent_1_question)
+
+    if tim_kiem_cong_viec is None:
+        print("Tìm kiếm công việc không thành công")
         return
 
-    du_doan_binh_luan = generate_comment_replies(agent_3_generate_reply(), comment, phan_tich_bai_post,
-                                                 phan_tich_binh_luan)
-    if du_doan_binh_luan is None:
-        print("Học hỏi bình luận không thành công")
-        return
-
-    # Khởi tạo đội ngũ với các agent
+    # Khởi tạo đội ngũ với các task: phân tích CV và tìm kiếm công việc
     doan = Crew(
-        # agents=[agent_1_post_analysis(), agent_2_comment_analysis(), agent_3_generate_reply()],
-        tasks=[phan_tich_bai_post, phan_tich_binh_luan, du_doan_binh_luan],
+        tasks=[phan_tich_cau_hoi, tim_kiem_cong_viec],
         verbose=True,
     )
 

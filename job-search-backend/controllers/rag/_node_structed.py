@@ -78,58 +78,14 @@ def get_ids_1_node(docs):
     list_ids = []
 
     for doc in docs:
-        id = doc.metadata["doc_id"]
-        ids = [id - 1, id, id + 1]
-        ids = [elem for elem in ids if elem != "None"]
-        list_ids.append(ids)
+        id = abs(int(doc.metadata["id_job"]))
+        print(id)
+        list_ids.append(id)
 
     return list_ids
 
 
-# Lấy danh sách các id 3 node
-def get_ids_3_node(docs):
-    list_ids = []
 
-    for doc in docs:
-        id = doc.metadata["doc_id"]
-        ids = [
-            id - 3,
-            id - 2,
-            id - 1,
-            id,
-            id + 1,
-            id + 2,
-            id + 3,
-        ]
-        ids = [elem for elem in ids if elem > 0]
-        list_ids.append(ids)
-
-    return list_ids
-
-
-def check_common_elements(l1, l2):
-    return any(elem in l1 for elem in l2)
-
-
-# Bước 2: Hợp nhất các danh sách có phần tử trùng nhau và sắp xếp tăng dần
-def merge_lists(lists):
-    merged = []
-    visited = [False] * len(lists)
-
-    for i in range(len(lists)):
-        if visited[i]:
-            continue
-        current_merge = lists[i]
-        visited[i] = True
-        for j in range(i + 1, len(lists)):
-            if check_common_elements(current_merge, lists[j]):
-                current_merge += [
-                    elem for elem in lists[j] if elem not in current_merge
-                ]
-                visited[j] = True
-        merged.append(sorted(current_merge))  # Sắp xếp danh sách hiện tại
-
-    return merged
 
 
 class OrderedSet:

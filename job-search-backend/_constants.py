@@ -71,3 +71,6 @@ SMTP_PORT = 587
 SMTP_USER = "khnh113a@gmail.com"
 SMTP_PASSWORD = "mjkd poba rymf bhav"
 VERIFICATION_TIMEOUT = 10
+
+
+COLLECTION  = "jobs_collection"

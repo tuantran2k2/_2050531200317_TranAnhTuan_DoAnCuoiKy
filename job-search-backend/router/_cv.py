@@ -19,9 +19,6 @@ router = APIRouter(
     tags=["cv"],
 )
 
-
-
-
 ################################ upload file CV ########################################################
 @router.post("/upload_files")
 async def upload_files(
@@ -34,21 +31,21 @@ async def upload_files(
         file_content = await file.read()  # Đọc toàn bộ nội dung của file
         
         # Chuyển đổi file_content thành một đối tượng BytesIO để có thể sử dụng seek
-        file_stream = io.BytesIO(file_content) # Đọc toàn bộ nội dung của file
-        
-        # Truyền file_content vào pdfminer để xử lý
-        noi_dung_cv = _cv.extract_text_from_pdf(file_content)  # Giả sử extract_text_from_pdf chấp nhận nội dung file dưới dạng bytes
+        file_stream = io.BytesIO(file_content)  # Wrap file_content in BytesIO
+
+        # Truyền file_stream vào pdfminer để xử lý
+        noi_dung_cv = _cv.extract_text_from_pdf(file_stream)  # Pass file_stream instead of file_content
         answer = _cv.chatbot_cv(noi_dung_cv)
 
         # Kiểm tra nếu answer có giá trị cho các key cần thiết
         new_cv = CV(
             tenCV=answer.get("tenDayDu", "null"),
             Nganh=answer.get("nganhNghe", "null"),
-            KyNangMem=answer.get("kyNangMem", "null"),
-            KyNangChuyenNganh=answer.get("kyNangChuyenNganh", "null"),
+            KyNangMem=", ".join(answer.get("kyNangMem", ["null"])) if isinstance(answer.get("kyNangMem"), list) else answer.get("kyNangMem", "null"),
+            KyNangChuyenNganh=", ".join(answer.get("kyNangChuyenNganh", ["null"])) if isinstance(answer.get("kyNangChuyenNganh"), list) else answer.get("kyNangChuyenNganh", "null"),
             hocVan=answer.get("hocVan", "null"),
             tinhTrang="null",
-            DiemGPA=answer.get("diemGPA", 0.0),
+            DiemGPA=float(answer.get("diemGPA", 0.0)) if answer.get("diemGPA") else 0.0,
             soDienThoai=answer.get("soDienThoai", "null"),
             email=answer.get("email", "null"),
             diaChi=answer.get("diaChi", "null"),

@@ -1,10 +1,15 @@
-import re
-import json
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
+from sqlalchemy.orm import Session
+from models.CV import CV
+
+
+import re
+import json
 import pdfplumber
 import _prompts
 import _environments
+
 
 def extract_text_from_pdf(file_path):
     """Extracts text from each page of a PDF file."""
@@ -66,3 +71,32 @@ def chatbot_cv(noidung_cv):
     except Exception as e:
         print(f"Lỗi trong quá trình xử lý chatbot_cv: {e}")
         return None
+
+def get_cv(id_CV: int, db: Session):
+    # Truy vấn CV dựa vào id_CV
+    cv = db.query(CV).filter(CV.maCV == id_CV).first()
+    print(cv) 
+    # Kiểm tra nếu không tìm thấy CV
+    if cv is None:
+        return None
+
+    # Chuẩn bị dữ liệu để trả về
+    cv_data = {
+        "maCV": cv.maCV,
+        "tenCV": cv.tenCV,
+        "Nganh": cv.Nganh,
+        "KyNangMem": cv.KyNangMem,
+        "KyNangChuyenNganh": cv.KyNangChuyenNganh,
+        "hocVan": cv.hocVan,
+        "tinhTrang": cv.tinhTrang,
+        "DiemGPA": cv.DiemGPA,
+        "soDienThoai": cv.soDienThoai,
+        "email": cv.email,
+        "diaChi": cv.diaChi,
+        "GioiThieu": cv.GioiThieu,
+        "maKH": cv.maKH,
+        "ChungChi": cv.ChungChi
+    }
+
+   
+    return cv_data
