@@ -1,0 +1,66 @@
+---
+Nội dung:
+About the job I.MÔ TẢ CÔNG VIỆC -Thiết kế kiến trúc và lập trình phát triển module/sản phẩm mới hoạt động ổn định. -Tham gia phát triển, đề xuất giải pháp kỹ thuật các dự án lập trình ứng dụng App trên nền tảng mobile. -Nghiên cứu và ứng dụng các công nghệ mới và ứng dụng vào quá trình phát triển sản phẩm -Làm việc, phối hợp công việc theo nhóm dưới sự phân công công việc của cấp trên. -Góp phần xây dựng công ty, tham gia định hướng chiến lược và phát triển sản phẩm. -Đánh giá các chức năng khi nhận được yêu cầu từ các nhóm. -Báo cáo kết quả làm việc với Ban lãnh đạo và Quản lý trực tiếp. -Phân tích dữ liệu người dùng. II.YÊU CẦU -Có từ 02 năm kinh nghiệm phát triển ứng dụng trên nền tảng Flutter -Có kinh nghiệm lập trình Android là một lợi thế. -Có kiến thức, kinh nghiệm về mô hình MVVM sử dụng provider, rxDart, OOP, Component -Có kinh nghiệm về REST APIs với http, dio, interceptor -Có hiểu biết và thành thạo việc xử lý UI bằng XML -Có khả năng tìm hiểu những công nghệ chuyên sâu. -Hiểu biết về thuật toán. -Sáng tạo, nhiệt huyết, có trách nhiệm với sản phẩm. -Có tư duy tốt, tinh thần ham học hỏi, năng động. -Kiến thức về UX / UI trên thiết bị di động là một lợi thế. III. QUYỀN LỢI Mức lương: 15.000.000 - 30.000.000 VNĐ/tháng -Thưởng các ngày nghỉ lễ, thưởng tết (1-5 tháng lương) -Review lương 2 lần/năm -Phụ cấp ăn trưa, thuê trọ, đi lại -Xét duyệt thưởng tour du lịch 6 tháng/lần -Văn hóa công ty: đọc sách, tập thể dục hàng ngày -Làm việc trong môi trường trẻ trung, thân thiện và hướng đến việc phát triển con người -Chế độ BHXH, BHYT, BHTN theo luật lao động -Trang bị thiết bị hiện đại, laptop, màn hình lớn -Du lịch hàng năm, tham gia liên hoan hàng tháng -Đồ ăn nhẹ /đồ uống miễn phí -Tham gia vào CLB Bóng đá của công ty hàng tuần -Quyền lợi dành cho thành viên: Từ > 01 năm được khám sức khỏe tổng quát 1 năm/lần; Từ > 03 năm được cấp vốn mua nhà, mua xe...... -Thời gian làm việc: T2 - T6, nghỉ 3 thứ 7, 1 thứ 7 Creative day và 4 chủ nhật (8h30 - 18h, nghỉ trưa 1h30p)
+
+Tiêu đề Công Việc: Flutter Developer (Upto 30M)
+Địa chỉ việc làm: Hanoi, Hanoi, Vietnam
+Link chi tiết: https://www.linkedin.com/jobs/view/4073987039
+Ngày đăng: 2024-11-14T14:06:02.927181
+id_job: 4073987039
+---
+
+
+
+---
+Nội dung:
+About the job Mô tả công việc: Sử dụng Java phát triển các service sử dụng REST API (Spring Boot) trong hệ thống kiến trúc Microservices Hỗ trợ thêm lập trình frontend cho các dự án phát triển sản phẩm nếu cần (Chỉ khi phát sinh - sử dụng ReactJS) Tham gia phát triển nền tảng quản lý & bán hàng trên hệ thống Sapo (phân hệ POS, WEB, F&B): quản lý bán hàng, quản lý kho, quy trình hoàn tất đơn hàng, đồng bộ đa kênh… Tham gia phân tích nghiệp vụ, đảm bảo chất lượng, tiến độ công việc và trải nghiệm người dùng (hiệu năng, tính dễ sử dụng, cũng như mức độ ổn định của sản phẩm). Triển khai các hạng mục công việc theo nhiệm vụ được giao. Tham gia & kiểm soát các hạng mục phát triển tính năng mới, cải tiến tính năng cũ nhằm đảm bảo chất lượng và khả năng mở rộng. Phối hợp với team nghiên cứu và ứng dụng các công nghệ mới để triển khai tính năng mới, đồng thời cải tiến liên tục các hạng mục đã ra mắt nhằm tối ưu hiệu năng & duy trì ổn định sản phẩm. Yêu cầu kinh nghiệm: Tốt nghiệp chuyên ngành Công nghệ thông tin và các chuyên ngành liên quan khác. Có từ 4 - 5 năm kinh nghiệm lập trình Java (Spring Boot). Có khả năng thiết kế kiến trúc, tối ưu và xây dựng hệ thống Sử dụng thành thạo Git hoặc SVN. Hiểu biết các Framework: Spring, Hibernate. Có hiểu biết tốt về Design pattern, OOP, REST API. Có kiến thức tốt về Mariadb. Có kinh nghiệm & hiểu biết về xây dựng hệ thống Microservice. Có tư duy logic tốt, khả năng tự tìm hiểu & giải quyết vấn đề tốt Có kiến thức về cơ sở dữ liệu quan hệ. Ưu tiên có kinh nghiệm về Domain Driven Design, NoSQL (Redis, MongoDB), các hệ thống Message Queue (Kafka, RabbitMQ). Chủ động trong công việc, có tinh thần trách nhiệm cao. Chủ động phối hợp với thành viên trong team để giải quyết vấn đề, thực hiện mục tiêu. Ưu tiên có kinh nghiệm vận hành hệ thống AWS là 1 lợi thế. Ưu tiên có định hướng trở thành teamlead và trong quá trình làm việc đã có hỗ trợ, đào tạo được thành viên trong team. Có kinh nghiệm leader là 1 lợi thế Quyên lợi: Lương thưởng hấp dẫn theo năng lực và kinh nghiệm thực tế của ứng viên (upto 45 triệu/tháng + phụ cấp) Được hỗ trợ học và thi các chứng chỉ quốc tế Được sự hỗ trợ trực tiếp của các chuyên gia giỏi từ các hãng công nghệ hàng đầu thế giới và sử dụng các hạ tầng công nghệ tiên tiến. Chế độ BHXH, BHYT theo luật Lao động, ngoài ra được tham gia chương trình bảo hiểm Sapo Care Được làm việc trong môi trường chuyên nghiệp, trẻ trung, năng động, ý kiến cá nhân được tôn trọng và tinh thần làm việc tập thể được đề cao. Được làm việc trong môi trường chuyên nghiệp, trẻ trung, năng động.
+
+Tiêu đề Công Việc: Senior Java Software Engineer
+Địa chỉ việc làm: Hanoi, Hanoi, Vietnam
+Link chi tiết: https://www.linkedin.com/jobs/view/4074234668
+Ngày đăng: 2024-11-14T20:57:49.122877
+id_job: 4074234668
+---
+
+
+
+---
+Nội dung:
+About the job Mô tả công việc Tìm kiếm, mở rộng thị trường tiêu thụ sản phẩm. Tạo và quản lý đơn hàng. Thiết lập, duy trì và phát triển mối quan hệ với khách hàng. Xây dựng và quản lý cơ sở dữ liệu khách hàng. Báo cáo kết quả kinh doanh, đề xuất cải tiến. Tham gia xây dựng hệ thống quản trị (quy trình, quy định, công cụ, phần mềm ...) phục vụ công tác chuyên môn. Thực hiện các nhiệm vụ khác theo sự phân công, chỉ đạo của Ban giám đốc Tham gia hỗ trợ các công việc, dự án liên quan đến vị trí chuyên môn đang đảm nhận. Yêu cầu ứng viên Ưu tiên Nam, ngoại hình ưa nhìn Có kinh nghiệm 02 năm ở vị trí tương đương Ưu tiên ứng viên có kiến thức trong ngành nội/ngoại thất hoặc liên quan Có kỹ năng làm việc nhóm. Có kỹ năng giao tiếp, đàm phán, thuyết phục, giải quyết vấn đề. Có khả năng khai thác thông tin, dánh giá, phân tích, tổng hợp và báo cáo. Sử dụng tốt tin học văn phòng. Ưu tiên ứng viên sử dụng tốt Autocad (chưa biết sẽ được đào tạo) Quyền lợi Mức lương: 10-15tr + % hoa hồng doanh số (Thu nhập 200-350tr/năm) Hỗ trợ ăn trưa tại Công ty, phụ cấp điện thoại Đóng BHXH sau khi trở thành nhân viên chính thức. Thưởng Lễ Tết, tháng lương 13, thưởng sinh nhật, hiếu, hỷ, du lịch... Xét điều chỉnh lương hàng năm. Địa chỉ Công ty Cổ phần Sofia Nội thất Trần Hữu Dực, Cầu Diễn, Nam Từ Liêm (đối diện 304 đường K2), Quận Nam Từ Liêm, Thành phố Hà Nội
+
+Tiêu đề Công Việc: Nhân viên kinh doanh
+Địa chỉ việc làm: Hanoi, Hanoi, Vietnam
+Link chi tiết: https://www.linkedin.com/jobs/view/4074805864
+Ngày đăng: 2024-11-14T22:57:20.804986
+id_job: 4074805864
+---
+
+
+
+---
+Nội dung:
+About the job Mô tả công việc Sáng tạo nội dung nhằm hỗ trợ truyền thông thương hiệu tuyển dụng trên các nền tảng mạng xã hội: Facebook, Linkedin, Threads, Tiktok. Quản lý hoạt động và tương tác với ứng viên trên các nền tảng. Hỗ trợ hoạt động kết nối, tạo nguồn ứng viên. Hỗ trợ thiết lập và duy trì mối quan hệ với các đối tác bên ngoài,bao gồm: các trường đại học, tổ chức giáo dục, chuyên gia… Thực hiện các công việc khác theo yêu cầu của Team Lead Yêu cầu Sinh viên năm 4 thuộc chuyên ngành Truyền thông, Marketing hoặc Quản trị nhân lực Có khả năng sáng tạo nội dung và thiết kế hình ảnh cơ bản Có thể làm việc Fulltime Đam mê và định hướng lâu dài theo lĩnh vực truyền thông – marketing. Tinh thần làm việc với trách nhiệm cao, tuân thủ quy định, văn hóa Công ty. Ngoại hình ưu nhìn là một lợi thế. Quyền lợi Mức lương hỗ trợ: 3.000.000/ tháng Được đào tạo, hướng dẫn và thực hiện các công việc cụ thể Được xây dựng lộ trình thăng tiến rõ ràng Làm việc trong môi trường chuyên nghiệp, trẻ trung, năng động Tích lũy kinh nghiệm, kiến thức thực tế liên quan đến truyền thông tuyển dụng, nâng cao kỹ năng chiêu mộ và tuyển dụng nhân sự Hỗ trợ đóng dấu báo cáo thực tập Cách thức ứng tuyển Gửi CV về thông tin bên dưới: Email: careers@techvify.com.vn Fanpage: https://www.facebook.com/techvify.careers
+
+Tiêu đề Công Việc: Intern Employer Branding
+Địa chỉ việc làm: Hanoi, Hanoi, Vietnam
+Link chi tiết: https://www.linkedin.com/jobs/view/4073990213
+Ngày đăng: 2024-11-14T15:05:45.368224
+id_job: 4073990213
+---
+
+
+
+---
+Nội dung:
+About the job Job Describe: Lên ý tưởng, thiết kế và tạo tài liệu chi tiết kịch bản game. Cùng làm việc với các bộ phận trong dự án để đảm bảo tiến độ và chất - lượng cho sự phát triển các tính năng và event cho các game. Theo dõi chỉ số, phân tích và đưa ra các action phù hợp giai đoạn dự án. Xây dựng game story phù hợp với mục tiêu sản phẩm. Requirement: Tối thiểu 1 năm kinh nghiệm, có sản phẩm GDD hoặc sản phẩm đã lên store. Có hiểu biết về các yếu tố khi thiết kế game như Fun factors, User motivation, core lopp, progression.. Ưu tiên ứng viên có hiểu biết về phân tích dữ liệu và economic, monetization trong Game IAP Có kinh nghiệm phát triển tối thiểu 1 tựa Game RPG là một lợi thế Yêu thích chơi game, mong muốn phát triển sự nghiệp trong ngành game Ham học hỏi, có tư duy phát triển, cải tiến công việc Cởi mở, chủ động giao tiếp, tương tác và kết hợp công việc với đồng đội. Benefits: Lương: Salary upto $1000 + Thương dự án. Thử việc hưởng 100% lương. Phụ cấp ăn trưa, gửi xe Nghỉ phép hưởng nguyên lương 12 ngày/ năm. Được hưởng đầy đủ các chính sách BHXH, BHYT, các phúc lợi khác theo đúng quy định của Luật lao động và các chế độ đãi ngộ của Công ty. Cung cấp trang thiết bị đầy đủ để phục vụ công việc Thưởng cuối năm (T13,14,15…) theo doanh thu của công ty và nhiều hình thức thưởng hấp dẫn khác (Thưởng ý tưởng, nhân viên xuất sắc, thưởng dự án, thưởng sinh nhật, thích là thưởng ...) Văn hóa cho phép phát huy tối đa khả năng và tính sáng tạo của nhân sự Được tham gia các buổi đào tạo, training, workshop nâng cao năng lực, kiến thức, cơ hội phát triển, tăng cấp bậc thường niên. Các chuyến du lịch, teambuilding hấp dẫn hàng tháng, hàng năm trong hoặc ngoài nước. Các bạn quan tâm vui lòng gửi CV ứng tuyển Email: tuyendung@gameestudio.com - Tiêu đề \(Họ tên - Vị trí ứng tuyển\) Hotline: 0867624995 ( Ms.Ngọc) Website: https://gameestudio.com/ Fanpage: https://www.facebook.com/gameeglobal/
+
+Tiêu đề Công Việc: Game Designer (Midcore)
+Địa chỉ việc làm: Hanoi, Hanoi, Vietnam
+Link chi tiết: https://www.linkedin.com/jobs/view/4074229253
+Ngày đăng: 2024-11-14T16:03:46.019101
+id_job: 4074229253
+---
+
+
+
+

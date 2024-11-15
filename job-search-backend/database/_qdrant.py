@@ -101,19 +101,12 @@ def delete_old_points(collection_name):
 
 
 
-def similarity_search_qdrant_data(db, query, k=5):
+def similarity_search_qdrant_data(db, query, k):
     docs = db.similarity_search(query=query, k=k)
     return docs
 
 
-def get_point_from_ids(db, point_ids, collection_name):
-    # Lọc ra các ID không hợp lệ
-    valid_point_ids = [id for id in point_ids if isinstance(id, (int, str)) and id is not None]
 
-    # Kiểm tra nếu danh sách valid_point_ids không trống trước khi thực hiện truy vấn
-    if not valid_point_ids:
-        raise ValueError("Danh sách ID hợp lệ rỗng, không thể thực hiện truy vấn.")
-
-    # Gọi hàm retrieve với danh sách valid_point_ids
-    id = db.client.retrieve(collection_name=collection_name, ids=valid_point_ids)
+def get_point_from_ids(db, collection_name, point_ids):
+    id = db.client.retrieve(collection_name=collection_name, ids=point_ids)
     return id

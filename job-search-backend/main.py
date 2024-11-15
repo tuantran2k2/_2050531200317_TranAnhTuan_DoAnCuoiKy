@@ -1,13 +1,13 @@
 from fastapi import FastAPI
 from database._database_mysql import engine, Base
-from router import _user ,_cv
+from router import _user ,_cv ,_chatbot
 import uvicorn
 from models import CV, BoSuuTap,KhachHang,LichSuTroChuyen,PhuongXa,QuanHuyen,QuyenTruyCap, ThonTo,TinhThanh,ViToken
 app = FastAPI()
 
 app.include_router(_user.router)
 app.include_router(_cv.router)
-
+app.include_router(_chatbot.router)
 # Khởi tạo các router cho API
 # app.include_router(...)
 if __name__ == "__main__":

@@ -20,3 +20,4 @@ class UserRegistrationRequest(BaseModel):
 class User(BaseModel):
     email: str
     password: str
+
