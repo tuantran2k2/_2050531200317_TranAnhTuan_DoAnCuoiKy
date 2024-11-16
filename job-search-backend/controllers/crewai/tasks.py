@@ -5,6 +5,9 @@ from controllers import _cv
 from controllers.rag.chatbot import _chatbot_cv
 from dependencies.dependencies import get_db
 from models import BoSuuTap,KhachHang,LichSuTroChuyen,PhuongXa,QuanHuyen,QuyenTruyCap, ThonTo,TinhThanh,ViToken
+from models.LichSuTroChuyen import LichSuTroChuyen
+from models.BoSuuTap import BoSuTap
+from datetime import datetime
 
 def rag_jobs_list(agent, id_cv , k ,collection_id , ma_KH):
     with next(get_db()) as db:
@@ -17,8 +20,31 @@ def rag_jobs_list(agent, id_cv , k ,collection_id , ma_KH):
                 - Học vấn: {cv_details.get('hocVan', 'Không có')}
                 - GPA: {cv_details.get('DiemGPA', 'Không có')}
                 - Chứng chỉ: {cv_details.get('ChungChi', 'Không có')}"""
-                
+        
     answer = _chatbot_cv.chatbot_rag_crewai(agent_1_question,k,collection_id,ma_KH,id_cv)
+    
+    with next(get_db()) as db:
+        bosutap_in_db = db.query(BoSuTap).filter(BoSuTap.ma_BST == collection_id).first()
+        if not bosutap_in_db:
+            BST = BoSuTap(
+                ma_BST=collection_id,
+                TenBST=f"tìm {k} công việc về Ngành Nghề: {cv_details.get('Nganh', 'Không có')}",
+                ngayTao=datetime.now(),
+                maKH=ma_KH
+            )
+            db.add(BST)  
+            db.commit()  
+        
+        total_characters = len(agent_1_question) + len(answer)
+        history_record = LichSuTroChuyen(
+            cauHoi=agent_1_question,
+            phanHoi=answer,
+            tongSoToken=total_characters,
+            maBST = collection_id
+        )
+        
+        db.add(history_record)
+        db.commit()
     
     
     return Task(

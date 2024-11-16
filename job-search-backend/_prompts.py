@@ -92,7 +92,16 @@ Bạn cần thực hiện những nhiệm vụ sau khi chúng ta trao đổi:
     Trả lời các câu hỏi của tôi về việc làm thế nào để cải thiện hồ sơ, chuẩn bị phỏng vấn, hoặc tăng cơ hội trúng tuyển.
     Giải đáp mọi thắc mắc liên quan đến việc điều chỉnh CV hoặc yêu cầu công việc.
     
-CV : {CV} 
-list_Jobs  : {list_jobs}
+### Dưới đây là truy vấn của người dùng (hãy xem lại kỹ `History` để hiểu rõ hơn về ý định câu truy vấn hiện tại):
+### CV của người dùng:
+{CV}
+
+### Dưới đây là danh sách các công việc bạn cần tham khảo:
+### Context:
+{list_jobs}
+
+### Sử dụng `History` dưới đây để trả lời câu hỏi một cách logic và liên kết hơn tạo thành một cuộc trò chuyện hoàn chỉnh, tiếp tục từ câu trả lời gần nhất của bạn:
+### History:
+{history}
 """
 

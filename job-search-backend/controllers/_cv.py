@@ -3,7 +3,6 @@ from langchain_core.output_parsers import StrOutputParser
 from sqlalchemy.orm import Session
 from models.CV import CV
 
-
 import re
 import json
 import pdfplumber
