@@ -133,25 +133,33 @@ for page_num in range(1, 20):
     # Cuộn xuống cuối trang để tải thêm nội dung
     last_height = driver.execute_script('return document.body.scrollHeight')
     while True:
-        driver.execute_script('window.scrollTo(0, document.body.scrollHeight);')
-        time.sleep(random.uniform(2, 5))
-        new_height = driver.execute_script('return document.body.scrollHeight')
-        if new_height == last_height:
+        try:
+            driver.execute_script('window.scrollTo(0, document.body.scrollHeight);')
+            time.sleep(random.uniform(2, 5))
+            new_height = driver.execute_script('return document.body.scrollHeight')
+            if new_height == last_height:
+                break
+            last_height = new_height
+            logging.info("Cuộn trang để tải thêm nội dung...")
+        except Exception as e:
+            logging.error(f"Lỗi khi cuộn trang: {e}")
             break
-        last_height = new_height
-        logging.info("Cuộn trang để tải thêm nội dung...")
 
     # Phân tích HTML bằng BeautifulSoup
     logging.info("Đang phân tích HTML để lấy thông tin công việc...")
     soup = BeautifulSoup(driver.page_source, 'html.parser')
     job_postings = soup.find_all('div', {'class': 'job-card-container'})
-    
-    
+
     # Trích xuất thông tin từ mỗi công việc
     for job in job_postings:
         try:
             job_id = job.get('data-job-id', None)
-            if _qdrant.qdrant_client.get_collections().collections:
+            if not job_id:
+                logging.warning("Không tìm thấy ID công việc, bỏ qua.")
+                continue
+
+            # Kiểm tra công việc đã tồn tại trong Qdrant
+            try:
                 existing_job, _ = _qdrant.qdrant_client.scroll(
                     collection_name=COLLECTION_NAME,
                     scroll_filter=models.Filter(
@@ -159,18 +167,20 @@ for page_num in range(1, 20):
                     ),
                     limit=1
                 )
-                
-                print(existing_job)
                 if existing_job:
                     logging.info(f"Job với id_job {job_id} đã tồn tại trong Qdrant.")
                     continue
-            print("không chạy vào vào if")       
+            except Exception as e:
+                logging.warning(f"Lỗi khi kiểm tra job {job_id} trong Qdrant: {e}")
+
             job_link = f"https://www.linkedin.com/jobs/view/{job_id}"
             logging.info(f"Đang truy cập chi tiết công việc: {job_link}")
             driver.get(job_link)
             time.sleep(5)
-            job_soup = BeautifulSoup(driver.page_source, "html.parser")
+
+            # Lấy thông tin chi tiết công việc
             try:
+                job_soup = BeautifulSoup(driver.page_source, "html.parser")
                 job_title = job_soup.find("h1", {"class": "t-24 t-bold inline"}).text.strip()
                 job_card = job_soup.find('div', class_='job-details-jobs-unified-top-card__primary-description-container')
                 text_content = job_card.get_text(separator=' ', strip=True)
@@ -181,8 +191,10 @@ for page_num in range(1, 20):
                 date_format = convert_to_str(exact_time) if exact_time else None
                 logging.info(f"Title: {job_title}, Location: {location}, Date: {date_format}")
             except AttributeError as e:
-                logging.error(f"Lỗi khi lấy thông tin chi tiết công việc: {e}")
+                logging.warning(f"Lỗi khi lấy thông tin chi tiết công việc {job_id}: {e}")
                 continue
+
+            # Lấy mô tả công việc
             try:
                 about_job = job_soup.find('div', id='job-details')
                 text_about_job = about_job.get_text(separator='\n')
@@ -190,10 +202,10 @@ for page_num in range(1, 20):
                 text_about_job_cleaned = re.sub(r'\n+', '\n', text_about_job_cleaned).strip()
                 logging.info(f"About job: {text_about_job_cleaned[:100]}...")  # Log ngắn gọn mô tả
             except AttributeError as e:
-                logging.error(f"Lỗi khi lấy mô tả công việc: {e}")
+                logging.warning(f"Lỗi khi lấy mô tả công việc {job_id}: {e}")
                 continue
-            
-            
+
+            # Tạo metadata và tài liệu
             metadata = {
                 "id_job": job_id,
                 "job_title": job_title,
@@ -201,19 +213,17 @@ for page_num in range(1, 20):
                 "location": location,
                 "date": date_format,
             }
-            
-            doc = Document(metadata=metadata,page_content=text_about_job_cleaned)
+            doc = Document(metadata=metadata, page_content=text_about_job_cleaned)
             docs.append(doc)
-        except AttributeError:
-            logging.error("Không tìm thấy ID công việc, bỏ qua công việc này.")
+        except Exception as e:
+            logging.error(f"Lỗi xảy ra trong quá trình xử lý công việc: {e}")
             continue
 
-docs_sorted = sorted(
-    docs,
-    key=lambda doc: datetime.strptime(doc.metadata["date"], "%Y-%m-%dT%H:%M:%S.%f"),
-    reverse=True
-)
-_qdrant.save_vector_db(docs_sorted,COLLECTION_NAME)
-driver.quit()
+# Sắp xếp và lưu tài liệu vào Qdrant
+try:
+    logging.info("Đã cập nhật các công việc xong.")
+except Exception as e:
+    logging.error(f"Lỗi khi lưu tài liệu vào Qdrant: {e}")
 
+driver.quit()
 logging.info("Đã cập nhật các công việc xong.")

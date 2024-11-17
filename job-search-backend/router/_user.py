@@ -56,7 +56,7 @@ def request_otp(request: EmailRequest, db: Session = Depends(get_db)):
             email=email,
             otp_code=otp_code,
             is_used=False,
-            created_at=datetime.datetime.utcnow() 
+            created_at=datetime.utcnow()
         )
         db.add(_otp_code)
         db.commit()
