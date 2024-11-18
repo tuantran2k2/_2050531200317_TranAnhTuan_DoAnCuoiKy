@@ -13,7 +13,9 @@ class UserRegistrationRequest(BaseModel):
     email: str
     otp_code: str
     tenHienThi: str
+    ngaySinh: str
     tenKH: str
+    diaChi: str
     password: str
     
     

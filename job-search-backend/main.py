@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from database._database_mysql import engine, Base
 from router import _user ,_cv ,_chatbot
 import uvicorn
-from models import CV, BoSuuTap,KhachHang,LichSuTroChuyen,PhuongXa,QuanHuyen,QuyenTruyCap, ThonTo,TinhThanh,ViToken
+from models import CV, BoSuuTap,KhachHang,LichSuTroChuyen,QuyenTruyCap,ViToken
 app = FastAPI()
 
 app.add_middleware(
@@ -24,7 +24,7 @@ app.include_router(_chatbot.router)
 if __name__ == "__main__":
     uvicorn.run(
         app,
-        host="0.0.0.0",
+        host="192.168.30.1",
         port=8000,
         limit_concurrency=1000,       
         timeout_keep_alive=30        # Tăng thời gian chờ kết nối lên 1 giờ (3600 giây)

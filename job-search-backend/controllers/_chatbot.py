@@ -1,6 +1,6 @@
 from controllers import _cv 
 from dependencies.dependencies import get_db
-from models import BoSuuTap,KhachHang,LichSuTroChuyen,PhuongXa,QuanHuyen,QuyenTruyCap, ThonTo,TinhThanh,ViToken
+from models import BoSuuTap,KhachHang,LichSuTroChuyen,QuyenTruyCap,ViToken
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 import _prompts ,_environments

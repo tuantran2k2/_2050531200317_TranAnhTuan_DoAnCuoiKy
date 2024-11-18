@@ -4,7 +4,7 @@ from controllers.rag import _clean_data
 from controllers import _cv 
 from controllers.rag.chatbot import _chatbot_cv
 from dependencies.dependencies import get_db
-from models import BoSuuTap,KhachHang,LichSuTroChuyen,PhuongXa,QuanHuyen,QuyenTruyCap, ThonTo,TinhThanh,ViToken
+from models import BoSuuTap,KhachHang,LichSuTroChuyen,QuyenTruyCap,ViToken
 from models.LichSuTroChuyen import LichSuTroChuyen
 from models.BoSuuTap import BoSuTap
 from datetime import datetime

@@ -117,11 +117,19 @@ def register_user(request: UserRegistrationRequest, db: Session = Depends(get_db
         if not otp_entry:
             raise HTTPException(status_code=400, detail="Phiên đăng ký không hợp lệ")
 
+        # Kiểm tra định dạng ngày sinh
+        try:
+            ngay_sinh_parsed = datetime.strptime(request.ngaySinh, "%Y-%m-%d").date()
+        except ValueError:
+            raise HTTPException(status_code=400, detail="Ngày sinh không hợp lệ. Định dạng phải là YYYY-MM-DD")
+
         # Tạo người dùng mới
         new_user = KhachHang(
             email=otp_entry.email,
             tenHienThi=request.tenHienThi,
             tenKH=request.tenKH,
+            diaChi=request.diaChi,
+            ngaySinh=ngay_sinh_parsed,
             matKhau=get_password_hash(request.password),
             ngayDangKy=datetime.utcnow()
         )
@@ -129,9 +137,9 @@ def register_user(request: UserRegistrationRequest, db: Session = Depends(get_db
         db.commit()
         db.refresh(new_user)
 
-        return {"status" : 200 , "message": "Đăng ký thành công"}
+        return {"status": 200, "message": "Đăng ký thành công"}
     except Exception as e:
-            return {"status" : 500 , "message": f"lỗi {e}"}
+        return {"status": 500, "message": f"Lỗi {e}"}
 
 ####################################################Đăng nhập tài khoản####################################
 def get_current_user(request: Request):

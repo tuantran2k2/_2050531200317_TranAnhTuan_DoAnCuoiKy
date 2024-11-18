@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Date, DateTime, Boolean, ForeignKey ,TIMESTAMP, func ,Enum
+from sqlalchemy import Column, Integer, String, Date, Boolean, ForeignKey ,TIMESTAMP, func , Text
 from sqlalchemy.orm import relationship
 from database._database_mysql import Base
 
@@ -9,7 +9,7 @@ class KhachHang(Base):
     maKH = Column(Integer, primary_key=True, autoincrement=True)
     tenHienThi = Column(String(100))
     tenKH = Column(String(100), nullable=False)
-    maThonTo = Column(Integer, ForeignKey("ThonTo.maThonTo"))
+    diaChi = Column(Text)
     email = Column(String(100), nullable=False, unique=True)
     matKhau = Column(String(255), nullable=False)
     ngayDangKy = Column(Date)
@@ -18,7 +18,6 @@ class KhachHang(Base):
 
     
     # Quan hệ với các bảng khác
-    thonto = relationship("ThonTo", back_populates="khachhangs")
     vi_token = relationship("ViToken", back_populates="khach_hangs")
     quyen_truy_cap = relationship("QuyenTruyCap", back_populates="khachhangs")
     cvs = relationship("CV", back_populates="khachhang")
