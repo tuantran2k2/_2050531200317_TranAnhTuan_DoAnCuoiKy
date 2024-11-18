@@ -24,9 +24,9 @@ app.include_router(_chatbot.router)
 if __name__ == "__main__":
     uvicorn.run(
         app,
-        host="127.0.0.1",
+        host="0.0.0.0",
         port=8000,
         limit_concurrency=1000,       
-        timeout_keep_alive=3600        # Tăng thời gian chờ kết nối lên 1 giờ (3600 giây)
+        timeout_keep_alive=30        # Tăng thời gian chờ kết nối lên 1 giờ (3600 giây)
     )
 
