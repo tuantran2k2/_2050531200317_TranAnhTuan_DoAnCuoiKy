@@ -29,6 +29,7 @@ QDRANT_SERVER = os.getenv("QDRANT_SERVER")
 
 
     
+    
 # Cấu hình logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -36,6 +37,17 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 logging.info(f"Đang lọc lại tài liệu trên qdrant")
 
 collections = _qdrant.qdrant_client.get_collections().collections
+
+if COLLECTION_NAME not in [collection.name for collection in collections]:
+    logging.info(f"Collection '{COLLECTION_NAME}' không tồn tại. Đang tạo mới...")
+    _qdrant.qdrant_client.create_collection(
+        COLLECTION_NAME,
+        vectors_config=models.VectorParams(size=1536, distance=models.Distance.COSINE)
+    )
+    logging.info(f"Đã tạo collection '{COLLECTION_NAME}' thành công.")
+else:
+    logging.info(f"Collection '{COLLECTION_NAME}' đã tồn tại.")
+    
     
 try:
     _qdrant.delete_old_points(COLLECTION_NAME)
