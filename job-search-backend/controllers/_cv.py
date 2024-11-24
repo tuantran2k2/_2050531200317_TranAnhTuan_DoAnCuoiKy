@@ -2,6 +2,8 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from sqlalchemy.orm import Session
 from models.CV import CV
+from pathlib import Path
+from fastapi.responses import JSONResponse
 
 import re
 import json
@@ -99,3 +101,43 @@ def get_cv(id_CV: int, db: Session):
 
    
     return cv_data
+
+
+def get_list_cv(maKH: int):
+    try:
+        # Đường dẫn thư mục và file JSON
+        file_dir = Path(f"./files/data/{maKH}")
+        json_path = file_dir / "cv_list.json"
+        
+        # Kiểm tra file JSON tồn tại
+        if not json_path.exists():
+            return JSONResponse(
+                content={
+                    "status": 404,
+                    "message": f"No CV data found for maKH: {maKH}"
+                },
+                status_code=404
+            )
+        
+        # Đọc nội dung từ file JSON
+        with json_path.open("r", encoding="utf-8") as json_file:
+            cv_data = json.load(json_file)
+        
+        # Chuẩn bị dữ liệu để trả về
+        return JSONResponse(
+            content={
+                "status": 200,
+                "message": "List of CVs retrieved successfully.",
+                "data": cv_data
+            },
+            status_code=200
+        )
+    
+    except Exception as e:
+        return JSONResponse(
+            content={
+                "status": 400,
+                "message": f"Error retrieving CV list: {str(e)}"
+            },
+            status_code=400
+        )

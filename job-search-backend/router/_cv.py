@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends , File, UploadFile , Form
+from fastapi import APIRouter, Depends , File, UploadFile , Form,HTTPException
 from models.CV import CV
 from datetime import datetime, timedelta
 from fastapi.responses import JSONResponse
@@ -8,7 +8,9 @@ from controllers import _cv
 from sqlalchemy.orm import Session
 from dependencies.dependencies import get_db
 from shutil import copyfileobj
+from schemas._cv import MaKHRequest
 
+import json  # Import thư viện JSON
 import io
 import _constants
 import aiofiles
@@ -20,6 +22,8 @@ router = APIRouter(
 )
 
 ################################ upload file CV ########################################################
+
+
 @router.post("/upload_files")
 async def upload_files(
     ma_KH: int = Form(...),
@@ -68,6 +72,24 @@ async def upload_files(
         with file_path.open("wb") as buffer:
             buffer.write(file_content)  # Ghi nội dung file từ bộ nhớ
 
+        # Cập nhật hoặc tạo file JSON lưu danh sách CV
+        json_path = file_dir / "cv_list.json"
+        if json_path.exists():
+            with json_path.open("r", encoding="utf-8") as json_file:
+                cv_list = json.load(json_file)  # Đọc nội dung cũ
+        else:
+            cv_list = []  # Nếu chưa tồn tại, tạo danh sách rỗng
+
+        # Thêm thông tin CV mới vào danh sách
+        cv_list.append({
+            "id_cv": maCV,
+            "ten_cv": answer.get("tenDayDu", "null")
+        })
+
+        # Ghi lại file JSON
+        with json_path.open("w", encoding="utf-8") as json_file:
+            json.dump(cv_list, json_file, ensure_ascii=False, indent=4)
+
         # Chuẩn bị phản hồi
         content = {
             "status": 200,
@@ -78,3 +100,17 @@ async def upload_files(
     except Exception as e:
         content = {"status": 400, "message": "Error uploading files: " + str(e)}
         return JSONResponse(content=content, status_code=400)
+
+
+@router.post("/list_cv")
+async def list_cv(request: MaKHRequest):
+    try:
+        # Gọi hàm get_list_cv để lấy danh sách CV
+        response = _cv.get_list_cv(request.makh)
+        return response  # Trả về JSONResponse từ hàm get_list_cv
+    except Exception as e:
+        # Xử lý lỗi nếu có
+        raise HTTPException(
+            status_code=500,
+            detail=f"Error occurred while fetching CV list: {str(e)}"
+        )
