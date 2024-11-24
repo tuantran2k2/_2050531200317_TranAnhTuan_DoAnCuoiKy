@@ -125,7 +125,7 @@ driver.get('https://www.linkedin.com')
 
   
     # Vòng lặp qua các trang công việc
-for page_num in range(1, 20):
+for page_num in range(1, 100):
     logging.info(f"Đang truy cập trang công việc {page_num}...")
     url = f'https://www.linkedin.com/jobs/search/?currentJobId=4084322941&f_PP=102267004%2C105790653%2C105668258&f_TPR=r604800&geoId=104195383&origin=JOB_SEARCH_PAGE_JOB_FILTER&refresh=true&sortBy=DD&start={25 * (page_num - 1)}'
     driver.get(url)
