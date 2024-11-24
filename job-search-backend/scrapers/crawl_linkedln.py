@@ -220,11 +220,8 @@ for page_num in range(1, 20):
             logging.error(f"Lỗi xảy ra trong quá trình xử lý công việc: {e}")
             continue
 
-# Sắp xếp và lưu tài liệu vào Qdrant
-try:
-    logging.info("Đã cập nhật các công việc xong.")
-except Exception as e:
-    logging.error(f"Lỗi khi lưu tài liệu vào Qdrant: {e}")
+#lưu tài liệu vào Qdrant
+_qdrant.save_vector_db(docs,COLLECTION_NAME)
 
 driver.quit()
 logging.info("Đã cập nhật các công việc xong.")
