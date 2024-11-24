@@ -9,12 +9,14 @@ class KhachHang(Base):
     maKH = Column(Integer, primary_key=True, autoincrement=True)
     tenHienThi = Column(String(100))
     tenKH = Column(String(100), nullable=False)
-    diaChi = Column(Text)
     email = Column(String(100), nullable=False, unique=True)
     matKhau = Column(String(255), nullable=False)
     ngayDangKy = Column(Date)
     maQuyen = Column(Integer, ForeignKey("QuyenTruyCap.maQuyen"), default=2)
     maVi = Column(Integer, ForeignKey("ViToken.maVi"))
+    diaChi = Column(Text)
+    ngaySinh = Column(Date)
+    
 
     
     # Quan hệ với các bảng khác

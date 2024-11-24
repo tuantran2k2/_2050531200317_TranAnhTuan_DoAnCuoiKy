@@ -11,11 +11,10 @@ class OTPVerifyRequest(BaseModel):
     
 class UserRegistrationRequest(BaseModel):
     email: str
-    otp_code: str
     tenHienThi: str
-    ngaySinh: str
     tenKH: str
     diaChi: str
+    ngaySinh: str
     password: str
     
     

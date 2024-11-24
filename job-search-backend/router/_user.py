@@ -110,7 +110,6 @@ def register_user(request: UserRegistrationRequest, db: Session = Depends(get_db
         # Kiểm tra token tạm thời hợp lệ
         otp_entry = db.query(OTP).filter(
             OTP.email == request.email,
-            OTP.otp_code == request.otp_code,
             OTP.is_used == True
         ).first()
 
@@ -172,7 +171,7 @@ async def login(user: User, db: Session = Depends(get_db)):
                 data={
                     "user_id": user_in_db.maKH,
                     "display_name": user_in_db.tenKH,
-                    "user_email": user_in_db.tenHienThi,
+                    "user_name": user_in_db.tenHienThi,
                     "email": user_in_db.email,
                 },
                 expires_delta=access_token_expires
@@ -183,7 +182,7 @@ async def login(user: User, db: Session = Depends(get_db)):
                 data={
                     "user_id": user_in_db.maKH,
                     "display_name": user_in_db.tenKH,
-                    "user_email": user_in_db.tenHienThi,
+                    "user_name": user_in_db.tenHienThi,
                     "email": user_in_db.email,
                 },
                 expires_delta=refresh_token_expires
@@ -240,7 +239,7 @@ async def refresh_token(request: Request, response: Response ,  db: Session = De
                     data={
                         "user_id": user_in_db.maKH,
                         "display_name": user_in_db.tenKH,
-                        "user_email": user_in_db.tenHienThi,
+                        "user_name": user_in_db.tenHienThi,
                         "email": user_in_db.email,
                     },
                     expires_delta=access_token_expires
@@ -251,7 +250,7 @@ async def refresh_token(request: Request, response: Response ,  db: Session = De
                 data={
                     "user_id": user_in_db.maKH,
                     "display_name": user_in_db.tenKH,
-                    "user_email": user_in_db.tenHienThi,
+                    "user_name": user_in_db.tenHienThi,
                     "email": user_in_db.email,
                 },
                 expires_delta=refresh_token_expires
