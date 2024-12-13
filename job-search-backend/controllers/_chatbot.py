@@ -1,6 +1,6 @@
 from controllers import _cv 
 from dependencies.dependencies import get_db
-from models import BoSuuTap,KhachHang,LichSuTroChuyen,QuyenTruyCap,ViToken
+from models import BoSuuTap,KhachHang,LichSuTroChuyen,QuyenTruyCap
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 import _prompts ,_environments
@@ -9,10 +9,12 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from models.LichSuTroChuyen import LichSuTroChuyen
 from models.BoSuuTap import BoSuTap
+from models.KhachHang import KhachHang
 
 
 import _prompts
 import _environments
+from controllers import _user
 
 def chatbot(id_cv, collection_id, ma_KH, query):
     try:
@@ -26,7 +28,10 @@ def chatbot(id_cv, collection_id, ma_KH, query):
             for record in reversed(history_records):  # Đảo ngược thứ tự để giữ ngữ cảnh
                 history += f"User: {record.cauHoi}\nBot: {record.phanHoi}\n"
         
-        CV = f"""CV của tôi gồm những yêu cầu sau:
+        CV = f"""CV của tôi gồm những thông tin sau:
+                    - Họ và Tên: {cv_details.get('tenCV', 'Không có')}
+                    - Địa chỉ : {cv_details.get('diaChi', 'Không có')}
+                    - Giới Thiệu : {cv_details.get('GioiThieu', 'Không có')}
                     - Ngành Nghề: {cv_details.get('Nganh', 'Không có')}
                     - Kỹ năng mềm: {cv_details.get('KyNangMem', 'Không có')}
                     - Kỹ năng chuyên ngành: {cv_details.get('KyNangChuyenNganh', 'Không có')}
@@ -68,6 +73,15 @@ def chatbot(id_cv, collection_id, ma_KH, query):
         answer = chain.invoke({"input": str(query)})
         
         total_characters = len(query) + len(answer)
+
+        user_in_db = db.query(KhachHang).filter(KhachHang.maKH == ma_KH).first()
+        
+        if total_characters > user_in_db.soLuongToken:
+            return 400
+        
+        update_mount = user_in_db.soLuongToken - total_characters
+        
+        _user.update_amount(maKH=ma_KH,new_money=update_mount,db=db)
         
         with next(get_db()) as db:
             
@@ -81,7 +95,7 @@ def chatbot(id_cv, collection_id, ma_KH, query):
             db.add(history_record)
             db.commit()
     
-        return answer
+        return answer 
 
     except Exception as e:
         # Xử lý mọi lỗi khác và trả về thông báo lỗi

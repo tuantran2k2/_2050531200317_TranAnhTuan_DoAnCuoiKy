@@ -1,0 +1,27 @@
+[
+    {
+        "id_cv": 1,
+        "ten_cv": "Ngan",
+        "chuyen_nganh": "Marketing"
+    },
+    {
+        "id_cv": 2,
+        "ten_cv": "Hậu",
+        "chuyen_nganh": "Truyền thông Marketing"
+    },
+    {
+        "id_cv": 3,
+        "ten_cv": "Na",
+        "chuyen_nganh": "Thực tập sinh Marketing"
+    },
+    {
+        "id_cv": 4,
+        "ten_cv": "Vy",
+        "chuyen_nganh": ""
+    },
+    {
+        "id_cv": 5,
+        "ten_cv": "Ngan",
+        "chuyen_nganh": "Marketing"
+    }
+]

@@ -13,18 +13,16 @@ class KhachHang(Base):
     matKhau = Column(String(255), nullable=False)
     ngayDangKy = Column(Date)
     maQuyen = Column(Integer, ForeignKey("QuyenTruyCap.maQuyen"), default=2)
-    maVi = Column(Integer, ForeignKey("ViToken.maVi"))
+    soLuongToken = Column(Integer,default=0)
     diaChi = Column(Text)
     ngaySinh = Column(Date)
-    
+    trangThai = Column(Integer,default=1)
 
-    
-    # Quan hệ với các bảng khác
-    vi_token = relationship("ViToken", back_populates="khach_hangs")
+
     quyen_truy_cap = relationship("QuyenTruyCap", back_populates="khachhangs")
     cvs = relationship("CV", back_populates="khachhang")
     bosutaps = relationship("BoSuTap", back_populates="khachhang")
-
+    lichsugiaodichs = relationship("LichSuGiaoDich", back_populates="khachhang")
 class OTP(Base):
     __tablename__ = "otp_codes"
 

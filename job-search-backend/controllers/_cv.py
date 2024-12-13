@@ -11,7 +11,6 @@ import pdfplumber
 import _prompts
 import _environments
 
-
 def extract_text_from_pdf(file_path):
     """Extracts text from each page of a PDF file."""
     text = ""
@@ -32,6 +31,7 @@ def chatbot_cv(noidung_cv):
         print("Nội dung CV trống.")
         return None
     
+    input_tokens = len(noidung_cv)
     # Create the prompt with context
     prompt = ChatPromptTemplate.from_messages(
         [
@@ -54,6 +54,9 @@ def chatbot_cv(noidung_cv):
         
         # Invoke the chain and get the response
         answer = chain.invoke({"input": ""})
+        
+        output_tokens = len(answer)
+        total_tokens = input_tokens + output_tokens
 
         # Filter out any non-JSON text and parse JSON content
         try:
@@ -62,16 +65,16 @@ def chatbot_cv(noidung_cv):
             if json_text_match:
                 json_text = json_text_match.group(0)
                 answer_json = json.loads(json_text)
-                return answer_json
+                return answer_json , total_tokens
             else:
                 print("Không tìm thấy JSON hợp lệ trong đầu ra.")
-                return answer
+                return answer , total_tokens
         except json.JSONDecodeError as e:
             print(f"Lỗi: Đầu ra không phải là JSON hợp lệ: {e}")
-            return answer
+            return answer , total_tokens
     except Exception as e:
         print(f"Lỗi trong quá trình xử lý chatbot_cv: {e}")
-        return None
+        return None , None
 
 def get_cv(id_CV: int, db: Session):
     # Truy vấn CV dựa vào id_CV
@@ -140,4 +143,103 @@ def get_list_cv(maKH: int):
                 "message": f"Error retrieving CV list: {str(e)}"
             },
             status_code=400
+        )
+
+def delete_cv(id_CV: int, maKH: int, db: Session):
+    """
+    Xóa CV dựa trên id_CV và maKH, đồng thời cập nhật JSON và xóa file PDF tương ứng.
+    
+    Args:
+        id_CV (int): ID của CV cần xóa.
+        maKH (int): Mã khách hàng sở hữu CV.
+        db (Session): Phiên làm việc với cơ sở dữ liệu.
+    
+    Returns:
+        JSONResponse: Kết quả của quá trình xóa.
+    """
+    try:
+        # Đường dẫn thư mục và file JSON
+        file_dir = Path(f"./files/data/{maKH}")
+        json_path = file_dir / "cv_list.json"
+        
+        # Kiểm tra sự tồn tại của thư mục và file JSON
+        if not file_dir.exists():
+            return JSONResponse(
+                content={
+                    "status": 404,
+                    "message": f"Directory for maKH {maKH} not found."
+                },
+                status_code=404
+            )
+        if not json_path.exists():
+            return JSONResponse(
+                content={
+                    "status": 404,
+                    "message": f"cv_list.json for maKH {maKH} not found."
+                },
+                status_code=404
+            )
+        
+        # Đọc và cập nhật JSON
+        with json_path.open("r", encoding="utf-8") as f:
+            data = json.load(f)
+        
+        # Kiểm tra nếu id_CV có trong JSON
+        cv_exists_in_json = any(cv["id_cv"] == id_CV for cv in data)
+        if not cv_exists_in_json:
+            return JSONResponse(
+                content={
+                    "status": 404,
+                    "message": f"CV with id {id_CV} not found in JSON for maKH {maKH}."
+                },
+                status_code=404
+            )
+        
+        # Lọc dữ liệu JSON
+        updated_data = [cv for cv in data if cv["id_cv"] != id_CV]
+        
+        # Ghi lại file JSON
+        with json_path.open("w", encoding="utf-8") as f:
+            json.dump(updated_data, f, ensure_ascii=False, indent=4)
+        
+        # Truy vấn CV từ database
+        cv = db.query(CV).filter(CV.maCV == id_CV, CV.maKH == maKH).first()
+        
+        # Xóa file PDF tương ứng
+        for file in file_dir.iterdir():
+            if file.is_file() and file.suffix == ".pdf" and file.name.startswith(f"{id_CV}_"):
+                file.unlink()
+        
+        # Kiểm tra nếu không tìm thấy CV trong database
+        if cv is None:
+            return JSONResponse(
+                content={
+                    "status": 404,
+                    "message": f"CV with id {id_CV} and maKH {maKH} not found in database."
+                },
+                status_code=404
+            )
+        
+        # Xóa CV khỏi database
+        db.delete(cv)
+        db.commit()
+        
+        # Trả về phản hồi thành công
+        return JSONResponse(
+            content={
+                "status": 200,
+                "message": f"CV with id {id_CV} and maKH {maKH} deleted successfully."
+            },
+            status_code=200
+        )
+    
+    except Exception as e:
+        # Rollback nếu có lỗi
+        db.rollback()
+        return JSONResponse(
+            content={
+                "status": 500,
+                "message": f"Error deleting CV: {str(e)}"
+            },
+            status_code=500
         )

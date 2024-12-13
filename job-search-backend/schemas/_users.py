@@ -22,3 +22,16 @@ class User(BaseModel):
     email: str
     password: str
 
+class UpdateUser(BaseModel):
+    maKH: int
+    email: str
+    tenHienThi: str
+    tenKH: str
+    diaChi: str
+    ngaySinh: str
+    password: str
+
+class UpdateStatus(BaseModel):
+    maKH: int
+    email :str
+    trangThai: int

@@ -2,6 +2,12 @@
 # ====================== DATA PATH_CV  ======================
 DATAS_PATH = "./files"
 
+from urllib.parse import quote_plus
+
+password = quote_plus("tuandenk56")
+SQLALCHEMY_DATABASE_URL = f"mysql+pymysql://root:{password}@127.0.0.1:3306/chatbot_cv"
+
+
 
 # ====================== CHATBOT NAME ======================
 NAME_CHATBOT = "CHATBOT"
@@ -57,8 +63,7 @@ GOOGLE_REDIRECT_URI = 'https://api-images.mekongai.io/google/callback'
 #JWT login:
 JWT  = "5878fe66-08ed-4e52-afee-86a16f1eb030"
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 40
-ACCESS_REFRESH_TOKEN_EXPIRE_DAY = 365
+ACCESS_TOKEN_EXPIRE_MINUTES = 100000000
 
 
 

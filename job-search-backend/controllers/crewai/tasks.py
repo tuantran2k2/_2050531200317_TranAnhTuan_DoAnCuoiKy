@@ -4,10 +4,12 @@ from controllers.rag import _clean_data
 from controllers import _cv 
 from controllers.rag.chatbot import _chatbot_cv
 from dependencies.dependencies import get_db
-from models import BoSuuTap,KhachHang,LichSuTroChuyen,QuyenTruyCap,ViToken
+from models import BoSuuTap,KhachHang,LichSuTroChuyen,QuyenTruyCap
 from models.LichSuTroChuyen import LichSuTroChuyen
 from models.BoSuuTap import BoSuTap
+from models.KhachHang import KhachHang
 from datetime import datetime
+from controllers import _user
 
 def rag_jobs_list(agent, id_cv , k ,collection_id , ma_KH):
     with next(get_db()) as db:
@@ -36,6 +38,15 @@ def rag_jobs_list(agent, id_cv , k ,collection_id , ma_KH):
             db.commit()  
         
         total_characters = len(agent_1_question) + len(answer)
+        
+        user_in_db = db.query(KhachHang).filter(KhachHang.maKH == ma_KH).first()
+        
+        if total_characters > user_in_db.soLuongToken:
+            return 400
+        
+        update_mount = user_in_db.soLuongToken - total_characters
+        
+        _user.update_amount(maKH=ma_KH,new_money=update_mount,db=db)
         history_record = LichSuTroChuyen(
             cauHoi=agent_1_question,
             phanHoi=answer,

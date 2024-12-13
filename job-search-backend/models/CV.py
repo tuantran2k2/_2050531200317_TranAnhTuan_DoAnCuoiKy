@@ -12,7 +12,7 @@ class CV(Base):
     KyNangChuyenNganh = Column(Text)
     hocVan = Column(Text)
     tinhTrang = Column(Text)
-    DiemGPA = Column(Float)
+    DiemGPA = Column(Text)
     soDienThoai = Column(Text) 
     email = Column(Text)
     diaChi = Column(Text)

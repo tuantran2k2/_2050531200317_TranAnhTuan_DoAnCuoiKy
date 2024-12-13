@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException, status ,Request ,Response
 from sqlalchemy.orm import Session
 from models.KhachHang import KhachHang, OTP 
-from schemas._users import EmailRequest, OTPVerifyRequest ,UserRegistrationRequest , User
-from dependencies.otp_service import generate_otp, send_verification_email
-from dependencies.security import get_password_hash , verify_password , create_access_token, create_refresh_token , verified_user
+from schemas._users import EmailRequest, OTPVerifyRequest ,UserRegistrationRequest , User , UpdateUser ,UpdateStatus
+from dependencies.otp_service import generate_otp, send_verification_email , send_verification_email_from_admin
+from dependencies.security import get_password_hash , verify_password , create_access_token , verified_user
 from database._database_mysql import SessionLocal
 from dependencies.dependencies import get_db
 from datetime import datetime, timedelta
@@ -48,7 +48,7 @@ def request_otp(request: EmailRequest, db: Session = Depends(get_db)):
                             "otp_code": otp_entry.otp_code
                         } 
             }
-        # Tạo mã OTP và gửi đến ema
+        # Tạo mã OTP và gửi đến email
         otp_code = generate_otp(email)
         send_verification_email(email,otp_code)
 
@@ -160,12 +160,16 @@ async def login(user: User, db: Session = Depends(get_db)):
         user_in_db = db.query(KhachHang).filter(
             KhachHang.email == user.email
         ).first()
-          
+        
+        if (user_in_db.trangThai == 0):
+            return {"status" : 500 , "messages" :"Tài khoản của bạn chưa được duyệt"}
+        if (user_in_db.trangThai == 2):
+            return {"status" : 500 , "messages" :"Tài khoản của bạn đã bị khóa"}
+        
         print(user_in_db.matKhau)
         if user_in_db and verify_password(user.password,user_in_db.matKhau):
             access_token_expires = timedelta(minutes=_constants.ACCESS_TOKEN_EXPIRE_MINUTES)
-            refresh_token_expires = timedelta(days=_constants.ACCESS_REFRESH_TOKEN_EXPIRE_DAY)
-            # Tạo Access Token và Refresh Token
+            # Tạo Access Token
             
             access_token = create_access_token(
                 data={
@@ -173,26 +177,13 @@ async def login(user: User, db: Session = Depends(get_db)):
                     "display_name": user_in_db.tenKH,
                     "user_name": user_in_db.tenHienThi,
                     "email": user_in_db.email,
+                    "role" : user_in_db.maQuyen,
+                    "trangThai" : user_in_db.trangThai,
+                    "SoDu" : user_in_db.soLuongToken
                 },
                 expires_delta=access_token_expires
             )
-
-                    # Tạo refresh token
-            refresh_token = create_refresh_token(
-                data={
-                    "user_id": user_in_db.maKH,
-                    "display_name": user_in_db.tenKH,
-                    "user_name": user_in_db.tenHienThi,
-                    "email": user_in_db.email,
-                },
-                expires_delta=refresh_token_expires
-            )
-            # Tạo phản hồi JSON với Access Token
             response = JSONResponse({"access_token": access_token})
-            
-            # Thiết lập Refresh Token trong Cookie HTTP-only
-            response.set_cookie(key="refresh_token", value=refresh_token, httponly=True)
-
             return response
     except Exception as e:
             return {"status" : 500 , "message": f"lỗi {e}"}
@@ -202,7 +193,7 @@ async def login(user: User, db: Session = Depends(get_db)):
 async def logout(response: Response, current_user: dict = Depends(get_current_user)):
     try:
         # Xóa cookie "refresh_token"
-        response.delete_cookie(key="refresh_token")
+        # response.delete_cookie(key="refresh_token")
         return JSONResponse({"message": "Logged out successfully"}, status_code=200)
     except Exception as e:
         print(f"Error during logout: {e}")
@@ -211,69 +202,133 @@ async def logout(response: Response, current_user: dict = Depends(get_current_us
             detail="Logout failed. Please try again."
         )
         
-        
-@router.post("/refresh_token")
-async def refresh_token(request: Request, response: Response ,  db: Session = Depends(get_db)):
+####################################################lấy thông  tin tất cả user ####################################
+
+@router.get("/admin/all-users")
+def get_all_users(db: Session = Depends(get_db), current_user: dict = Depends(get_current_user)):
     try:
-        refresh_token = request.cookies.get("refresh_token")
-        
-        print(refresh_token)
-        
-        if not refresh_token:
-            return JSONResponse({"status": 405, "message": "Invalid token"}, status_code=405)
+        if current_user['role'] != 1:
+            raise HTTPException(status_code=403, detail="Không có quyền truy cập")
 
-        data = jwt.decode(refresh_token, _constants.JWT_REFRESH_KEY, algorithms=[_constants.ALGORITHM])
-        
-        if 'email' not in data:
-            return JSONResponse({"status": 405, "message": "Refresh token not va"}, status_code=405)
-        
-        user_in_db = db.query(KhachHang).filter(
-                KhachHang.email == data["email"]
-        ).first()
-        
-        if user_in_db:
-            access_token_expires = timedelta(minutes=_constants.ACCESS_TOKEN_EXPIRE_MINUTES)
-            refresh_token_expires = timedelta(days=_constants.ACCESS_REFRESH_TOKEN_EXPIRE_DAY)
-            
-            access_token_new = create_access_token(
-                    data={
-                        "user_id": user_in_db.maKH,
-                        "display_name": user_in_db.tenKH,
-                        "user_name": user_in_db.tenHienThi,
-                        "email": user_in_db.email,
-                    },
-                    expires_delta=access_token_expires
-                )
+        # Query tất cả người dùng có mã quyền là 2
+        users = db.query(KhachHang).filter(KhachHang.maQuyen == 2).all()
 
-                        # Tạo refresh token
-            refresh_token_new = create_refresh_token(
-                data={
-                    "user_id": user_in_db.maKH,
-                    "display_name": user_in_db.tenKH,
-                    "user_name": user_in_db.tenHienThi,
-                    "email": user_in_db.email,
-                },
-                expires_delta=refresh_token_expires
-            )
-        print("aaaaaaa")
-        print(access_token_new)
-        
-        print("bbbbb")
-        print(refresh_token_new)
+        if not users:
+            raise HTTPException(status_code=404, detail="Không tìm thấy người dùng")
 
-        response.set_cookie(
-            key="refresh_token",
-            value=refresh_token_new,
-            httponly=True
-        )
-        return JSONResponse({
-            "access_token": access_token_new,
-            "token_type": "bearer"
-        }, status_code=200)
-        
+        # Trả về danh sách người dùng
+        return {"status": 200, "users": users}
     except Exception as e:
-        print(f"Error during logout: {e}")
-        raise HTTPException(
-            status_code=500,
-            detail="Logout failed. Please try again."
-        )
+        return {"status": 500, "message": f"Lỗi {e}"}
+    
+####################################################cập nhật trạng thái  tin tất cả user ####################################
+
+@router.post("/admin/update-status")
+def update_status_user(
+    request: UpdateStatus, 
+    db: Session = Depends(get_db), 
+    current_user: dict = Depends(get_current_user)
+):
+    try:
+        
+        # Query user by maKH (user ID)
+        user_in_db = db.query(KhachHang).filter(KhachHang.maKH == request.maKH).first()
+
+        if not user_in_db:
+            raise HTTPException(status_code=404, detail="User not found")
+
+        # Validate the new status
+        if request.trangThai not in [0, 1, 2]:
+            raise HTTPException(status_code=400, detail="Invalid status")
+
+        # Check if transitioning from 0 to 1
+        if user_in_db.trangThai == 0 and request.trangThai == 1:
+            # Send notification email
+            try:
+                send_verification_email_from_admin(request.email)
+            except Exception as email_error:
+                raise HTTPException(status_code=500, detail=f"Failed to send email: {email_error}")
+
+        # Update the status
+        user_in_db.trangThai = request.trangThai
+
+        # Commit the changes to the database
+        db.commit()
+        db.refresh(user_in_db)
+
+        return {"status": 200, "message": "User status updated successfully"}
+
+    except HTTPException as http_err:
+        db.rollback()  # Rollback any changes if there's an error
+        raise http_err  # Rethrow HTTP exceptions
+
+    except Exception as e:
+        db.rollback()  # Rollback any changes if there's an unexpected error
+        return {"status": 500, "message": f"Error: {e}"}
+
+    
+@router.post("/update-user")
+def update_user(request: UpdateUser, db: Session = Depends(get_db),current_user: dict = Depends(get_current_user)):
+    try:
+        # Query user by user_id
+        user_in_db = db.query(KhachHang).filter(KhachHang.maKH == request.maKH).first()
+
+        if not user_in_db:
+            raise HTTPException(status_code=404, detail="User not found")
+
+        # Update user fields from the request object
+        if request.tenHienThi:
+            user_in_db.tenHienThi = request.tenHienThi
+        if request.tenKH:
+            user_in_db.tenKH = request.tenKH
+        if request.diaChi:
+            user_in_db.diaChi = request.diaChi
+        if request.ngaySinh:
+            try:
+                user_in_db.ngaySinh = datetime.strptime(request.ngaySinh, "%Y-%m-%d").date()
+            except ValueError:
+                raise HTTPException(status_code=400, detail="Ngày sinh không hợp lệ. Định dạng phải là YYYY-MM-DD")
+        if request.password:
+            user_in_db.matKhau = get_password_hash(request.password)
+
+        # Commit the changes to the database
+        db.commit()
+        db.refresh(user_in_db)
+
+        return {"status": 200, "message": "User updated successfully", "user": user_in_db}
+    
+    except Exception as e:
+        return {"status": 500, "message": f"Error: {e}"}
+
+
+@router.get("/get-user/{user_id}")
+def get_user_by_id(user_id: int, db: Session = Depends(get_db), current_user: dict = Depends(get_current_user)):
+    print(f"current_user: {current_user}")  # In ra để kiểm tra
+    try:
+        if current_user['user_id'] != user_id:  
+            raise HTTPException(status_code=403, detail="Không có quyền truy cập")
+
+        # Tìm người dùng theo user_id
+        user_in_db = db.query(KhachHang).filter(KhachHang.maKH == user_id).first()
+
+        if not user_in_db:
+            raise HTTPException(status_code=404, detail="Không tìm thấy người dùng")
+
+        # Trả về thông tin người dùng
+        return {
+            "status": 200,
+            "user": {
+                "email": user_in_db.email,
+                "tenHienThi": user_in_db.tenHienThi,
+                "tenKH": user_in_db.tenKH,
+                "diaChi": user_in_db.diaChi,
+                "ngaySinh": user_in_db.ngaySinh,
+                "ngayDangKy": user_in_db.ngayDangKy,
+                "soLuongToken": user_in_db.soLuongToken,
+                "trangThai": user_in_db.trangThai,
+            }
+        }
+    except Exception as e:
+        print(f"Error: {e}")  # Log chi tiết lỗi
+        return {"status": 500, "message": f"Lỗi: {e}"}
+

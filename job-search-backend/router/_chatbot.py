@@ -27,10 +27,17 @@ def get_current_user(request: Request):
 
 # Bước 1: tìm list CV 
 @router.post("/find_jobs")
+@router.post("/find_jobs/")
 def request_otp(request: QuestionRequest):
     try:
         answer = _main._crewai_jobscv(id_cv=request.id_cv,k=request.so_luong_job,collection_id=request.collection_id,ma_KH=request.user_id)
 
+        if answer == 400 :
+            return { 
+                    "status" : 403 , 
+                    "messages": "Số dư của bạn không đủ"
+            }
+            
         if answer:
             return { 
                     "status" : 200 , 
@@ -46,6 +53,11 @@ def request_otp(request: QuestionRequestChat):
     try:
         answer = _chatbot.chatbot(id_cv=request.id_cv,collection_id=request.collection_id,ma_KH=request.user_id, query=request.query)
 
+        if answer == 400 :
+            return { 
+                    "status" : 403 , 
+                    "messages": "Số dư của bạn không đủ"
+            }
         if answer:
             return { 
                     "status" : 200 , 
