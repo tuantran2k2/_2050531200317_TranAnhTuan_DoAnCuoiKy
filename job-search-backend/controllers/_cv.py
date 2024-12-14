@@ -243,3 +243,111 @@ def delete_cv(id_CV: int, maKH: int, db: Session):
             },
             status_code=500
         )
+        
+        
+def get_list_cv_admin(db: Session):
+    try:
+        # Lấy tất cả CV từ cơ sở dữ liệu
+        cvs = db.query(CV).all()
+
+        # Nếu không có CV nào trong cơ sở dữ liệu
+        if not cvs:
+            return JSONResponse(
+                content={
+                    "status": 404,
+                    "message": "No CV data found"
+                },
+                status_code=404
+            )
+        
+        cv_data = [
+            {
+                "maCV": cv.maCV,
+                "tenCV": cv.tenCV,
+                "Nganh": cv.Nganh,
+                "KyNangMem": cv.KyNangMem,
+                "KyNangChuyenNganh": cv.KyNangChuyenNganh,
+                "hocVan": cv.hocVan,
+                "tinhTrang": cv.tinhTrang,
+                "DiemGPA": cv.DiemGPA,
+                "soDienThoai": cv.soDienThoai,
+                "email": cv.email,
+                "diaChi": cv.diaChi,
+                "GioiThieu": cv.GioiThieu,
+                "ChungChi": cv.ChungChi,
+                "maKH": cv.maKH,
+                "trangThai": cv.trangThai  
+            } for cv in cvs
+        ]
+        
+        # Trả về dữ liệu dưới dạng JSON
+        return JSONResponse(
+            content={
+                "status": 200,
+               "cvs": cv_data
+            },
+            status_code=200
+        )
+    
+    except Exception as e:
+        return JSONResponse(
+            content={
+                "status": 400,
+                "message": f"Error retrieving CV list: {str(e)}"
+            },
+            status_code=400
+        )
+
+
+def update_status_admin(db: Session , trangThai : int , maCV: int):
+    try:
+        # Lấy tất cả CV từ cơ sở dữ liệu
+        cvs = db.query(CV).all()
+
+        # Nếu không có CV nào trong cơ sở dữ liệu
+        if not cvs:
+            return JSONResponse(
+                content={
+                    "status": 404,
+                    "message": "No CV data found"
+                },
+                status_code=404
+            )
+        
+        cv_data = [
+            {
+                "maCV": cv.maCV,
+                "tenCV": cv.tenCV,
+                "Nganh": cv.Nganh,
+                "KyNangMem": cv.KyNangMem,
+                "KyNangChuyenNganh": cv.KyNangChuyenNganh,
+                "hocVan": cv.hocVan,
+                "tinhTrang": cv.tinhTrang,
+                "DiemGPA": cv.DiemGPA,
+                "soDienThoai": cv.soDienThoai,
+                "email": cv.email,
+                "diaChi": cv.diaChi,
+                "GioiThieu": cv.GioiThieu,
+                "ChungChi": cv.ChungChi,
+                "maKH": cv.maKH,
+                "trangThai": cv.trangThai  
+            } for cv in cvs
+        ]
+        
+        # Trả về dữ liệu dưới dạng JSON
+        return JSONResponse(
+            content={
+                "status": 200,
+               "cvs": cv_data
+            },
+            status_code=200
+        )
+    
+    except Exception as e:
+        return JSONResponse(
+            content={
+                "status": 400,
+                "message": f"Error retrieving CV list: {str(e)}"
+            },
+            status_code=400
+        )

@@ -6,3 +6,7 @@ class MaKHRequest(BaseModel):
 class DeleteRequest(BaseModel):
     makh: int
     maCV :int
+    
+class UpdateStatus(BaseModel):
+    trangThai: int
+    maCV :int

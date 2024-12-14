@@ -15,13 +15,13 @@
         "chuyen_nganh": "Thực tập sinh Marketing"
     },
     {
-        "id_cv": 4,
-        "ten_cv": "Vy",
-        "chuyen_nganh": ""
+        "id_cv": 11,
+        "ten_cv": "Giang",
+        "chuyen_nganh": "Marketing"
     },
     {
-        "id_cv": 5,
-        "ten_cv": "Ngan",
-        "chuyen_nganh": "Marketing"
+        "id_cv": 12,
+        "ten_cv": "Mai",
+        "chuyen_nganh": "Digital Marketing"
     }
 ]

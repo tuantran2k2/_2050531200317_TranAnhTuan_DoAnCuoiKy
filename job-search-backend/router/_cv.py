@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends , File, UploadFile , Form,HTTPException
+from fastapi import APIRouter, Depends , File, UploadFile , Form,HTTPException ,Request
 from models.CV import CV
 from datetime import datetime, timedelta
 from fastapi.responses import JSONResponse
@@ -7,10 +7,11 @@ from pathlib import Path
 from controllers import _cv
 from sqlalchemy.orm import Session
 from dependencies.dependencies import get_db
-from shutil import copyfileobj
-from schemas._cv import MaKHRequest 
+from shutil import copyfileobj 
+from schemas._cv import MaKHRequest , UpdateStatus
 from models.KhachHang import KhachHang
 from controllers import _user
+from dependencies.security import  verified_user
 
 import json  # Import thư viện JSON
 import io
@@ -24,6 +25,19 @@ router = APIRouter(
 )
 
 ################################ upload file CV ########################################################
+
+def get_current_user(request: Request):
+    auth_header = request.headers.get("Authorization")
+    if not auth_header:
+        raise HTTPException(status_code=500, detail="Authorization header missing")
+    
+    # Xác thực người dùng
+    payload = verified_user(auth_header)
+    if not payload:
+        raise HTTPException(status_code=500, detail="Invalid token or unauthorized")
+    
+    return payload
+
 
 
 @router.post("/upload_files")
@@ -43,7 +57,9 @@ async def upload_files(
         noi_dung_cv = _cv.extract_text_from_pdf(file_stream)  # Pass file_stream instead of file_content
         answer , total_token = _cv.chatbot_cv(noi_dung_cv)
         
-        
+        print("answer")
+        print(answer)
+        print("answeradsadasdad")
             
         user_in_db = db.query(KhachHang).filter(KhachHang.maKH == ma_KH).first()
         
@@ -56,10 +72,10 @@ async def upload_files(
         update_mount = user_in_db.soLuongToken - total_token
         _user.update_amount(maKH=ma_KH,new_money=update_mount,db=db)
         
-        if (answer.get("hopLe") == 'False'):
+        if (answer.get("hopLe") == False):
             content = {
                 "status": 500,
-                "message": "Bạn vẫn bị trừ tiền do tải CV rác"
+                "message": answer.get("lyDo")
             }
             return JSONResponse(content=content, status_code=500)
         else:
@@ -71,7 +87,7 @@ async def upload_files(
                 KyNangChuyenNganh=", ".join(answer.get("kyNangChuyenNganh", ["null"])) if isinstance(answer.get("kyNangChuyenNganh"), list) else answer.get("kyNangChuyenNganh", "null"),
                 hocVan=answer.get("hocVan", "null"),
                 tinhTrang="null",
-                DiemGPA=float(answer.get("diemGPA", 0.0)) if answer.get("diemGPA") else 0.0,
+                DiemGPA=answer.get("diemGPA", "null"),
                 soDienThoai=answer.get("soDienThoai", "null"),
                 email=answer.get("email", "null"),
                 diaChi=answer.get("diaChi", "null"),
@@ -140,6 +156,54 @@ async def list_cv(request: MaKHRequest):
             detail=f"Error occurred while fetching CV list: {str(e)}"
         )
         
+@router.get("/admin/list_cv")
+async def list_cv(db: Session = Depends(get_db),current_user: dict = Depends(get_current_user)):
+    try:
+        # Gọi hàm get_list_cv_admin
+        response = _cv.get_list_cv_admin(db)
+        return response  # Trả về kết quả từ JSONResponse của hàm
+    except Exception as e:
+        # Bắt lỗi và trả về HTTPException
+        raise HTTPException(
+            status_code=500,
+            detail=f"Error occurred while fetching CV list: {str(e)}"
+        )
+        
+@router.post("/admin/update-status")
+def update_status_user(
+    request: UpdateStatus, 
+    db: Session = Depends(get_db), 
+    current_user: dict = Depends(get_current_user)
+):
+    try:
+        
+        # Query user by maKH (user ID)
+        cv_in_db = db.query(CV).filter(CV.maCV == request.maCV).first()
+
+        if not cv_in_db:
+            raise HTTPException(status_code=404, detail="CV not found")
+
+        # Validate the new status
+        if request.trangThai not in [0, 1]:
+            raise HTTPException(status_code=400, detail="Invalid status")
+
+        # Update the status
+        cv_in_db.trangThai = request.trangThai
+
+        # Commit the changes to the database
+        db.commit()
+        db.refresh(cv_in_db)
+
+        return {"status": 200, "message": "CV status updated successfully"}
+
+    except HTTPException as http_err:
+        db.rollback()  # Rollback any changes if there's an error
+        raise http_err  # Rethrow HTTP exceptions
+
+    except Exception as e:
+        db.rollback()  # Rollback any changes if there's an unexpected error
+        return {"status": 500, "message": f"Error: {e}"}
+
 
 @router.delete("/cv/{id_CV}/maKH/{maKH}")
 def api_delete_cv(id_CV: int, maKH: int, db: Session = Depends(get_db)):

@@ -16,7 +16,7 @@ class KhachHang(Base):
     soLuongToken = Column(Integer,default=0)
     diaChi = Column(Text)
     ngaySinh = Column(Date)
-    trangThai = Column(Integer,default=1)
+    trangThai = Column(Integer,default=0)
 
 
     quyen_truy_cap = relationship("QuyenTruyCap", back_populates="khachhangs")

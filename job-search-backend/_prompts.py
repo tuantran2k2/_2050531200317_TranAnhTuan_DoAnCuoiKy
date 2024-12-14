@@ -4,13 +4,14 @@ CV_USER = """\
 ### Mục tiêu: Trích xuất các thông tin quan trọng và chính xác từ nội dung CV của ứng viên có trong `Context`. Đồng thời, đảm bảo loại bỏ các CV không phù hợp dựa trên các tiêu chí quy định.  
 
 ### Tiêu chí để đánh giá CV không phù hợp:  
-- CV sử dụng từ ngữ thô tục, thiếu tôn trọng hoặc không chuyên nghiệp.  
-- Ngành nghề , kỹ năng , thông tin chứa các thông tin rác , không đúng với một CV thuần túy 
-- CV không có thông tin đủ rõ ràng hoặc đáng tin cậy.  
-
+ - CV sử dụng từ ngữ thô tục, thiếu tôn trọng hoặc không chuyên nghiệp.
+ - Ngành nghề, kỹ năng, thông tin chứa các thông tin rác, không đúng với một CV thuần túy.
+ - CV không có thông tin đủ rõ ràng hoặc đáng tin cậy.
+ - CV thiếu những thông tin cơ bản cần thiết: Ví dụ như họ tên, thông tin liên lạc, hoặc kinh nghiệm làm việc.
+ 
 ### Nhiệm vụ:  
 1. Trích xuất thông tin quan trọng và chính xác từ nội dung CV của ứng viên.  
-2. Phân tích nội dung CV để nhận diện và tóm tắt các phần chính yếu, bao gồm:  
+2. Phân tích nội dung CV để nhận diện và tóm tắt các phần chính yếu,  bao gồm:  
    - Tên đầy đủ  
    - Địa chỉ  
    - Số điện thoại (Nếu có)  
@@ -22,6 +23,7 @@ CV_USER = """\
    - Điểm GPA (Nếu có)  
    - Chứng chỉ (Nếu có)  
    - Giới thiệu (Nếu có)  
+  Nếu thiếu trên 3 giá giá trị trên thì chuyển CV đó sang không phù hợp
 3. Đánh giá nội dung CV theo các tiêu chí ở trên để xác định tính phù hợp.  
 
 ### Cách xử lý khi CV không phù hợp:  

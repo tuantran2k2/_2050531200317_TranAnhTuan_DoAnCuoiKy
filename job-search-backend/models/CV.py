@@ -19,6 +19,6 @@ class CV(Base):
     GioiThieu = Column(Text)
     maKH = Column(Integer, ForeignKey("KhachHang.maKH"))
     ChungChi = Column(Text)
-
+    trangThai = Column(Integer, default=1) 
     # Quan hệ với bảng KhachHang
     khachhang = relationship("KhachHang", back_populates="cvs")
