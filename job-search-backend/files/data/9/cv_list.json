@@ -1,0 +1,16 @@
+[
+    {
+        "id_cv": 39,
+        "ten_cv": "Hương",
+        "chuyen_nganh": "Chuyên viên Kinh doanh",
+        "trangThai": 1,
+        "linkURL": "https://doancuoiky.s3.us-west-2.amazonaws.com/d3373e24-a2ea-44e8-8f3a-7955acd1f26f.pdf"
+    },
+    {
+        "id_cv": 40,
+        "ten_cv": "Nguyen",
+        "chuyen_nganh": "Chuyên Viên Kinh Doanh",
+        "trangThai": 1,
+        "linkURL": "https://doancuoiky.s3.us-west-2.amazonaws.com/0a2a4a75-d222-4cc6-a488-87c8b7cc50c5.pdf"
+    }
+]

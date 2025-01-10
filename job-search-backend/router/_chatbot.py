@@ -1,9 +1,13 @@
-from fastapi import APIRouter , HTTPException,Request
+from fastapi import APIRouter, Depends, HTTPException ,Request
+from sqlalchemy.orm import Session
 from schemas._chatbot import QuestionRequest ,QuestionRequestChat
 from dependencies.security import verified_user
 from controllers.crewai import _main
 from controllers import _chatbot
 from dependencies.dependencies import get_db
+
+from models.LichSuTroChuyen import LichSuTroChuyen 
+from models.BoSuuTap import  BoSuTap
 
 
 router = APIRouter(
@@ -66,3 +70,38 @@ def request_otp(request: QuestionRequestChat):
             
     except Exception as e:
             return {"status" : 500 , "message": f"lỗi {e}"}
+
+
+@router.get("/chat-history")
+def get_chat_history(msKH: int, maBST: int, db: Session = Depends(get_db)):
+    try:
+        # Lấy danh sách BST dựa trên msKH và maBST
+        bst_records = db.query(BoSuTap).filter(BoSuTap.maKH == msKH, BoSuTap.ma_BST == maBST).all()
+
+        if not bst_records:
+            return {"status": 404, "message": "Không tìm thấy bản ghi BST phù hợp."}
+
+        # Lấy lịch sử trò chuyện dựa trên maBST
+        chat_history = db.query(LichSuTroChuyen).filter(LichSuTroChuyen.maBST == maBST).all()
+
+        if not chat_history:
+            return {"status": 404, "message": "Không tìm thấy lịch sử trò chuyện cho maBST này."}
+
+        # Xây dựng dữ liệu trả về
+        data = {
+            "chat_history": [
+                {
+                    "ma_LSTC": chat.ma_LSTC,
+                    "cauHoi": chat.cauHoi,
+                    "phanHoi": chat.phanHoi,
+                    "tongSoToken": chat.tongSoToken,
+                    "timestamp": chat.timestamp,
+                }
+                for chat in chat_history
+            ],
+        }
+
+        return {"status": 200, "data": data}
+
+    except Exception as e:
+        return {"status": 500, "message": f"Lỗi: {e}"}

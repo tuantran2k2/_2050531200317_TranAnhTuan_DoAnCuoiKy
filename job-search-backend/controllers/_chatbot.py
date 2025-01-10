@@ -66,7 +66,7 @@ def chatbot(id_cv, collection_id, ma_KH, query):
         # Thực thi chain và lấy kết quả
         chain = (
             prompt
-            | _environments.get_llm(model="gpt-4o", temperature=0.7)
+            | _environments.custom_llm()
             | StrOutputParser()
         )
         
@@ -81,7 +81,7 @@ def chatbot(id_cv, collection_id, ma_KH, query):
         
         update_mount = user_in_db.soLuongToken - total_characters
         
-        _user.update_amount(maKH=ma_KH,new_money=update_mount,db=db)
+        _user.update_token(maKH=ma_KH,new_token=update_mount,db=db)
         
         with next(get_db()) as db:
             

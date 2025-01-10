@@ -35,3 +35,13 @@ class UpdateStatus(BaseModel):
     maKH: int
     email :str
     trangThai: int
+    
+    
+class UpdateUserInfoRequest(BaseModel):
+    maKH: int
+    tenHienThi: str
+    tenKH: str
+    diaChi: str
+    ngaySinh: str
+    
+    

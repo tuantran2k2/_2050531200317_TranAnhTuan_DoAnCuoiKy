@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, ForeignKey, DECIMAL, String, Enum, TIMESTAMP
+from sqlalchemy import Column, Integer, ForeignKey, String, Enum, TIMESTAMP , BIGINT
 from sqlalchemy.orm import relationship
 from database._database_mysql import Base
 from datetime import datetime
@@ -16,5 +16,6 @@ class LichSuGiaoDich(Base):
     status = Column(Enum('PENDING', 'PAID', 'FAILED', 'CANCELLED'), nullable=False)
     created_at = Column(TIMESTAMP, default=datetime.utcnow)
     updated_at = Column(TIMESTAMP, default=datetime.utcnow, onupdate=datetime.utcnow)
+    token = Column(BIGINT)
 
     khachhang = relationship("KhachHang", back_populates="lichsugiaodichs")

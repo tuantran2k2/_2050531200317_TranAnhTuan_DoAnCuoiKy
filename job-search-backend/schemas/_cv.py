@@ -8,5 +8,6 @@ class DeleteRequest(BaseModel):
     maCV :int
     
 class UpdateStatus(BaseModel):
+    makh :int
     trangThai: int
     maCV :int

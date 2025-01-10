@@ -1,0 +1,24 @@
+[
+    {
+        "id_cv": 37,
+        "ten_cv": "Hân",
+        "chuyen_nganh": "Giáo viên tiếng Anh",
+        "trangThai": 1,
+        "linkURL": "https://doancuoiky.s3.us-west-2.amazonaws.com/9932fc8f-a15a-4d8b-9eab-ac855675c7db.pdf"
+    },
+    {
+        "id_cv": 38,
+        "ten_cv": "Anh",
+        "chuyen_nganh": "Mỹ thuật Đa phương tiện",
+        "trangThai": 1,
+        "linkURL": "https://doancuoiky.s3.us-west-2.amazonaws.com/4ef30625-08bb-4678-acc2-2bd577cb53a4.pdf"
+    },
+    {
+        "id_cv": 59,
+        "ten_cv": "Tuấn",
+        "chuyen_nganh": "Web Developer",
+        "trangThai": 1,
+        "linkURL": "https://doancuoiky.s3.us-west-2.amazonaws.com/bbe774b9-56be-4a15-8604-c53da2bfe976.pdf",
+        "nameFile": "CV_intern.pdf"
+    }
+]

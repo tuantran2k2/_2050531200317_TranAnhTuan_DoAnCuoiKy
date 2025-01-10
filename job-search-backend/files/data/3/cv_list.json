@@ -1,27 +1,37 @@
 [
     {
-        "id_cv": 1,
-        "ten_cv": "Ngan",
-        "chuyen_nganh": "Marketing"
+        "id_cv": 27,
+        "ten_cv": "An",
+        "chuyen_nganh": "Kỹ sư công nghiệp",
+        "trangThai": 1,
+        "linkURL": "https://doancuoiky.s3.us-west-2.amazonaws.com/214666b9-c648-48e8-917c-e097815d36bf.pdf"
     },
     {
-        "id_cv": 2,
-        "ten_cv": "Hậu",
-        "chuyen_nganh": "Truyền thông Marketing"
+        "id_cv": 28,
+        "ten_cv": "An",
+        "chuyen_nganh": "Kỹ sư công nghiệp",
+        "trangThai": 1,
+        "linkURL": "https://doancuoiky.s3.us-west-2.amazonaws.com/06f89172-e62b-44ad-ae9c-c99e97e71cd9.pdf"
     },
     {
-        "id_cv": 3,
-        "ten_cv": "Na",
-        "chuyen_nganh": "Thực tập sinh Marketing"
+        "id_cv": 29,
+        "ten_cv": "Tiên",
+        "chuyen_nganh": "Chuyên viên phát triển phần mềm",
+        "trangThai": 1,
+        "linkURL": "https://doancuoiky.s3.us-west-2.amazonaws.com/3c3f3287-4f94-4664-9e0f-069771d7d477.pdf"
     },
     {
-        "id_cv": 11,
-        "ten_cv": "Giang",
-        "chuyen_nganh": "Marketing"
+        "id_cv": 30,
+        "ten_cv": "Hoàng",
+        "chuyen_nganh": "Tâm lý học",
+        "trangThai": 1,
+        "linkURL": "https://doancuoiky.s3.us-west-2.amazonaws.com/1e37cff8-da06-4701-839e-27173b5fa746.pdf"
     },
     {
-        "id_cv": 12,
-        "ten_cv": "Mai",
-        "chuyen_nganh": "Digital Marketing"
+        "id_cv": 31,
+        "ten_cv": "Minh",
+        "chuyen_nganh": "Thiết kế Đồ hoạ",
+        "trangThai": 1,
+        "linkURL": "https://doancuoiky.s3.us-west-2.amazonaws.com/c098a26f-b32e-4ce6-8081-cef3f10fc973.pdf"
     }
 ]

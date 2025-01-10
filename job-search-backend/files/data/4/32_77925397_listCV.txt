@@ -1,0 +1,40 @@
+---
+Nội dung:
+About the job MÔ TẢ CÔNG VIỆC: - Tham gia phát triển và triển khai các dự án chuyển đổi số của Tổng Công ty. - Khảo sát, phân tích yêu cầu người sử dụng. - Xây dựng hồ sơ thiết kế ứng dụng. - Lập trình phát triển các chức năng của ứng dụng. - Chạy thử và sửa lỗi, điều chỉnh cho phù hợp. - Viết tài liệu hướng dẫn sử dụng phần mềm. - Đào tạo hướng dẫn sử dụng. - Bảo trì: xử lý lỗi khi triển khai ứng dụng, phát triển các yêu cầu bổ sung từ phía người sử dụng, cải tiến nâng cấp chức năng, ... YÊU CẦU: - Sử dụng thành thạo một số ngôn ngữ lập trình như VB.NET, ASP.NET, C#.NET, Xamarin, React Native … và cơ sở dữ liệu SQL, JSON. - Lập trình phát triển ứng dụng winform và web. - Lập trình phát triển ứng dụng trên thiết bị di động. - Am hiểu về các công nghệ 4.0 như AI, Big Data, Blockchain, BI, RFID, RPA, IoT, Smart Factory,… - Kỹ năng làm việc theo nhóm, nghiên cứu, sáng tạo. - Kỹ năng quản lý dự án theo phương pháp luận Agile. - Kỹ năng phân tích, thiết kế hệ thống tin quản trị doanh nghiệp.
+
+Tiêu đề Công Việc: IT fullstack
+Địa chỉ việc làm: Đà Nang, Da Nang City, Vietnam
+Link chi tiết: https://www.linkedin.com/jobs/view/4108389617
+Ngày đăng: 2024-12-23T22:57:42.393798
+id_job: 4108389617
+---
+
+
+
+---
+Nội dung:
+About the job 1. MÔ TẢ CÔNG VIỆC Lập kế hoạch kiểm thử; Nghiên cứu, phân tích và review các tài liệu yêu cầu, thiết kế; Thiết kế Test case (Matrix, checklist..); Thực hiện kiểm thử; Log lỗi và quản lý lỗi trên hệ thống Quản lý lỗi; Quản lý và báo cáo về quá trình kiểm thử, chất lượng phần mềm, kết quả kiểm thử. 2. YÊU CẦU ỨNG VIÊN Trình độ học vấn Cử nhân chuyên ngành Công nghệ thông tin hoặc các chuyên ngành liên quan. Kiến thức & kinh nghiệm liên quan Có kinh nghiệm 02 năm trở lên với vị trí tương đương; Nắm vững các quy trình và kỹ thuật test; Có kỹ năng lập kế hoạch, kỹ năng phân tích nghiệp vụ; Có kỹ năng xây dựng test case và thực hiện test; Có kỹ năng phân tích kết quả kiểm thử và báo cáo; Có kinh nghiệm làm việc với các dự án theo quy trình CMMI, Agile/Scrum là lợi thế; Có hiểu biết về SQL; Có chứng chỉ ISTQB là một lợi thế; Có tiếng Anh, tiếng Nhật là lợi thế; Phẩm chất cá nhân cần thiết cho công việc Cẩn thận, tỉ mỉ trong công việc Tư duy logic, có khả năng nghiên cứu. 3. PHÚC LỢI TẠI DEHA Chính sách lương & thưởng Mức lương cạnh tranh 10.000.000 - 17.000.000 VNĐ và có thể deal theo năng lực; Thưởng theo kết quả kinh doanh của Công ty. Môi trường làm việc Được làm việc trong môi trường chuyên nghiệp, được hỗ trợ phát huy khả năng, phát triển sự nghiệp; Văn hóa học tập thúc đẩy phát triển cá nhân; Chính sách hỗ trợ các hoạt động học tập, trao đổi, chia sẻ kiến thức; Được hỗ trợ 100% chi phí tham gia các khóa học kỹ năng mềm, các khóa đào tạo chuyên môn, thi các chứng chỉ uy tín trong nước và quốc tế. Lộ trình nghề nghiệp Lộ trình phát triển con đường sự nghiệp là một phần của quá trình phát triển nhân viên tại Deha Việt Nam, bao gồm sự phát triển theo chiều dọc thăng tiến lên các vị trí chuyên gia, quản lý; Được tư vấn, đồng hành và hỗ trợ phát huy tối đa khả năng, phát triển sự nghiệp; Được định hướng mục tiêu cá nhân, nhóm và tổ chức.
+
+Tiêu đề Công Việc: Junior Tester
+Địa chỉ việc làm: Hanoi, Hanoi, Vietnam
+Link chi tiết: https://www.linkedin.com/jobs/view/4108749589
+Ngày đăng: 2024-12-24T10:49:14.318428
+id_job: 4108749589
+---
+
+
+
+---
+Nội dung:
+About the job Mô tả công việc Luôn chú ý giữ gìn hình ảnh, dáng vẻ khi làm việc, đồng phục gọn gàng, kiểu tóc theo quy định và trang điểm theo tiêu chuẩn hình ảnh của nhân viên phòng chờ. Luôn cập nhật kiến thức, thông tin liên quan đến hãng và phòng chờ. Chịu trách nhiệm vận hành và đảm bảo chất lượng các trang thiết bị, công cụ dụng cụ trong phòng chờ. Tham gia quá trình phục vụ khách hàng thương gia theo tiêu chuẩn nghiệp vụ. Đảm bảo chất lượng dịch vụ theo bộ tiêu chuẩn vận hành phòng chờ Có trách nhiệm tiếp nhận và giải quyết các phản hồi của khách hàng tại phòng chờ Đảm bảo làm việc với đồng nghiệp với chất lượng tốt nhất Địa điểm làm việc: Nhà ga T1 - Sân Bay Quốc tế Nội Bài - Sóc Sơn - Hà Nội Thời gian nhận việc: cuối tháng 12/2024. Yêu cầu ứng viên Tốt nghiệp các trường cao đẳng, đại học ngành du lịch, khách sạn, hàng không... Ngoại hình sáng, tươi tắn. Chiều cao: nữ 1m6/nam 1m7 trở lên. Tiếng anh: Có khả năng giao tiếp tiếng anh với người nước ngoài (Ưu tiên ứng viên có bằng TOEIC từ 550 trở lên). Tuổi: 21 - 30 tuổi. Kinh nghiệm: Ít nhất 01 năm kinh nghiệm trong ngành dịch vụ hàng không/dịch vụ du lịch, nhà hàng, khách sạn 4, 5 sao. Kỹ năng giao tiếp tốt, có tư duy dịch vụ. Quyền lợi Thu nhập từ 12 - 14tr/tháng Thưởng lễ tết Lương tháng 13 Thưởng hiệu quả SXKD 2 lần trong năm Du lịch, nghỉ mát, teambuilding Đia chỉ CÔNG TY CỔ PHẦN DỊCH VỤ HÀNG KHÔNG NỘI BÀI Tòa nhà N02 - T1 - Khu Đoàn Ngoại Giao, Quận Bắc Từ Liêm, Thành phố Hà Nội
+
+Tiêu đề Công Việc: Nhân viên phục vụ
+Địa chỉ việc làm: Hanoi, Hanoi, Vietnam
+Link chi tiết: https://www.linkedin.com/jobs/view/4108772714
+Ngày đăng: 2024-12-24T12:47:25.186564
+id_job: 4108772714
+---
+
+
+
+

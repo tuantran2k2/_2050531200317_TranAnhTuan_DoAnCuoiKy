@@ -1,0 +1,23 @@
+[
+    {
+        "id_cv": 32,
+        "ten_cv": "Hiền",
+        "chuyen_nganh": "Giáo sư Đại học",
+        "trangThai": 1,
+        "linkURL": "https://doancuoiky.s3.us-west-2.amazonaws.com/e2ae6338-22c0-4b8f-98ea-9cde0cc89dae.pdf"
+    },
+    {
+        "id_cv": 33,
+        "ten_cv": "Chi",
+        "chuyen_nganh": "Giáo viên Mầm non",
+        "trangThai": 1,
+        "linkURL": "https://doancuoiky.s3.us-west-2.amazonaws.com/b3fbbce4-cedd-47e9-a240-42e527d1bbac.pdf"
+    },
+    {
+        "id_cv": 34,
+        "ten_cv": "Nhi",
+        "chuyen_nganh": "Thiết kế Đồ họa",
+        "trangThai": 1,
+        "linkURL": "https://doancuoiky.s3.us-west-2.amazonaws.com/5a1cf138-7311-4a57-b2d4-b37235dd0b31.pdf"
+    }
+]

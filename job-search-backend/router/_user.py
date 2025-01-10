@@ -1,8 +1,8 @@
-from fastapi import APIRouter, Depends, HTTPException, status ,Request ,Response
+from fastapi import APIRouter, Depends, HTTPException, status ,Request ,Response , File, UploadFile , Form
 from sqlalchemy.orm import Session
 from models.KhachHang import KhachHang, OTP 
-from schemas._users import EmailRequest, OTPVerifyRequest ,UserRegistrationRequest , User , UpdateUser ,UpdateStatus
-from dependencies.otp_service import generate_otp, send_verification_email , send_verification_email_from_admin
+from schemas._users import EmailRequest, OTPVerifyRequest ,UserRegistrationRequest , User , UpdateUser ,UpdateStatus , UpdateUserInfoRequest
+from dependencies.otp_service import generate_otp, send_verification_email , send_verification_email_from_admin , send_pdf_email
 from dependencies.security import get_password_hash , verify_password , create_access_token , verified_user
 from database._database_mysql import SessionLocal
 from dependencies.dependencies import get_db
@@ -12,6 +12,8 @@ from fastapi.responses import JSONResponse
 import _constants
 from datetime import datetime
 import jwt
+import os
+import shutil
 
 router = APIRouter(
     prefix="/api/v1/user",
@@ -170,13 +172,15 @@ async def login(user: User, db: Session = Depends(get_db)):
         if user_in_db and verify_password(user.password,user_in_db.matKhau):
             access_token_expires = timedelta(minutes=_constants.ACCESS_TOKEN_EXPIRE_MINUTES)
             # Tạo Access Token
-            
+            ngay_sinh_str = user_in_db.ngaySinh.isoformat() if user_in_db.ngaySinh else None
             access_token = create_access_token(
                 data={
                     "user_id": user_in_db.maKH,
                     "display_name": user_in_db.tenKH,
                     "user_name": user_in_db.tenHienThi,
                     "email": user_in_db.email,
+                    "diaChi" : user_in_db.diaChi,
+                    "ngaySinh" : ngay_sinh_str,
                     "role" : user_in_db.maQuyen,
                     "trangThai" : user_in_db.trangThai,
                     "SoDu" : user_in_db.soLuongToken
@@ -332,3 +336,87 @@ def get_user_by_id(user_id: int, db: Session = Depends(get_db), current_user: di
         print(f"Error: {e}")  # Log chi tiết lỗi
         return {"status": 500, "message": f"Lỗi: {e}"}
 
+@router.post("/update_user_info")
+def update_user_info(request: UpdateUserInfoRequest, db: Session = Depends(get_db)):
+    
+    user_in_db = db.query(KhachHang).filter(KhachHang.maKH == request.maKH).first()
+
+    if not user_in_db:
+        raise HTTPException(status_code=404, detail="User not found")
+
+    user_in_db.tenKH = request.tenKH
+    user_in_db.tenHienThi = request.tenHienThi
+    user_in_db.diaChi = request.diaChi
+    user_in_db.ngaySinh = request.ngaySinh
+
+    db.commit()
+    db.refresh(user_in_db)
+
+    return {"status": 200, "message": "User information updated successfully"}
+
+@router.get("/user-info/{maKH}")
+def get_user_info(maKH: int, db: Session = Depends(get_db)):
+    """
+    Fetch personal information of a user based on maKH (user ID).
+    """
+    try:
+        # Query user information by maKH
+        user_in_db = db.query(KhachHang).filter(KhachHang.maKH == maKH).first()
+
+        if not user_in_db:
+            raise HTTPException(status_code=404, detail="Không tìm thấy người dùng")
+
+        # Return user information
+        return {
+            "status": 200,
+            "user": {
+                "email": user_in_db.email,
+                "tenHienThi": user_in_db.tenHienThi,
+                "tenKH": user_in_db.tenKH,
+                "diaChi": user_in_db.diaChi,
+                "ngaySinh": user_in_db.ngaySinh,
+                "ngayDangKy": user_in_db.ngayDangKy,
+                "soLuongToken": user_in_db.soLuongToken,
+                "trangThai": user_in_db.trangThai,
+            }
+        }
+    except Exception as e:
+        return {"status": 500, "message": f"Lỗi: {e}"}
+    
+    
+@router.post("/send_messages_pdf")
+def send_messages_pdf(
+    email: str = Form(...),
+    file: UploadFile = File(...)
+):
+    try:
+        # Đường dẫn thư mục tạm
+        temp_dir = "/tmp/uploaded_files"
+        temp_filepath = os.path.join(temp_dir, file.filename)
+
+        # Kiểm tra và tạo thư mục nếu chưa tồn tại
+        os.makedirs(temp_dir, exist_ok=True)
+
+        # Lưu file từ UploadFile vào thư mục tạm
+        with open(temp_filepath, "wb") as buffer:
+            shutil.copyfileobj(file.file, buffer)
+
+        # Log đường dẫn file
+        print(f"File saved at: {temp_filepath}")
+
+        # Gửi email với file đã lưu
+        email_sent = send_pdf_email(email, temp_filepath)
+
+        # Xóa file sau khi gửi xong
+        os.remove(temp_filepath)
+
+        if not email_sent:
+            raise HTTPException(status_code=500, detail="Failed to send email")
+
+        return {"status": 200, "message": "PDF sent to email successfully"}
+
+    except Exception as e:
+        # Ghi log lỗi chi tiết
+        print(f"Error: {e}")
+        raise HTTPException(status_code=500, detail=f"An error occurred: {str(e)}")
+    

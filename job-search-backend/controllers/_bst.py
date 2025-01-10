@@ -19,7 +19,8 @@ def get_list_bst(maKH: int, db: Session):
             collection_data = {
                 "id": collection.ma_BST,
                 "ten_bo_suu_tap": collection.TenBST,
-                "ngay_tao": collection.ngayTao
+                "ngay_tao": collection.ngayTao,
+                "ma_cv" : collection.maCV
             }
             collection_list.append(collection_data)
 

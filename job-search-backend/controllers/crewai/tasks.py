@@ -32,7 +32,8 @@ def rag_jobs_list(agent, id_cv , k ,collection_id , ma_KH):
                 ma_BST=collection_id,
                 TenBST=f"tìm {k} công việc về Ngành Nghề: {cv_details.get('Nganh', 'Không có')}",
                 ngayTao=datetime.now(),
-                maKH=ma_KH
+                maKH=ma_KH,
+                maCV=id_cv
             )
             db.add(BST)  
             db.commit()  
@@ -46,7 +47,7 @@ def rag_jobs_list(agent, id_cv , k ,collection_id , ma_KH):
         
         update_mount = user_in_db.soLuongToken - total_characters
         
-        _user.update_amount(maKH=ma_KH,new_money=update_mount,db=db)
+        _user.update_token(maKH=ma_KH,new_token=update_mount,db=db)
         history_record = LichSuTroChuyen(
             cauHoi=agent_1_question,
             phanHoi=answer,

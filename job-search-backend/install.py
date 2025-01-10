@@ -12,7 +12,7 @@ libraries = [
     'langsmith', 'langchain_cohere', 'qdrant-client', 'faiss-cpu', 'neo4j', 
     'markdown', 'markdownify', 'markdown-crawler', 'PyPDF2', 'pymupdf', 
     'unstructured[all-docs]', 'pydantic', 'lxml', 'pdf2image', 'spacy', 'pyvi', 
-    'flashrank', 'cohere', 'pycryptodome', 'pyairtable', 'gspread', 'llama-cpp-python' ,'selenium' , 'webdriver-manager'
+    'flashrank', 'cohere', 'pycryptodome', 'pyairtable', 'gspread', 'llama-cpp-python' ,'selenium' , 'webdriver-manager' ,'python-magic'
 ]
 
 # Danh sách lưu các thư viện không cài đặt được

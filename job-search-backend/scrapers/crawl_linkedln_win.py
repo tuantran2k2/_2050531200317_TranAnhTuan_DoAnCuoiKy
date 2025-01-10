@@ -9,13 +9,10 @@ from qdrant_client.http import models
 from langchain.schema import Document  
 from qdrant_client.http.models import CollectionStatus
 
-
-import pandas as pd
 import time
 import re
 import logging
 import random
-import csv
 import os
 
 file_path = 'points.txt'
@@ -25,7 +22,6 @@ load_dotenv()
 # Lấy các biến môi trường từ file .env
 QDRANT_URL = os.getenv("QDRANT_URL")
 COLLECTION_NAME = os.getenv("COLLECTION_NAME")
-QDRANT_SERVER = os.getenv("QDRANT_SERVER")
 
 
     
@@ -86,7 +82,7 @@ def convert_to_str(o):
     raise TypeError(f"Type {type(o)} not serializable")
 
 # Đường dẫn đến ChromeDriver
-service = Service("C:/chromedriver-win32/chromedriver.exe") 
+service = Service("C:/chromedriver/chromedriver.exe") 
 
 # Cấu hình Chrome Options để chạy không giao diện
 options = Options()
@@ -107,7 +103,7 @@ driver.get('https://www.linkedin.com')
 # Thiết lập cookie 'li_at' để đăng nhập
 cookie = {
     'name': 'li_at',
-    'value': 'AQEDAU0MA38BZcpPAAABkx_BK9sAAAGTQ82v200AFePTERGyTg9jpAHEhCqYubPkCG9BYpga2V3LeHXXYdAnKNP1jgBDOuf9b-1NXVeSx_ueXFM654EW0tbx5p5RgmAZbLlLBzt4-b3QvaH_RBnmTQm1',  # Thay bằng giá trị cookie thực tế của bạn
+    'value': 'AQEDAU0MA38CyXMFAAABlE7QnEsAAAGUct0gS00ABFd-5zdFW1Hky3mF5qEQEaGVzPRvgy1b5U4aoe_k9lnswyHW3EjUwcolCk1JTLaiBNbzXsCqwaJraQMPn4gxUv5B3eOlXQrKYT-0he1-hzY_fBp9',  # Thay bằng giá trị cookie thực tế của bạn
     'domain': '.linkedin.com',
     'path': '/',
     'secure': True,

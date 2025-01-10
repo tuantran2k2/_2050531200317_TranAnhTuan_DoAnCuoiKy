@@ -4,6 +4,7 @@ from sqlalchemy import func
 from sqlalchemy.orm import Session
 from models.LichSuGiaoDich import LichSuGiaoDich
 from models.KhachHang import KhachHang
+from controllers._user import update_token , get_amount
 from dotenv import load_dotenv
 import os
 
@@ -34,7 +35,6 @@ async def create_payment_link(maKH ,amount, cancelUrl, returnUrl):
              maKH=maKH,
         )
         payment_link_data = payOS.createPaymentLink(paymentData=payment_data)
-
         if not payment_link_data:
             print("createPaymentLink did not return valid data")
             return None 
@@ -46,12 +46,7 @@ async def create_payment_link(maKH ,amount, cancelUrl, returnUrl):
 # Trong hàm kiểm tra trạng thái thanh toán
 def process_payment_status(order_id, maKH ,db: Session):
     try:
-        existing_transaction = db.query(LichSuGiaoDich).filter_by(order_id=order_id).first()
-        if existing_transaction:
-            return {"status": existing_transaction.status}
-
         payment_info = payOS.getPaymentLinkInformation(orderId=order_id)
-        
         if not payment_info:
             return {"error": "Payment information not found"}
 
@@ -72,6 +67,11 @@ def process_payment_status(order_id, maKH ,db: Session):
                 return {"error": "Failed to save transaction"}
             if result == 404:
                 return {"message": "User ID not found", "status": 404}
+            amount = int(payment_info.amount)  # Chuyển amount sang int
+            token = amount * 10
+            token_old = get_amount(maKH=maKH , db=db)
+            new_token = token + token_old
+            update_token(maKH=maKH,new_token=new_token,db=db)
             return {"status": "PAID"}
     except Exception as e:
         print(f'Error processing payment: {e}')
@@ -146,8 +146,43 @@ def fetch_deposit_history(user_id: int , db: Session):
                 "status": txn.status,
                 "created_at": txn.created_at,
                 "updated_at": txn.updated_at,
+                "token" : txn.token
             }
             for txn in transactions
+        ]
+
+        return {"message": "Transaction history fetched successfully", "transactions": transaction_history}
+    except Exception as e:
+        print(f"Lỗi khi lấy lịch sử nạp tiền: {e}")
+        return {"message": f"Error fetching transaction history: {str(e)}", "transactions": None}
+
+
+def fetch_deposit_history_admin(db: Session):
+    try:
+        # Truy vấn để lấy lịch sử nạp tiền theo `user_id`, sắp xếp từ mới nhất đến cũ nhất
+        transactions = (
+            db.query(LichSuGiaoDich, KhachHang)
+            .join(KhachHang, LichSuGiaoDich.maKH == KhachHang.maKH)
+            .order_by(LichSuGiaoDich.created_at.desc())
+            .all()
+        )
+
+        # Nếu không có giao dịch, trả về thông báo
+        if not transactions:
+            return {"message": "No transactions found", "transactions": []}
+
+        # Chuyển đổi kết quả truy vấn thành danh sách các dict để trả về JSON
+        transaction_history = [
+            {
+                "transaction_code": txn.id,  # Mã giao dịch
+                "customer_name": customer.tenKH,  # Tên khách hàng
+                "email": customer.email,  # Email khách hàng
+                "amount": int(txn.amount),  # Số tiền (chuyển sang int)
+                "token_count": txn.token,  # Số token
+                "status": txn.status,  # Trạng thái
+                "payment_date": txn.created_at  # Ngày thanh toán
+            }
+            for txn, customer in transactions
         ]
 
         return {"message": "Transaction history fetched successfully", "transactions": transaction_history}

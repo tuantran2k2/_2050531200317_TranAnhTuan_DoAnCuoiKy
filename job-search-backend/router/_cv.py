@@ -1,8 +1,6 @@
 from fastapi import APIRouter, Depends , File, UploadFile , Form,HTTPException ,Request
 from models.CV import CV
-from datetime import datetime, timedelta
 from fastapi.responses import JSONResponse
-from dependencies import security
 from pathlib import Path
 from controllers import _cv
 from sqlalchemy.orm import Session
@@ -12,11 +10,11 @@ from schemas._cv import MaKHRequest , UpdateStatus
 from models.KhachHang import KhachHang
 from controllers import _user
 from dependencies.security import  verified_user
-
+from controllers.aws3_pdf import connect_s3 
 import json  # Import thư viện JSON
 import io
-import _constants
-import aiofiles
+import uuid
+import magic
 
 
 router = APIRouter(
@@ -47,100 +45,147 @@ async def upload_files(
     db: Session = Depends(get_db)
 ):
     try:
-        # Đọc nội dung file vào bộ nhớ
-        file_content = await file.read()  # Đọc toàn bộ nội dung của file
-        
-        # Chuyển đổi file_content thành một đối tượng BytesIO để có thể sử dụng seek
-        file_stream = io.BytesIO(file_content)  # Wrap file_content in BytesIO
+        # Kiểm tra dung lượng file ngay từ đầu (giới hạn 3MB)
+        file_dir = Path(f"./files/data/{ma_KH}")
+        file_dir.mkdir(parents=True, exist_ok=True)
+        json_path = file_dir / "cv_list.json"
+        max_size_mb = 3
+        max_size_bytes = max_size_mb * 1024 * 1024
 
-        # Truyền file_stream vào pdfminer để xử lý
-        noi_dung_cv = _cv.extract_text_from_pdf(file_stream)  # Pass file_stream instead of file_content
-        answer , total_token = _cv.chatbot_cv(noi_dung_cv)
-        
-        print("answer")
-        print(answer)
-        print("answeradsadasdad")
-            
-        user_in_db = db.query(KhachHang).filter(KhachHang.maKH == ma_KH).first()
-        
-        if total_token > user_in_db.soLuongToken:
-            content = {
-            "message": "Số dư của bạn không đủ"
-            }
-            return JSONResponse(content=content, status_code=403)
-        
-        update_mount = user_in_db.soLuongToken - total_token
-        _user.update_amount(maKH=ma_KH,new_money=update_mount,db=db)
-        
-        if (answer.get("hopLe") == False):
-            content = {
-                "status": 500,
-                "message": answer.get("lyDo")
-            }
-            return JSONResponse(content=content, status_code=500)
-        else:
-            # Kiểm tra nếu answer có giá trị cho các key cần thiết
-            new_cv = CV(
-                tenCV=answer.get("tenDayDu", "null"),
-                Nganh=answer.get("nganhNghe", "null"),
-                KyNangMem=", ".join(answer.get("kyNangMem", ["null"])) if isinstance(answer.get("kyNangMem"), list) else answer.get("kyNangMem", "null"),
-                KyNangChuyenNganh=", ".join(answer.get("kyNangChuyenNganh", ["null"])) if isinstance(answer.get("kyNangChuyenNganh"), list) else answer.get("kyNangChuyenNganh", "null"),
-                hocVan=answer.get("hocVan", "null"),
-                tinhTrang="null",
-                DiemGPA=answer.get("diemGPA", "null"),
-                soDienThoai=answer.get("soDienThoai", "null"),
-                email=answer.get("email", "null"),
-                diaChi=answer.get("diaChi", "null"),
-                GioiThieu=answer.get("gioiThieu", "null"),
-                maKH=ma_KH,
-                ChungChi=answer.get("chungChi", "null")
+        # Kiểm tra dung lượng file từ thông tin tiêu đề hoặc đọc thủ công
+        file_size = file.size if hasattr(file, 'size') else file.file._file.tell()
+
+        if not file_size or file_size > max_size_bytes:
+            return JSONResponse(
+                content={"status": 400, "message": f"File vượt quá {max_size_mb}MB"},
+                status_code=400
             )
-            db.add(new_cv)
-            db.commit()
-            db.refresh(new_cv)
+        
+        #kiểm tra file trùng 
+        with json_path.open("r", encoding="utf-8") as json_file:
+            cv_list = json.load(json_file)
+            
+        if json_path.exists():
+            if any(cv.get("nameFile") == file.filename for cv in cv_list):
+                return JSONResponse(
+                    content={"status": 400, "message": f"File '{file.filename}' đã tồn tại. Vui lòng đổi tên file trước khi upload."},
+                    status_code=400
+                )
+        else:
+            cv_list = []
+        # Đọc nội dung file
+        file_content = await file.read()
 
-            maCV = new_cv.maCV  # Lấy ID của bản ghi mới tạo làm mã CV
-            file_dir = Path(f"./files/data/{ma_KH}")
-            file_dir.mkdir(parents=True, exist_ok=True)
+        # Kiểm tra nội dung file không rỗng
+        if not file_content.strip():
+            return JSONResponse(
+                content={"status": 400, "message": "File content is empty or invalid."},
+                status_code=400
+            )
 
-            # Tạo đường dẫn file với tên theo định dạng yêu cầu
-            file_path = file_dir / f"{maCV}_{file.filename}"
+        # Kiểm tra MIME type
+        file_type = magic.from_buffer(buffer=file_content, mime=True)
+        if not file_type or file_type not in connect_s3.SUPPORT_FILE_TYPES:
+            return JSONResponse(
+                content={"status": 400, "message": f"Unsupported file type: {file_type}"},
+                status_code=400
+            )
 
-            # Lưu file vào thư mục
-            with file_path.open("wb") as buffer:
-                buffer.write(file_content)  # Ghi nội dung file từ bộ nhớ
+        # Reset con trỏ để xử lý lại nội dung file
+        await file.seek(0)
 
-            # Cập nhật hoặc tạo file JSON lưu danh sách CV
-            json_path = file_dir / "cv_list.json"
-            if json_path.exists():
-                with json_path.open("r", encoding="utf-8") as json_file:
-                    cv_list = json.load(json_file)  # Đọc nội dung cũ
-            else:
-                cv_list = []  # Nếu chưa tồn tại, tạo danh sách rỗng
-            name_parts = answer.get("tenDayDu", "null").split()
-            # Lấy phần cuối cùng
-            last_name = name_parts[-1]
-            # Thêm thông tin CV mới vào danh sách
-            cv_list.append({
-                "id_cv": maCV,
-                "ten_cv": last_name,
-                "chuyen_nganh" : answer.get("nganhNghe", "null"),
-            })
+        # Xử lý nội dung file (trích xuất văn bản từ PDF và gọi chatbot)
+        try:
+            noi_dung_cv = _cv.extract_text_from_pdf(io.BytesIO(file_content))
+            answer, total_token = _cv.chatbot_cv(noi_dung_cv)
+        except Exception as e:
+            return JSONResponse(
+                content={"status": 400, "message": f"Error processing file: {str(e)}"},
+                status_code=400
+            )
 
-            # Ghi lại file JSON
-            with json_path.open("w", encoding="utf-8") as json_file:
-                json.dump(cv_list, json_file, ensure_ascii=False, indent=4)
+        # Kiểm tra số dư token của khách hàng
+        user_in_db = db.query(KhachHang).filter(KhachHang.maKH == ma_KH).first()
+        if total_token > user_in_db.soLuongToken:
+            return JSONResponse(
+                content={"message": "Số dư của bạn không đủ."},
+                status_code=403
+            )
 
-            # Chuẩn bị phản hồi
-            content = {
-                "status": 200,
-                "message": "File uploaded, processed, and saved successfully."
-            }
-            return JSONResponse(content=content, status_code=200)
+        update_mount = user_in_db.soLuongToken - total_token
+        _user.update_token(maKH=ma_KH, new_token=update_mount, db=db)
+
+        # Xử lý kết quả từ chatbot
+        if not answer.get("hopLe", True):
+            return JSONResponse(
+                content={"status": 500, "message": answer.get("lyDo", "Lỗi không xác định")},
+                status_code=500
+            )
+
+        # Lưu file lên S3
+        file_extension = connect_s3.SUPPORT_FILE_TYPES[file_type]
+        file_extension = file_extension[0] if isinstance(file_extension, list) else file_extension
+        file_key = f"{uuid.uuid4()}.{file_extension}"
+
+        file_url = await connect_s3.s3_upload(
+            contents=file_content,
+            key=file_key,
+            mime_type=file_type
+        )
+
+        # Lưu thông tin vào cơ sở dữ liệu
+        new_cv = CV(
+            tenCV=answer.get("tenDayDu", "null"),
+            Nganh=answer.get("nganhNghe", "null"),
+            KyNangMem=", ".join(answer.get("kyNangMem", ["null"])) if isinstance(answer.get("kyNangMem"), list) else answer.get("kyNangMem", "null"),
+            KyNangChuyenNganh=", ".join(answer.get("kyNangChuyenNganh", ["null"])) if isinstance(answer.get("kyNangChuyenNganh"), list) else answer.get("kyNangChuyenNganh", "null"),
+            hocVan=answer.get("hocVan", "null"),
+            tinhTrang="null",
+            DiemGPA=answer.get("diemGPA", "null"),
+            soDienThoai=answer.get("soDienThoai", "null"),
+            email=answer.get("email", "null"),
+            diaChi=answer.get("diaChi", "null"),
+            GioiThieu=answer.get("gioiThieu", "null"),
+            maKH=ma_KH,
+            ChungChi=answer.get("chungChi", "null"),
+            linkURL=file_url
+        )
+        db.add(new_cv)
+        db.commit()
+        db.refresh(new_cv)
+
+        maCV = new_cv.maCV
+        
+        # Lưu file vào thư mục local
+        file_path = file_dir / f"{maCV}_{file.filename}"
+        with file_path.open("wb") as buffer:
+            buffer.write(file_content)
+
+        # Cập nhật hoặc tạo file JSON
+        name_parts = answer.get("tenDayDu", "null").split()
+        last_name = name_parts[-1] if name_parts else ""
+        cv_list.append({
+            "id_cv": maCV,
+            "ten_cv": last_name,
+            "chuyen_nganh": answer.get("nganhNghe", "null"),
+            "trangThai": new_cv.trangThai,
+            "linkURL": new_cv.linkURL,
+            "nameFile" : file.filename  
+        })
+
+        with json_path.open("w", encoding="utf-8") as json_file:
+            json.dump(cv_list, json_file, ensure_ascii=False, indent=4)
+
+        return JSONResponse(
+            content={"status": 200, "message": "File uploaded, processed, and saved successfully."},
+            status_code=200
+        )
 
     except Exception as e:
-        content = {"status": 400, "message": "Error uploading files: " + str(e)}
-        return JSONResponse(content=content, status_code=400)
+        return JSONResponse(
+            content={"status": 400, "message": "Error uploading files: " + str(e)},
+            status_code=400
+        )
 
 
 @router.post("/list_cv")
@@ -176,7 +221,6 @@ def update_status_user(
     current_user: dict = Depends(get_current_user)
 ):
     try:
-        
         # Query user by maKH (user ID)
         cv_in_db = db.query(CV).filter(CV.maCV == request.maCV).first()
 
@@ -193,6 +237,26 @@ def update_status_user(
         # Commit the changes to the database
         db.commit()
         db.refresh(cv_in_db)
+        
+        file_dir = Path(f"./files/data/{request.makh}")
+        
+        json_path = file_dir / "cv_list.json"
+        
+        if not json_path.exists():
+            return {"status": 404, "message": "File JSON không tồn tại."}
+
+        with json_path.open("r", encoding="utf-8") as json_file:
+            cv_list = json.load(json_file)
+
+        for cv in cv_list:
+            if cv.get("id_cv") == request.maCV:
+                cv["trangThai"] = request.trangThai
+                break
+        else:
+            return {"status": 404, "message": "Không tìm thấy CV với ID đã cho."}
+        
+        with json_path.open("w", encoding="utf-8") as json_file:
+            json.dump(cv_list, json_file, ensure_ascii=False, indent=4)
 
         return {"status": 200, "message": "CV status updated successfully"}
 

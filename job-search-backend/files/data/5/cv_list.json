@@ -1,0 +1,16 @@
+[
+    {
+        "id_cv": 35,
+        "ten_cv": "Hậu",
+        "chuyen_nganh": "Truyền thông Marketing",
+        "trangThai": 1,
+        "linkURL": "https://doancuoiky.s3.us-west-2.amazonaws.com/4a797f24-0570-45ce-a426-acf201f79f5a.pdf"
+    },
+    {
+        "id_cv": 36,
+        "ten_cv": "Tuấn",
+        "chuyen_nganh": "Web Developer",
+        "trangThai": 1,
+        "linkURL": "https://doancuoiky.s3.us-west-2.amazonaws.com/3aa58dab-0b75-4b63-a4f1-ae29af41243f.pdf"
+    }
+]

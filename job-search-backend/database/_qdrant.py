@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Lấy các biến môi trường từ file .env
-QDRANT_SERVER = os.getenv("QDRANT_SERVER")
+QDRANT_SERVER = os.getenv("QDRANT_URL")
 
 embeddings_model = OpenAIEmbeddings()
 
@@ -47,7 +47,6 @@ def load_vector_db(collection_names):
             collection_name=collection_names,
             url=QDRANT_SERVER,
         )
-        print(client)
         return client
     except Exception:
         return "None"

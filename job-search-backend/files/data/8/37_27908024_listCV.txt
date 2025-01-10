@@ -1,0 +1,40 @@
+---
+Nội dung:
+About the job MÔ TẢ CÔNG VIỆC: - Tham gia phát triển và triển khai các dự án chuyển đổi số của Tổng Công ty. - Khảo sát, phân tích yêu cầu người sử dụng. - Xây dựng hồ sơ thiết kế ứng dụng. - Lập trình phát triển các chức năng của ứng dụng. - Chạy thử và sửa lỗi, điều chỉnh cho phù hợp. - Viết tài liệu hướng dẫn sử dụng phần mềm. - Đào tạo hướng dẫn sử dụng. - Bảo trì: xử lý lỗi khi triển khai ứng dụng, phát triển các yêu cầu bổ sung từ phía người sử dụng, cải tiến nâng cấp chức năng, ... YÊU CẦU: - Sử dụng thành thạo một số ngôn ngữ lập trình như VB.NET, ASP.NET, C#.NET, Xamarin, React Native … và cơ sở dữ liệu SQL, JSON. - Lập trình phát triển ứng dụng winform và web. - Lập trình phát triển ứng dụng trên thiết bị di động. - Am hiểu về các công nghệ 4.0 như AI, Big Data, Blockchain, BI, RFID, RPA, IoT, Smart Factory,… - Kỹ năng làm việc theo nhóm, nghiên cứu, sáng tạo. - Kỹ năng quản lý dự án theo phương pháp luận Agile. - Kỹ năng phân tích, thiết kế hệ thống tin quản trị doanh nghiệp.
+
+Tiêu đề Công Việc: IT fullstack
+Địa chỉ việc làm: Đà Nang, Da Nang City, Vietnam
+Link chi tiết: https://www.linkedin.com/jobs/view/4108389617
+Ngày đăng: 2024-12-23T22:57:42.393798
+id_job: 4108389617
+---
+
+
+
+---
+Nội dung:
+About the job 1. MÔ TẢ CÔNG VIỆC Lập kế hoạch kiểm thử; Nghiên cứu, phân tích và review các tài liệu yêu cầu, thiết kế; Thiết kế Test case (Matrix, checklist..); Thực hiện kiểm thử; Log lỗi và quản lý lỗi trên hệ thống Quản lý lỗi; Quản lý và báo cáo về quá trình kiểm thử, chất lượng phần mềm, kết quả kiểm thử. 2. YÊU CẦU ỨNG VIÊN Trình độ học vấn Cử nhân chuyên ngành Công nghệ thông tin hoặc các chuyên ngành liên quan. Kiến thức & kinh nghiệm liên quan Có kinh nghiệm 02 năm trở lên với vị trí tương đương; Nắm vững các quy trình và kỹ thuật test; Có kỹ năng lập kế hoạch, kỹ năng phân tích nghiệp vụ; Có kỹ năng xây dựng test case và thực hiện test; Có kỹ năng phân tích kết quả kiểm thử và báo cáo; Có kinh nghiệm làm việc với các dự án theo quy trình CMMI, Agile/Scrum là lợi thế; Có hiểu biết về SQL; Có chứng chỉ ISTQB là một lợi thế; Có tiếng Anh, tiếng Nhật là lợi thế; Phẩm chất cá nhân cần thiết cho công việc Cẩn thận, tỉ mỉ trong công việc Tư duy logic, có khả năng nghiên cứu. 3. PHÚC LỢI TẠI DEHA Chính sách lương & thưởng Mức lương cạnh tranh 10.000.000 - 17.000.000 VNĐ và có thể deal theo năng lực; Thưởng theo kết quả kinh doanh của Công ty. Môi trường làm việc Được làm việc trong môi trường chuyên nghiệp, được hỗ trợ phát huy khả năng, phát triển sự nghiệp; Văn hóa học tập thúc đẩy phát triển cá nhân; Chính sách hỗ trợ các hoạt động học tập, trao đổi, chia sẻ kiến thức; Được hỗ trợ 100% chi phí tham gia các khóa học kỹ năng mềm, các khóa đào tạo chuyên môn, thi các chứng chỉ uy tín trong nước và quốc tế. Lộ trình nghề nghiệp Lộ trình phát triển con đường sự nghiệp là một phần của quá trình phát triển nhân viên tại Deha Việt Nam, bao gồm sự phát triển theo chiều dọc thăng tiến lên các vị trí chuyên gia, quản lý; Được tư vấn, đồng hành và hỗ trợ phát huy tối đa khả năng, phát triển sự nghiệp; Được định hướng mục tiêu cá nhân, nhóm và tổ chức.
+
+Tiêu đề Công Việc: Junior Tester
+Địa chỉ việc làm: Hanoi, Hanoi, Vietnam
+Link chi tiết: https://www.linkedin.com/jobs/view/4108749589
+Ngày đăng: 2024-12-24T10:49:14.318428
+id_job: 4108749589
+---
+
+
+
+---
+Nội dung:
+About the job Thực hiện công việc kiểm soát côn trùng dịch hại và đưa ra các đề xuất cho khách hàng Phản hồi về các vấn đề liên quan đến dịch vụ của khách hàng lên cấp trên; Bảo quản tất cả các thiết bị, công cụ, phương tiện đi lại và các dụng cụ khác do công ty cấp phát, để làm việc trong điều kiện hoạt động tốt; Lập kế hoạch và thực hiện theo lộ trình để đảm bảo có mặt kịp thời tại tất cả các địa điểm làmdịch vụ; Đảm bảo tuân thủ quy trình điều hành theo tiêu chuẩn phù hợp tại nhà kho, quy trình sắp xếp và lưu kho và lấy hàng ra khỏi kho; Đảm bảo tất cả các giấy tờ cần thiết (như báo cáo dịch vụ, Danh sách dịch vụ, vv) sử dụng trong các dịch vụ kiểm soát dịch hại được thực hiện đầy đủ, giải thích cho khách hàng, ký và nộp cho giám sát sau khi hoàn tất dịch vụ. Gửi các kiến nghị lên cấp trên để gia tăng hiệu quả và chất lượng dịch vụ, giảm khiếu nại của khách hàng, và kiểm soát để giảm thiểu, loại bỏ rủi ro và thiệt hại cho Công ty; Tuân thủ chính sách môi trường, sức khỏe và an toàn, chính sách không khoan nhượng trong quá trình làm việc và báo cáo các sự cố môi trường, sức khỏe và an toàn ngay lập tức; Lưu giữ chính xác các hồ sơ và nộp đúng thời hạn các báo cáo và các tài liệu theo yêu cầu của quản lý; Xây dựng và phát huy văn hóa công ty với với hình ảnh chuyên nghiệp. Ứng viên ứng tuyển qua Facebook, vui lòng gửi CV/Sơ Yếu Lý Lịch qua email: 1EF442CC06@jobs.workablemail.com Requirements Tốt nghiệp tối thiểu THPT 12/12 Kỹ năng giao tiếp, kỹ năng làm việc với khách hàng Chăm chỉ, cẩn thận, chịu khó, điềm tĩnh Có sức khỏe tốt, sẵn sàng di chuyển, làm ca Có xe gắn máy, bằng lái xe còn hiệu lực. Benefits Lương + phụ cấp (đào tạo, xăng xe, nặng nhọc) + thưởng dịch vụ.. Lương tháng 13, thưởng Lễ/Tết, thưởng thâm niên, thưởng giới thiệu dịch vụ.... Đóng bảo hiểm đầy đủ theo luật lao động Được đào tạo bài bản và hướng dẫn cụ thể Được cấp đồ bảo hộ lao động theo tiêu chuẩn quốc tế Cơ hội phát triển nghề nghiệp...
+
+Tiêu đề Công Việc: Kỹ thuật Viên Dịch vụ Kiểm soát Côn trùng Dịch hại (HCM)
+Địa chỉ việc làm: Ho Chi Minh City, Ho Chi Minh City, Vietnam
+Link chi tiết: https://www.linkedin.com/jobs/view/4109098808
+Ngày đăng: 2024-12-24T09:49:34.210742
+id_job: 4109098808
+---
+
+
+
+
