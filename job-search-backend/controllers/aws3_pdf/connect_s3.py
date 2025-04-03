@@ -19,6 +19,7 @@ AWS_BUCKET = _constants.AWS_BUCKET_NAME
 s3 = boto3.resource("s3")
 bucket = s3.Bucket(AWS_BUCKET)
 
+
 async def s3_upload(contents: bytes, key: str, mime_type: str):
     if mime_type not in SUPPORT_FILE_TYPES:
         raise ValueError(f"Unsupported file type: {mime_type}")

@@ -61,18 +61,18 @@ async def upload_files(
                 status_code=400
             )
         
-        #kiểm tra file trùng 
-        with json_path.open("r", encoding="utf-8") as json_file:
-            cv_list = json.load(json_file)
-            
+        # Kiểm tra file trùng
+        cv_list = []
         if json_path.exists():
+            with json_path.open("r", encoding="utf-8") as json_file:
+                cv_list = json.load(json_file)
+
             if any(cv.get("nameFile") == file.filename for cv in cv_list):
                 return JSONResponse(
                     content={"status": 400, "message": f"File '{file.filename}' đã tồn tại. Vui lòng đổi tên file trước khi upload."},
                     status_code=400
                 )
-        else:
-            cv_list = []
+        
         # Đọc nội dung file
         file_content = await file.read()
 
@@ -141,6 +141,7 @@ async def upload_files(
             KyNangChuyenNganh=", ".join(answer.get("kyNangChuyenNganh", ["null"])) if isinstance(answer.get("kyNangChuyenNganh"), list) else answer.get("kyNangChuyenNganh", "null"),
             hocVan=answer.get("hocVan", "null"),
             tinhTrang="null",
+            kinhNghiem=answer.get("kinhNghiem", "null"),
             DiemGPA=answer.get("diemGPA", "null"),
             soDienThoai=answer.get("soDienThoai", "null"),
             email=answer.get("email", "null"),
@@ -186,6 +187,7 @@ async def upload_files(
             content={"status": 400, "message": "Error uploading files: " + str(e)},
             status_code=400
         )
+
 
 
 @router.post("/list_cv")

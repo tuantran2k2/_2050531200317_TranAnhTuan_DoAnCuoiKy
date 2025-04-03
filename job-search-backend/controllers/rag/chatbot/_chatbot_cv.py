@@ -50,7 +50,7 @@ def chatbot_rag_crewai(
 
     chain = (
         prompt
-        | _environments.custom_llm()
+        | _environments.get_llm(model="gpt-4o", temperature=0.7)
         | StrOutputParser()
     )
     

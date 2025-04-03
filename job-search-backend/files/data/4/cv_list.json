@@ -1,23 +1,42 @@
 [
     {
-        "id_cv": 32,
-        "ten_cv": "Hiền",
-        "chuyen_nganh": "Giáo sư Đại học",
-        "trangThai": 1,
-        "linkURL": "https://doancuoiky.s3.us-west-2.amazonaws.com/e2ae6338-22c0-4b8f-98ea-9cde0cc89dae.pdf"
-    },
-    {
-        "id_cv": 33,
+        "id_cv": 66,
         "ten_cv": "Chi",
         "chuyen_nganh": "Giáo viên Mầm non",
         "trangThai": 1,
-        "linkURL": "https://doancuoiky.s3.us-west-2.amazonaws.com/b3fbbce4-cedd-47e9-a240-42e527d1bbac.pdf"
+        "linkURL": "https://do-an-tuan.s3.us-east-2.amazonaws.com/70350115-121d-4f29-9d2e-90d60b9ffeed.pdf",
+        "nameFile": "Xanh dương và Vàng Vui tươi Giáo viên Mầm non Sơ yếu Lý lịch.pdf"
     },
     {
-        "id_cv": 34,
+        "id_cv": 67,
         "ten_cv": "Nhi",
         "chuyen_nganh": "Thiết kế Đồ họa",
         "trangThai": 1,
-        "linkURL": "https://doancuoiky.s3.us-west-2.amazonaws.com/5a1cf138-7311-4a57-b2d4-b37235dd0b31.pdf"
+        "linkURL": "https://do-an-tuan.s3.us-east-2.amazonaws.com/b07df59a-8d56-48f9-ace5-27d559cff2d0.pdf",
+        "nameFile": "Sơ yếu Lý lịch Phong cách Hiện đại Trẻ trung Xanh lá hồng.pdf"
+    },
+    {
+        "id_cv": 68,
+        "ten_cv": "Hân",
+        "chuyen_nganh": "Giáo viên tiếng Anh",
+        "trangThai": 1,
+        "linkURL": "https://do-an-tuan.s3.us-east-2.amazonaws.com/e8277860-1206-40be-ba61-c708def08ec9.pdf",
+        "nameFile": "Trình độ đầu vào Giáo viên Tiếng Anh Sơ yếu lý lịch Trắng Xanh Ô liu Phong cách Đơn giản và Tối giản.pdf"
+    },
+    {
+        "id_cv": 69,
+        "ten_cv": "Anh",
+        "chuyen_nganh": "Mỹ thuật Đa phương tiện",
+        "trangThai": 1,
+        "linkURL": "https://do-an-tuan.s3.us-east-2.amazonaws.com/535c516d-5506-40ca-b345-ffdd5d502ba4.pdf",
+        "nameFile": "Màu be và Nâu Đường kẻ Rõ ràng Thực tập sinh Sinh viên Sơ yếu lý lịch.pdf"
+    },
+    {
+        "id_cv": 70,
+        "ten_cv": "",
+        "chuyen_nganh": "Kinh doanh",
+        "trangThai": 1,
+        "linkURL": "https://do-an-tuan.s3.us-east-2.amazonaws.com/4fcf0b05-eb36-4d24-a683-4da835a14ff4.pdf",
+        "nameFile": "Sơ yếu lý lịch Nhân viên bán hàng Sơ yếu lý lịch Xanh dương Phấn Màu be Phong cách In đậm.pdf"
     }
 ]

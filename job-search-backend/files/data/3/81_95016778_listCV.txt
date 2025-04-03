@@ -1,0 +1,40 @@
+---
+Nội dung:
+About the job I. MÔ TẢ CÔNG VIỆC Tham gia các dự án phát triển phần mềm với đa dạng domain cho các khách hàng lớn thuộc đa dạng thị trường EU, Sing, … Lập trình và tối ưu hóa code để đảm bảo hiệu suất, chất lượng và khả năng đáp ứng tốt nhất của các ứng dụng; Kiểm tra, gỡ lỗi chương trình và cải thiện chức năng của hệ thống hiện có; Liên tục cải tiến sản phẩm bằng cách nghiên cứu các giải pháp và công nghệ mới; Tham gia nhóm phát triển áp dụng mô hình Agile; Phối hợp với các thành viên trong dự án để mang đến sự hài lòng cho các khách hàng; Hỗ trợ hướng dẫn và đào tạo các thành viên trong nhóm II. YÊU CẦU ỨNG VIÊN Có từ 5 năm kinh nghiệm làm việc bằng Python Kinh nghiệm với các python frameworks như: Flask, Django, Pyramid... Có kinh nghiệm sử dụng các cơ sở dữ liệu quan hệ và phi quan hệ: MySQL, MariaDB, PostgreSQL, MongoDB, ... Có hiểu biết về Redis, Memcache Có kiến thức về Secure Coding, Clean Code, Clean Architecture Có kinh nghiệm tư vấn, xây dựng các giải pháp kỹ thuật cho dự án Có kinh nghiệm quản lý team. Có khả năng giao tiếp bằng tiếng Anh III. QUYỀN LỢI Mức lương: Lên tới 50 triệu/tháng Thử việc hưởng 100% lương chính thức Review hiệu suất 2 lần/năm và tháng lương thứ 13 Thưởng các dịp Lễ Tết: Ngày Quốc Tế Lao động, Quốc khánh, Tết dương lịch, Tết Nguyên đán Trợ cấp các chứng chỉ năng lực IT: AWS/Azure, Outsystems, Salesforce, PMP, Agile/Scrum Bảo hiểm sức khỏe nâng cao, chính sách thai sản, khám sức khỏe định kỳ 1 năm 1 lần Được hưởng các chế độ phúc lợi của Công ty: Nghỉ mát hàng năm, teambuilding hàng quý, các lớp nâng cao trình độ ngoại ngữ (Tiếng Anh), … Được định hướng phát triển sâu về công nghệ, cơ hội học hỏi nhiều stack khác nhau, dự án đa dạng ở các thị trường lớn Môi trường trẻ trung, năng động, nhiều cơ hội thăng tiến Thời gian làm việc linh hoạt từ thứ 2 đến thứ 6 IV. CÁCH THỨC LIÊN HỆ Gửi CV ứng tuyển qua email: tuyendung@gem-corp.tech Hotline: +842466666100 (BP Tuyển dụng) Facebook GEM Careers: https://www.facebook.com/tuyendungGEM Linkedin GEM Careers: https://www.linkedin.com/company/gem-careers-hiring/
+
+Tiêu đề Công Việc: Senior Python Developer
+Địa chỉ việc làm: Hanoi, Hanoi, Vietnam
+Link chi tiết: https://www.linkedin.com/jobs/view/4117544047
+Ngày đăng: 2025-01-08T01:22:53.168869
+id_job: 4117544047
+---
+
+
+
+---
+Nội dung:
+About the job Vị trí: Senior Backend Developer Lĩnh vực: Fintech Địa điểm: Quận 9, Hồ Chí Minh Báo cáo cho: Trưởng phòng Kỹ thuật Loại hình công việc: Toàn thời gian, Từ Thứ 2- Thứ 6, 8:30 - 17:30 (Nghỉ trưa 11:30 - 13:00) Mô tả công việc: Phát triển hệ thống backend : Tối ưu hiệu suất, đảm bảo ứng dụng hoạt động mượt mà và an toàn. Thiết kế kiến trúc : Triển khai microservices, hệ thống dữ liệu phân tán. Bảo mật dữ liệu : Xây dựng hệ thống bảo vệ thông tin tài chính người dùng, tuân thủ các tiêu chuẩn bảo mật. Tích hợp API : Phát triển API cho ứng dụng web/di động, đảm bảo khả năng mở rộng và tích hợp dễ dàng. Yêu cầu công việc: Tốt nghiệp đại học chuyên ngành Công nghệ thông tin, Khoa học máy tính, Lập trình, AI/ML , hoặc các lĩnh vực liên quan. Kinh nghiệm tối thiểu 3 năm ở vị trí tương tự tại các dự án fintech, nền tảng dữ liệu, hoặc đầu tư giao dịch. Thành thạo một hoặc nhiều ngôn ngữ lập trình: Python, Go, Java . Kinh nghiệm với cơ sở dữ liệu SQL/NoSQL . Hiểu biết về FAST APIs , JSON , và nguyên tắc bảo mật dữ liệu. Sử dụng thành thạo Git . Ưu tiên ứng viên có kiến thức về thị trường chứng khoán, crypto hoặc forex. Kỹ năng làm việc nhóm và giao tiếp tốt. Quyền lợi: Thu nhập: Cạnh tranh, thưởng hiệu suất hàng năm. Phúc lợi: BHXH, BHYT, bảo hiểm sức khỏe, nghỉ phép theo luật. Phát triển: Được tham gia các khóa đào tạo, cơ hội phát triển sự nghiệp trong lĩnh vực fintech. Ứng tuyển ngay tại TopCv. Hãy gia nhập đội ngũ của chúng tôi để cùng tạo nên những giải pháp tài chính đột phá!
+
+Tiêu đề Công Việc: Back End Developer
+Địa chỉ việc làm: District 9, Ho Chi Minh City, Vietnam
+Link chi tiết: https://www.linkedin.com/jobs/view/4118964231
+Ngày đăng: 2025-01-09T00:48:02.596766
+id_job: 4118964231
+---
+
+
+
+---
+Nội dung:
+About the job Kính gửi CTV DGS, công ty chuyên về số hóa dữ liệu, hiện đang tìm kiếm các cộng tác viên online để tham gia Dự án Số hóa Quốc gia. Nếu bạn quan tâm, vui lòng tham gia group Facebook của chúng tôi tại: https://www.facebook.com/groups/2681088098691861 để cập nhật thông tin và theo dõi các hoạt động của nhóm. Nếu có bất kỳ câu hỏi nào, bạn có thể liên hệ với tổng đài tư vấn qua Zalo tại: https://zalo.me/2956792643254805954. Chúng tôi rất mong sớm được hợp tác với bạn Kỹ năng - Kỹ năng nhập liệu: Nhanh nhẹn, chính xác, và quen thuộc với các công cụ nhập liệu như Excel, Google Sheets. • Khả năng làm việc độc lập: Có thể tự quản lý thời gian và hoàn thành công việc đúng hạn. • Kỹ năng tin học cơ bản: Sử dụng thành thạo máy tính, các phần mềm văn phòng và internet. • Tính cẩn thận và tỉ mỉ: Đảm bảo dữ liệu nhập vào không có sai sót. • Khả năng bảo mật: Tuân thủ các quy định về bảo mật thông tin của công ty. • Kinh nghiệm làm việc: Ưu tiên những ứng viên đã có kinh nghiệm trong lĩnh vực nhập liệu hoặc công việc tương tự. • Kết nối internet ổn định: Đảm bảo đường truyền internet ổn định để công việc không bị gián đoạn. Phúc Lợi - Thu nhập hấp dẫn: Được trả lương theo sản phẩm, với mức thù lao cạnh tranh. • Linh hoạt thời gian: Có thể làm việc tại nhà, chủ động sắp xếp thời gian phù hợp với lịch cá nhân. • Môi trường làm việc chuyên nghiệp: Được đào tạo và hỗ trợ kỹ thuật cần thiết để hoàn thành công việc. • Cơ hội phát triển: Cơ hội hợp tác lâu dài và thăng tiến trong công việc nếu đạt kết quả tốt. • Hỗ trợ công cụ làm việc: Công ty cung cấp các phần mềm cần thiết cho công việc nhập liệu. • Thưởng hiệu suất: Có chính sách thưởng thêm nếu đạt hoặc vượt chỉ tiêu công việc Không CỘC bất kỳ khoản chi phí nào khi nhận việc Yêu cầu làm việc 1. Có máy tính để làm việc online 2. Có thời gian rảnh để làm việc tối thiểu trong ngày, đảm bảo chất lượng sản phẩm làm ra 3. Thành thạo kỹ năng văn phòng để thao tác nhanh, tối ưu hoá công việc Bạn vui lòng liên hệ với tổng đài tư vấn ( https://zalo.me/2956792643254805954) bên ad để biết thông tin.
+
+Tiêu đề Công Việc: Nhập liệu ONLINE tại nhà 2024
+Địa chỉ việc làm: Quận 3, Ho Chi Minh City, Vietnam
+Link chi tiết: https://www.linkedin.com/jobs/view/4119753567
+Ngày đăng: 2025-01-09T00:50:30.193496
+id_job: 4119753567
+---
+
+
+
+

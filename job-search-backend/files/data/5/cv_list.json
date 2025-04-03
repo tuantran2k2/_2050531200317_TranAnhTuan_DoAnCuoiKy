@@ -1,16 +1,42 @@
 [
     {
-        "id_cv": 35,
-        "ten_cv": "Hậu",
-        "chuyen_nganh": "Truyền thông Marketing",
+        "id_cv": 71,
+        "ten_cv": "Nguyen",
+        "chuyen_nganh": "Chuyên Viên Kinh Doanh",
         "trangThai": 1,
-        "linkURL": "https://doancuoiky.s3.us-west-2.amazonaws.com/4a797f24-0570-45ce-a426-acf201f79f5a.pdf"
+        "linkURL": "https://do-an-tuan.s3.us-east-2.amazonaws.com/0e1f26dd-5f6d-4526-9427-9d713cf65587.pdf",
+        "nameFile": "Màu Trắng Tối Giản Chuyên Viên Sơ Yếu Lý Lịch.pdf"
     },
     {
-        "id_cv": 36,
-        "ten_cv": "Tuấn",
-        "chuyen_nganh": "Web Developer",
+        "id_cv": 72,
+        "ten_cv": "Linh",
+        "chuyen_nganh": "Biên tập nội dung",
         "trangThai": 1,
-        "linkURL": "https://doancuoiky.s3.us-west-2.amazonaws.com/3aa58dab-0b75-4b63-a4f1-ae29af41243f.pdf"
+        "linkURL": "https://do-an-tuan.s3.us-east-2.amazonaws.com/0fe818a8-c4d5-4f65-ace0-55504207ca06.pdf",
+        "nameFile": "Xanh lá Xám Khối màu Biên tập viên Sơ yếu lý lịch.pdf"
+    },
+    {
+        "id_cv": 73,
+        "ten_cv": "Tran",
+        "chuyen_nganh": "Kế toán",
+        "trangThai": 1,
+        "linkURL": "https://do-an-tuan.s3.us-east-2.amazonaws.com/e841059d-583e-4d7f-bab8-dfce0124e720.pdf",
+        "nameFile": "Màu Đen Và Trắng Tối Giản Sơ Yếu Lý Lịch.pdf"
+    },
+    {
+        "id_cv": 74,
+        "ten_cv": "Nhi",
+        "chuyen_nganh": "Thiết kế đồ họa",
+        "trangThai": 1,
+        "linkURL": "https://do-an-tuan.s3.us-east-2.amazonaws.com/c7fed2ec-40ad-409e-8722-4bcc30a1911f.pdf",
+        "nameFile": "Sơ yếu Lý lịch Chuyên nghiệp Tối giản Cổ điển Thanh lịch Đen be.pdf"
+    },
+    {
+        "id_cv": 75,
+        "ten_cv": "Duy",
+        "chuyen_nganh": "Kỹ sư ngành Robot",
+        "trangThai": 1,
+        "linkURL": "https://do-an-tuan.s3.us-east-2.amazonaws.com/5b853002-7e31-4ac3-aec0-5e87f1afd4c4.pdf",
+        "nameFile": "Xanh dương Hình học Kỹ sư robot Sơ yếu lý lịch.pdf"
     }
 ]

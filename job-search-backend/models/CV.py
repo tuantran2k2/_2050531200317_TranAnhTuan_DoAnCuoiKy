@@ -11,6 +11,7 @@ class CV(Base):
     Nganh = Column(Text)
     KyNangMem = Column(Text)
     KyNangChuyenNganh = Column(Text)
+    kinhNghiem = Column(Text)
     hocVan = Column(Text)
     tinhTrang = Column(Text)
     DiemGPA = Column(Text)

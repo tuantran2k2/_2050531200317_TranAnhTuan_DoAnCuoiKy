@@ -1,24 +1,34 @@
 [
     {
-        "id_cv": 37,
-        "ten_cv": "Hân",
-        "chuyen_nganh": "Giáo viên tiếng Anh",
+        "id_cv": 76,
+        "ten_cv": "Otieno",
+        "chuyen_nganh": "IT Project Manager",
         "trangThai": 1,
-        "linkURL": "https://doancuoiky.s3.us-west-2.amazonaws.com/9932fc8f-a15a-4d8b-9eab-ac855675c7db.pdf"
+        "linkURL": "https://do-an-tuan.s3.us-east-2.amazonaws.com/d45b4c93-4549-4ae2-aa57-935d857136b7.pdf",
+        "nameFile": "Beige Minimalist Corporate IT Project Manager Resume.pdf"
     },
     {
-        "id_cv": 38,
-        "ten_cv": "Anh",
-        "chuyen_nganh": "Mỹ thuật Đa phương tiện",
+        "id_cv": 77,
+        "ten_cv": "Hei",
+        "chuyen_nganh": "Graphics Designer",
         "trangThai": 1,
-        "linkURL": "https://doancuoiky.s3.us-west-2.amazonaws.com/4ef30625-08bb-4678-acc2-2bd577cb53a4.pdf"
+        "linkURL": "https://do-an-tuan.s3.us-east-2.amazonaws.com/efed51e9-f0fb-40a8-8a74-f38de0700adb.pdf",
+        "nameFile": "black and white minimalist resume.pdf"
     },
     {
-        "id_cv": 59,
+        "id_cv": 78,
         "ten_cv": "Tuấn",
         "chuyen_nganh": "Web Developer",
         "trangThai": 1,
-        "linkURL": "https://doancuoiky.s3.us-west-2.amazonaws.com/bbe774b9-56be-4a15-8604-c53da2bfe976.pdf",
+        "linkURL": "https://do-an-tuan.s3.us-east-2.amazonaws.com/cc8f76c9-3e0d-4b40-86f6-248b231ef53c.pdf",
         "nameFile": "CV_intern.pdf"
+    },
+    {
+        "id_cv": 79,
+        "ten_cv": "Nga",
+        "chuyen_nganh": "Marketing",
+        "trangThai": 1,
+        "linkURL": "https://do-an-tuan.s3.us-east-2.amazonaws.com/56605c28-2e14-4653-a005-f772d4cb57fa.pdf",
+        "nameFile": "Thanh Nga_CV.pdf"
     }
 ]

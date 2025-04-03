@@ -10,7 +10,8 @@ from langchain_core.output_parsers import StrOutputParser
 from models.LichSuTroChuyen import LichSuTroChuyen
 from models.BoSuuTap import BoSuTap
 from models.KhachHang import KhachHang
-
+from controllers.rag.chatbot import _chatbot_cv
+from datetime import datetime
 
 import _prompts
 import _environments
@@ -35,6 +36,7 @@ def chatbot(id_cv, collection_id, ma_KH, query):
                     - Ngành Nghề: {cv_details.get('Nganh', 'Không có')}
                     - Kỹ năng mềm: {cv_details.get('KyNangMem', 'Không có')}
                     - Kỹ năng chuyên ngành: {cv_details.get('KyNangChuyenNganh', 'Không có')}
+                    - Kinh nghiệm làm việc: {cv_details.get('KinhNghiem', 'Không có')}
                     - Học vấn: {cv_details.get('hocVan', 'Không có')}
                     - GPA: {cv_details.get('DiemGPA', 'Không có')}
                     - Chứng chỉ: {cv_details.get('ChungChi', 'Không có')}"""
@@ -66,7 +68,7 @@ def chatbot(id_cv, collection_id, ma_KH, query):
         # Thực thi chain và lấy kết quả
         chain = (
             prompt
-            | _environments.custom_llm()
+            | _environments.get_llm(model="gpt-4o", temperature=0.7)
             | StrOutputParser()
         )
         
@@ -100,4 +102,57 @@ def chatbot(id_cv, collection_id, ma_KH, query):
     except Exception as e:
         # Xử lý mọi lỗi khác và trả về thông báo lỗi
         return f"Lỗi trong quá trình thực hiện: {e}"
+
+
+def find_job(id_cv , k ,collection_id , ma_KH):
+    with next(get_db()) as db:
+        cv_details = _cv.get_cv(id_cv, db)
+        
+    CV_user = f"""Vui lòng tìm {k} công việc phù hợp nhất dựa trên các tiêu chí sau trong hồ sơ của ứng viên:
+        - Ngành nghề: {cv_details.get('Nganh', 'Không rõ')}
+        - Kỹ năng chuyên môn: {cv_details.get('KyNangChuyenNganh', 'Không rõ')}
+        - Kinh nghiệm làm việc: {cv_details.get('KinhNghiem', 'Không rõ')}
+        - Trình độ học vấn: {cv_details.get('hocVan', 'Không rõ')}
+        - Điểm trung bình (GPA): {cv_details.get('DiemGPA', 'Không rõ')}
+        - Kỹ năng mềm: {cv_details.get('KyNangMem', 'Không rõ')}
+        - Chứng chỉ: {cv_details.get('ChungChi', 'Không rõ')}
+        Hãy ưu tiên các công việc đáp ứng tốt nhất những tiêu chí trên."""
+        
+    answer = _chatbot_cv.chatbot_rag_crewai(CV_user,k,collection_id,ma_KH,id_cv)
+    
+    with next(get_db()) as db:
+        bosutap_in_db = db.query(BoSuTap).filter(BoSuTap.ma_BST == collection_id).first()
+        if not bosutap_in_db:
+            BST = BoSuTap(
+                ma_BST=collection_id,
+                TenBST=f"tìm {k} công việc về Ngành Nghề: {cv_details.get('Nganh', 'Không có')}",
+                ngayTao=datetime.now(),
+                maKH=ma_KH,
+                maCV=id_cv
+            )
+            db.add(BST)  
+            db.commit()  
+        
+        total_characters = len(CV_user) + len(answer)
+        
+        user_in_db = db.query(KhachHang).filter(KhachHang.maKH == ma_KH).first()
+        
+        if total_characters > user_in_db.soLuongToken:
+            return 400
+        
+        update_mount = user_in_db.soLuongToken - total_characters
+        
+        _user.update_token(maKH=ma_KH,new_token=update_mount,db=db)
+        history_record = LichSuTroChuyen(
+            cauHoi=CV_user,
+            phanHoi=answer,
+            tongSoToken=total_characters,
+            maBST = collection_id
+        )
+        
+        db.add(history_record)
+        db.commit()
+        return answer
+    
+
 

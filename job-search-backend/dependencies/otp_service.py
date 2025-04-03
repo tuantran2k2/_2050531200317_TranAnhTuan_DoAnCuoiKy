@@ -103,12 +103,12 @@ def send_pdf_email(user_email, filepath):
     <html>
     <body style="font-family: Arial, sans-serif; line-height: 1.6;">
         <div style="border: 1px solid #ddd; border-radius: 10px; padding: 20px; background-color: #f9f9f9;">
-            <h2 style="color: #2E86C1;">Hello!</h2>
-            <p>We have attached the PDF file you requested. Please find it below:</p>
-            <p>If you have any questions, feel free to reach out to our support team.</p>
+            <h2 style="color: #2E86C1;">Xin chào!</h2>
+            <p>Chúng tôi đã đính kèm tập tin PDF bạn đã yêu cầu. Vui lòng xem tập tin ở bên dưới:</p>
+            <p>Nếu bạn có bất kỳ thắc mắc nào, xin vui lòng liên hệ đối hỗ trợ của chúng tôi.</p>
             <br>
-            <p style="font-size: 0.9em; color: #555;">Best regards,</p>
-            <p style="font-size: 0.9em; color: #555;">The Support Team</p>
+            <p style="font-size: 0.9em; color: #555;">Trân trọng,</p>
+            <p style="font-size: 0.9em; color: #555;">Đội ngũ Hỗ trợ</p>
         </div>
     </body>
     </html>

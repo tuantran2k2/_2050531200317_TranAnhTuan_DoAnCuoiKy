@@ -126,7 +126,7 @@ def crawl_linkedin_jobs(time_range="r86400" ,db: Session = None):
     # Thiết lập cookie 'li_at' để đăng nhập
     cookie = {
         'name': 'li_at',
-        'value': '',  # Thay bằng giá trị cookie thực tế của bạn
+        'value': 'AQEDAU0MA38AINs5AAABlE9CEoMAAAGUc06Wg00ADRWiwaNH7sYZ0MchTAeo7ZmdYuwmH5szgLChycPU9oU1ExW9NTcpRPxOEd9IHovLa9yk6Sp_FqCCxJNthVzRJuqCS9uxtGisHg8a8J11jnJnGMBO',  # Thay bằng giá trị cookie thực tế của bạn
         'domain': '.linkedin.com',
         'path': '/',
         'secure': True,
@@ -147,34 +147,18 @@ def crawl_linkedin_jobs(time_range="r86400" ,db: Session = None):
         # Cuộn xuống cuối trang để tải thêm nội dung
         # Khởi tạo giá trị ban đầu
         last_height = driver.execute_script('return document.body.scrollHeight')
-        scroll_limit = 5  # Số lần cuộn tối đa khi không có nội dung mới
-        extra_scrolls = 0  # Đếm số lần cuộn thêm
-
         while True:
             try:
-                # Cuộn xuống cuối trang
                 driver.execute_script('window.scrollTo(0, document.body.scrollHeight);')
-                time.sleep(random.uniform(2, 5))  # Chờ để tải thêm nội dung
-
-                # Lấy chiều cao mới của trang
+                time.sleep(random.uniform(2, 5))
                 new_height = driver.execute_script('return document.body.scrollHeight')
-
                 if new_height == last_height:
-                    # Nếu không có nội dung mới, tăng bộ đếm
-                    extra_scrolls += 1
-                    if extra_scrolls >= scroll_limit:
-                        logging.info("Đã cuộn thêm đủ số lần và không có nội dung mới. Dừng cuộn.")
-                        break
-                else:
-                    # Nếu có nội dung mới, đặt lại bộ đếm
-                    last_height = new_height
-                    extra_scrolls = 0
-
+                    break
+                last_height = new_height
                 logging.info("Cuộn trang để tải thêm nội dung...")
             except Exception as e:
                 logging.error(f"Lỗi khi cuộn trang: {e}")
                 break
-
                 # Phân tích HTML bằng BeautifulSoup
         logging.info("Đang phân tích HTML để lấy thông tin công việc...")
         soup = BeautifulSoup(driver.page_source, 'html.parser')
@@ -235,9 +219,6 @@ def crawl_linkedin_jobs(time_range="r86400" ,db: Session = None):
                 # Lấy mô tả công việc
                 try:
                     about_job = job_soup.find('div', id='job-details')
-                    print("===============================================start=====================================================")
-                    print(about_job)
-                    print("=================================================end===================================================")
                     text_about_job = about_job.get_text(separator='\n')
                     text_about_job_cleaned = re.sub(r'\s+', ' ', text_about_job)
                     text_about_job_cleaned = re.sub(r'\n+', '\n', text_about_job_cleaned).strip()

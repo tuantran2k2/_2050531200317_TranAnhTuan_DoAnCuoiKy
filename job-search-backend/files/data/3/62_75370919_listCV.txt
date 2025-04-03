@@ -1,0 +1,40 @@
+---
+Nội dung:
+About the job I. MÔ TẢ CÔNG VIỆC Tham gia các dự án phát triển phần mềm với đa dạng domain cho các khách hàng lớn thuộc đa dạng thị trường EU, Sing, … Lập trình và tối ưu hóa code để đảm bảo hiệu suất, chất lượng và khả năng đáp ứng tốt nhất của các ứng dụng; Kiểm tra, gỡ lỗi chương trình và cải thiện chức năng của hệ thống hiện có; Liên tục cải tiến sản phẩm bằng cách nghiên cứu các giải pháp và công nghệ mới; Tham gia nhóm phát triển áp dụng mô hình Agile; Phối hợp với các thành viên trong dự án để mang đến sự hài lòng cho các khách hàng; Hỗ trợ hướng dẫn và đào tạo các thành viên trong nhóm II. YÊU CẦU ỨNG VIÊN Có từ 5 năm kinh nghiệm làm việc bằng Python Kinh nghiệm với các python frameworks như: Flask, Django, Pyramid... Có kinh nghiệm sử dụng các cơ sở dữ liệu quan hệ và phi quan hệ: MySQL, MariaDB, PostgreSQL, MongoDB, ... Có hiểu biết về Redis, Memcache Có kiến thức về Secure Coding, Clean Code, Clean Architecture Có kinh nghiệm tư vấn, xây dựng các giải pháp kỹ thuật cho dự án Có kinh nghiệm quản lý team. Có khả năng giao tiếp bằng tiếng Anh III. QUYỀN LỢI Mức lương: Lên tới 50 triệu/tháng Thử việc hưởng 100% lương chính thức Review hiệu suất 2 lần/năm và tháng lương thứ 13 Thưởng các dịp Lễ Tết: Ngày Quốc Tế Lao động, Quốc khánh, Tết dương lịch, Tết Nguyên đán Trợ cấp các chứng chỉ năng lực IT: AWS/Azure, Outsystems, Salesforce, PMP, Agile/Scrum Bảo hiểm sức khỏe nâng cao, chính sách thai sản, khám sức khỏe định kỳ 1 năm 1 lần Được hưởng các chế độ phúc lợi của Công ty: Nghỉ mát hàng năm, teambuilding hàng quý, các lớp nâng cao trình độ ngoại ngữ (Tiếng Anh), … Được định hướng phát triển sâu về công nghệ, cơ hội học hỏi nhiều stack khác nhau, dự án đa dạng ở các thị trường lớn Môi trường trẻ trung, năng động, nhiều cơ hội thăng tiến Thời gian làm việc linh hoạt từ thứ 2 đến thứ 6 IV. CÁCH THỨC LIÊN HỆ Gửi CV ứng tuyển qua email: tuyendung@gem-corp.tech Hotline: +842466666100 (BP Tuyển dụng) Facebook GEM Careers: https://www.facebook.com/tuyendungGEM Linkedin GEM Careers: https://www.linkedin.com/company/gem-careers-hiring/
+
+Tiêu đề Công Việc: Senior Python Developer
+Địa chỉ việc làm: Hanoi, Hanoi, Vietnam
+Link chi tiết: https://www.linkedin.com/jobs/view/4117544047
+Ngày đăng: 2025-01-08T01:22:53.168869
+id_job: 4117544047
+---
+
+
+
+---
+Nội dung:
+About the job Responsibilities Nghiên cứu các game puzzle chỉ số tốt trên thị trường, đưa ra giải pháp để tối ưu sản phẩm được giao. Phân tích chỉ số sản phẩm của team hiện tại, đưa ra các kịch bản khác nhau để tối ưu sản phẩm. Hợp tác cùng các thành viên khác trong team (game design, dev, art) để hoàn thành mục tiêu. Thực hiện một số yêu cầu trực tiếp từ Leader. List mới Requirements Tối thiểu 2 năm kinh nghiệm trong ngành thiết kế game, năng lực UI/UX tốt là một lợi thế. Có tư duy hệ thống tốt, có sản phẩm hệ thống lớn là một lợi thế. Có kinh nghiệm trong việc phân tích chỉ số game, tối ưu game. Có khả năng đánh giá, phân tích điểm mạnh yếu của 1 game bất kỳ. Sau đó đưa ra giải pháp để áp dụng vào sản phẩm của mình. Đam mê, nhiệt tình chủ động trong công việc, hòa đồng với môi trường làm việc. Benefits Nơi làm việc: Thanh Xuân, Hà Nội Mức lương: VND 15,000,000 – 24,000,000 Net
+
+Tiêu đề Công Việc: Game Designer (Puzzle Game)
+Địa chỉ việc làm: Hanoi, Hanoi, Vietnam
+Link chi tiết: https://www.linkedin.com/jobs/view/4119872405
+Ngày đăng: 2025-01-10T10:25:36.933207
+id_job: 4119872405
+---
+
+
+
+---
+Nội dung:
+About the job Job Description Tiến hành kiểm thử chất lượng cho các sự kiện trong game (Ingame Event) và trên trang sự kiện (Web Event) từ giai đoạn lên kế hoạch, triển khai, đến kết thúc của sự kiện. Chịu trách nhiệm chính cho việc kiểm thử các phiên bản cài đặt game theo yêu cầu từ phía regional, bao gồm việc xác nhận tính ổn định, tính năng mới trong game Xây dựng các test case, test scenario và test data cho việc kiểm thử các tính năng và nội dung của sự kiện. Ghi lại các lỗi và vấn đề phát sinh trong quá trình kiểm thử, và theo dõi việc giải quyết các lỗi này đến khi chúng được khắc phục. Hợp tác chặt chẽ với các bộ phận khác như Product Planing, MKT Creative để đảm bảo sự nhất quán và chất lượng cao nhất cho sự kiện. Đảm bảo việc QA các lỗi (bugs) hiện có trong game, bao gồm việc phân loại, ghi lại và báo cáo lại cho bên phía regional để xử lý lỗi một cách hiệu quả và kịp thời. Thực hiện các nhiệm vụ khác theo phân công của quản lý Job Requirements Là sinh viên năm 3, năm 4 ở các trường đại học, ưu tiên các bạn đang học chuyên ngành thuộc khối Công Nghệ Có kiến thức về quy trình kiểm thử phần mềm và các phương pháp kiểm thử chất lượng. Có khả năng viết test case. Có khả năng viết Test Scenario là điểm cộng. Có thể đọc hiểu các văn bản bằng tiếng Anh. Yêu thích chơi Game nói chung, ưu tiên các bạn có niềm yêu thích với các dòng game bắn súng, sinh tồn Kỹ năng giao tiếp tốt, có khả năng làm việc nhóm và làm việc hiệu quả dưới áp lực, với khả năng làm việc linh hoạt theo yêu cầu của dự án. Tự giác, cẩn thận và chi tiết trong công việc. HƯỚNG DẪN NỘP HỒ SƠ: Bộ hồ sơ của bạn cần có đầy đủ các tài liệu dưới đây: CV của bạn File Gaming Resume (Bạn hãy download file ở trong đường link, điền vào file và upload khi bạn gửi CV): https://shorturl.at/prsvw
+
+Tiêu đề Công Việc: \(HN, FF\) Cộng tác viên Kiểm thử - Quality Assurance
+Địa chỉ việc làm: Hanoi, Hanoi, Vietnam
+Link chi tiết: https://www.linkedin.com/jobs/view/4118706741
+Ngày đăng: 2025-01-08T01:05:55.030009
+id_job: 4118706741
+---
+
+
+
+

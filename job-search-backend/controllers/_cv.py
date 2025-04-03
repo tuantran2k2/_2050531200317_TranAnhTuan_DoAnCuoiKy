@@ -48,7 +48,7 @@ def chatbot_cv(noidung_cv):
         # Initialize the language model chain
         chain = (
             prompt
-            | _environments.custom_llm(model="gpt-4o", temperature=0)
+            | _environments.get_llm(model="gpt-4o", temperature=0.7)
             | StrOutputParser()
         )
         

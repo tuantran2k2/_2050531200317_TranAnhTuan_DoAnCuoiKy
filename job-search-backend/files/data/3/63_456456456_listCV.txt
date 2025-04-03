@@ -1,0 +1,40 @@
+---
+Nội dung:
+About the job Mục tiêu công việc: Xây dựng, triển khai và quản lý các chương trình đào tạo chiến lược, tập trung vào việc thiết kế khung năng lực và hệ thống đánh giá năng lực, nhằm nâng cao chất lượng nguồn nhân lực, hỗ trợ sự phát triển bền vững của công ty. Nhiệm vụ chính: Xây dựng khung năng lực và hệ thống đánh giá năng lực Tham gia vào nhiệm vụ xây dựng khung năng lực cho từng vị trí công việc, đảm bảo rõ ràng, minh bạch và khả thi. Phát triển hệ thống đánh giá năng lực, bao gồm công cụ, tiêu chí và quy trình triển khai. Phân tích và lập kế hoạch đào tạo: Đánh giá nhu cầu đào tạo dựa trên chiến lược kinh doanh, yêu cầu công việc và mục tiêu phát triển nhân sự. Lập kế hoạch đào tạo ngắn hạn và dài hạn, đảm bảo phù hợp với định hướng phát triển của công ty. Thiết kế và triển khai chương trình đào tạo: Phối hợp với các phòng ban để xây dựng nội dung và tổ chức các khóa đào tạo nội bộ từ cơ bản đến nâng cao, phù hợp với từng cấp bậc nhân sự. Phối hợp với các phòng ban để triển khai chương trình đào tạo hội nhập cho nhân viên mới. Tìm kiếm, lựa chọn, phối hợp với các đối tác đào tạo bên ngoài để tổ chức các khóa học Đo lường và cải tiến hiệu quả đào tạo: Xây dựng các tiêu chí đánh giá và theo dõi kết quả của các chương trình đào tạo. Thu thập phản hồi từ người học, quản lý, và các bên liên quan để cải tiến nội dung và phương pháp đào tạo. Phát triển đội ngũ nhân sự: Phối hợp với phòng Nhân sự để xây dựng văn hóa học tập và xây dựng lộ trình phát triển nghề nghiệp cho nhân viên. Tư vấn và hỗ trợ các quản lý cấp trung trong việc phát triển kỹ năng đào tạo đội ngũ. Yêu cầu: Trình độ học vấn: Tốt nghiệp đại học các ngành Quản trị Nhân sự, Quản trị Kinh doanh, Kinh tế, hoặc các lĩnh vực liên quan. Kinh nghiệm: Tối thiểu 4 năm kinh nghiệm chuyên về đào tạo và phát triển nhân sự. Có kinh nghiệm xây dựng khung năng lực và hệ thống đánh giá năng lực là yêu cầu bắt buộc. Ưu tiên ứng viên có kinh nghiệm làm việc tại các công ty IT Kỹ năng: Kỹ năng thiết kế và tổ chức các chương trình đào tạo. Kỹ năng phân tích, lập kế hoạch và giải quyết vấn đề hiệu quả. Kỹ năng giao tiếp, thuyết trình và làm việc nhóm xuất sắc. Phẩm chất cá nhân: Có tư duy LDBP, ham học hỏi và chủ động trong công việc. Cam kết theo đuổi mục tiêui và tạo ra giá trị lâu dài cho tổ chức. Linh hoạt và quản lý công việc cá nhân tốt Quyền lợi: Lương 15-25M & tháng lương 13. Thưởng chia sẻ lợi nhuận theo hiệu suất làm việc Du lịch 2 lần/ năm. Ngân sách học tập cá nhân 5M/năm Được đóng bảo hiểm theo quy định công ty và được tham gia bảo hiểm PVI khi lên nhân viên chính thức Quà lễ tết xịn top đầu thị trường, thưởng 2/9, 30/4-1/5, sinh nhật công ty Được làm việc tại văn phòng hạng A diện tích 1000m2, thiết kế hiện đại, sáng tạo Có cơ hội gặp gỡ và làm việc với các đối tác nước ngoài Được tham gia vào các hoạt động chung của công ty như Sinh nhật công ty, Tổng kết quý/ năm… Môi trường cởi mở; đồng nghiệp trẻ, thân thiện và hỗ trợ nhiệt tình trong công việc. Văn phòng hiện đại và tiện nghi, cung cấp thiết bị làm việc đầy đủ.
+
+Tiêu đề Công Việc: Senior Learning and Development
+Địa chỉ việc làm: Hanoi, Hanoi, Vietnam
+Link chi tiết: https://www.linkedin.com/jobs/view/4119247882
+Ngày đăng: 2025-01-10T00:36:09.457846
+id_job: 4119247882
+---
+
+
+
+---
+Nội dung:
+About the job I. MÔ TẢ CÔNG VIỆC Tham gia các dự án phát triển phần mềm với đa dạng domain cho các khách hàng lớn thuộc đa dạng thị trường EU, Sing, … Lập trình và tối ưu hóa code để đảm bảo hiệu suất, chất lượng và khả năng đáp ứng tốt nhất của các ứng dụng; Kiểm tra, gỡ lỗi chương trình và cải thiện chức năng của hệ thống hiện có; Liên tục cải tiến sản phẩm bằng cách nghiên cứu các giải pháp và công nghệ mới; Tham gia nhóm phát triển áp dụng mô hình Agile; Phối hợp với các thành viên trong dự án để mang đến sự hài lòng cho các khách hàng; Hỗ trợ hướng dẫn và đào tạo các thành viên trong nhóm II. YÊU CẦU ỨNG VIÊN Có từ 5 năm kinh nghiệm làm việc bằng Python Kinh nghiệm với các python frameworks như: Flask, Django, Pyramid... Có kinh nghiệm sử dụng các cơ sở dữ liệu quan hệ và phi quan hệ: MySQL, MariaDB, PostgreSQL, MongoDB, ... Có hiểu biết về Redis, Memcache Có kiến thức về Secure Coding, Clean Code, Clean Architecture Có kinh nghiệm tư vấn, xây dựng các giải pháp kỹ thuật cho dự án Có kinh nghiệm quản lý team. Có khả năng giao tiếp bằng tiếng Anh III. QUYỀN LỢI Mức lương: Lên tới 50 triệu/tháng Thử việc hưởng 100% lương chính thức Review hiệu suất 2 lần/năm và tháng lương thứ 13 Thưởng các dịp Lễ Tết: Ngày Quốc Tế Lao động, Quốc khánh, Tết dương lịch, Tết Nguyên đán Trợ cấp các chứng chỉ năng lực IT: AWS/Azure, Outsystems, Salesforce, PMP, Agile/Scrum Bảo hiểm sức khỏe nâng cao, chính sách thai sản, khám sức khỏe định kỳ 1 năm 1 lần Được hưởng các chế độ phúc lợi của Công ty: Nghỉ mát hàng năm, teambuilding hàng quý, các lớp nâng cao trình độ ngoại ngữ (Tiếng Anh), … Được định hướng phát triển sâu về công nghệ, cơ hội học hỏi nhiều stack khác nhau, dự án đa dạng ở các thị trường lớn Môi trường trẻ trung, năng động, nhiều cơ hội thăng tiến Thời gian làm việc linh hoạt từ thứ 2 đến thứ 6 IV. CÁCH THỨC LIÊN HỆ Gửi CV ứng tuyển qua email: tuyendung@gem-corp.tech Hotline: +842466666100 (BP Tuyển dụng) Facebook GEM Careers: https://www.facebook.com/tuyendungGEM Linkedin GEM Careers: https://www.linkedin.com/company/gem-careers-hiring/
+
+Tiêu đề Công Việc: Senior Python Developer
+Địa chỉ việc làm: Hanoi, Hanoi, Vietnam
+Link chi tiết: https://www.linkedin.com/jobs/view/4117544047
+Ngày đăng: 2025-01-08T01:22:53.168869
+id_job: 4117544047
+---
+
+
+
+---
+Nội dung:
+About the job This job is sourced from a job board. Learn More Mô tả công việc Tìm kiếm Nhà cung cấp đáp ứng yêu cầu, thỏa thuận các điều khoản thương mại và đàm phán giá; đảm bảo quy cách sản phẩm đáp ứng yêu cầu của đơn vị đề xuất và tối ưu về chi phí; Thu thập thông tin, tổng hợp và báo cáo cho Trưởng đơn vị về các vấn đề có liên quan đến Nhà cung cấp, điều khoản thương mại đàm phán, phân tích đề xuất chọn Nhà cung cấp; Theo dõi hợp đồng, duyệt giá để làm đặt hàng, theo dõi thanh toán cho Nhà cung cấp; Một số công việc khác sẽ được trao đổi cụ thể trong buổi phỏng vấn. Yêu cầu ứng viên Tốt nghiệp Đại học ngành Kinh tế, Quản trị kinh doanh,....và các ngành khác có liên quan; Có kinh nghiệm từ 1 năm trong lĩnh vực Mua hàng Tự tin trong giao tiếp, cẩn trọng, tỉ mỉ trong công việc; Có tinh thần trách nhiệm và khả năng chịu áp lực cao; Kỹ năng tổng hợp thông tin và sử dụng vi tính, thiết bị văn phòng thành thạo. Quyền lợi Thu nhập: Từ 10 - 12tr+ Được tham gia đầy đủ các chế độ BHXH, BHYT, BHTN 24/7; Khám sức khỏe định kì hằng năm; Phụ cấp đồng phục hằng năm; Phụ cấp khác theo quy định của Luật Lao động và Tập đoàn; Desired Skills and Experience Microsoft Office, Purchasing Negotiation, Mua Hàng
+
+Tiêu đề Công Việc: Nhân viên mua hàng
+Địa chỉ việc làm: Ho Chi Minh City, Ho Chi Minh City, Vietnam
+Link chi tiết: https://www.linkedin.com/jobs/view/4122331047
+Ngày đăng: 2025-01-11T00:27:56.957893
+id_job: 4122331047
+---
+
+
+
+

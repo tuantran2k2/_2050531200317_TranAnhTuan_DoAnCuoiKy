@@ -60,11 +60,11 @@ async def deposit(request: DepositRequest, req: Request, current_user: dict = De
 
     try:
         # Tạo liên kết thanh toán
-        payment_success_url = f"http://localhost:3003/payment-success?user_id={user_id}"
+        payment_success_url = f"http://127.0.0.1:19001/payment-success?user_id={user_id}"
         payment_link = await create_payment_link(
             user_id,
             amount,
-            "http://localhost:3003/payment-fail/",
+            "http://127.0.0.1:19001/payment-fail/",
             payment_success_url
         )
         if not payment_link:

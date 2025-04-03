@@ -2,12 +2,12 @@ from fastapi import APIRouter, Depends, HTTPException ,Request
 from sqlalchemy.orm import Session
 from schemas._chatbot import QuestionRequest ,QuestionRequestChat
 from dependencies.security import verified_user
-from controllers.crewai import _main
 from controllers import _chatbot
 from dependencies.dependencies import get_db
 
 from models.LichSuTroChuyen import LichSuTroChuyen 
 from models.BoSuuTap import  BoSuTap
+from controllers import _chatbot
 
 
 router = APIRouter(
@@ -34,8 +34,8 @@ def get_current_user(request: Request):
 @router.post("/find_jobs/")
 def request_otp(request: QuestionRequest):
     try:
-        answer = _main._crewai_jobscv(id_cv=request.id_cv,k=request.so_luong_job,collection_id=request.collection_id,ma_KH=request.user_id)
-
+        answer = _chatbot.find_job(id_cv=request.id_cv,k=request.so_luong_job,collection_id=request.collection_id,ma_KH=request.user_id)
+        print("answer",answer)
         if answer == 400 :
             return { 
                     "status" : 403 , 
